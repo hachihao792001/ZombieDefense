@@ -6,31 +6,34 @@ public class FPS_PC : MonoBehaviour
 {
     [SerializeField]
     Transform _cameraAndWeapon;
-    Rigidbody bodyRb;
+    Rigidbody _bodyRb;
 
     [Header("Mouse")]
 
     [SerializeField]
-    private float sentivity = 2;
+    private float _sentivity = 2;
 
     [Space]
     [Header("Walking & Running")]
     [SerializeField]
-    private float walkSpeed = 3;
-    private bool running;
-    private Vector2 input;
+    private float _walkSpeed = 3;
+    private bool _running;
+    private Vector2 _input;
+
+    public bool IsMoving { get; private set; }
+    public bool IsRunning => _running;
 
     [Space]
     [Header("Jumping")]
     [SerializeField]
-    private float groundDistance = 1.1f;
-    private bool grounded;
+    private float _groundDistance = 1.1f;
+    private bool _grounded;
     [SerializeField]
-    private float jumpForce = 200;
+    private float _jumpForce = 200;
 
     private void OnValidate()
     {
-        bodyRb = GetComponent<Rigidbody>();
+        _bodyRb = GetComponent<Rigidbody>();
     }
 
     void Start()
@@ -41,19 +44,21 @@ public class FPS_PC : MonoBehaviour
     void Update()
     {
         //Mouse
-        transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * sentivity);
-        _cameraAndWeapon.Rotate(Vector3.left * Input.GetAxis("Mouse Y") * sentivity);
+        transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * _sentivity);
+        _cameraAndWeapon.Rotate(Vector3.left * Input.GetAxis("Mouse Y") * _sentivity);
         _cameraAndWeapon.eulerAngles = new Vector3(_cameraAndWeapon.eulerAngles.x, _cameraAndWeapon.eulerAngles.y, 0);
 
         //Walking & Running
-        running = Input.GetKey(KeyCode.LeftControl);
-        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        input *= walkSpeed * (running ? 2 : 1);
-        bodyRb.velocity = transform.TransformDirection(new Vector3(input.x, bodyRb.velocity.y, input.y));
+        _running = Input.GetKey(KeyCode.LeftControl);
+        _input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        _input *= _walkSpeed * (_running ? 2 : 1);
+        _bodyRb.velocity = transform.TransformDirection(new Vector3(_input.x, _bodyRb.velocity.y, _input.y));
+
+        IsMoving = _input != Vector2.zero;
 
         //Jumping
-        grounded = Physics.Raycast(transform.position, Vector3.down, groundDistance);
-        if (grounded && Input.GetKeyDown(KeyCode.Space))
-            bodyRb.AddForce(Vector3.up * jumpForce);
+        _grounded = Physics.Raycast(transform.position, Vector3.down, _groundDistance);
+        if (_grounded && Input.GetKeyDown(KeyCode.Space))
+            _bodyRb.AddForce(Vector3.up * _jumpForce);
     }
 }

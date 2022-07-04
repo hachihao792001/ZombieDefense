@@ -13,6 +13,8 @@ public class HandGunShooting : Shooting
     {
         _animator.Play(FireHash, 0, 0);
 
+        PlayFireSound();
+
         if (Physics.Raycast(_weaponCamera.position, _weaponCamera.forward, out RaycastHit hitInfo))
         {
             Quaternion bulletImpactRotation = Quaternion.LookRotation(hitInfo.normal);
