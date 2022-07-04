@@ -49,7 +49,7 @@ public class FPS_PC : MonoBehaviour
         _cameraAndWeapon.eulerAngles = new Vector3(_cameraAndWeapon.eulerAngles.x, _cameraAndWeapon.eulerAngles.y, 0);
 
         //Walking & Running
-        _running = Input.GetKey(KeyCode.LeftControl);
+        _running = Input.GetKey(KeyCode.LeftShift);
         _input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         _input *= _walkSpeed * (_running ? 2 : 1);
         _bodyRb.velocity = transform.TransformDirection(new Vector3(_input.x, _bodyRb.velocity.y, _input.y));
