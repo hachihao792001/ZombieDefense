@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveByKey : MonoBehaviour
+public class FPS_PC : MonoBehaviour
 {
     [SerializeField]
     Transform _cameraAndWeapon;
