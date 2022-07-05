@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ZombieAttack : MonoBehaviour
 {
@@ -12,10 +14,15 @@ public class ZombieAttack : MonoBehaviour
     [HideInInspector]
     [SerializeField]
     private ZombieMoving _zombieMoving;
+
+    [SerializeField]
+    private float _damage;
     [SerializeField]
     private float _attackDistance;
     [SerializeField]
     private float _lookAtTargetWhileAttackingLerpRate;
+
+    public UnityEvent<float> OnDealDamage;
 
     private void OnValidate()
     {
@@ -54,5 +61,10 @@ public class ZombieAttack : MonoBehaviour
     {
         _animator.SetBool(AttackingHash, false);
         enabled = false;
+    }
+
+    public void DealDamage()
+    {
+        OnDealDamage?.Invoke(_damage);
     }
 }
