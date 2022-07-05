@@ -14,6 +14,8 @@ public class ZombieAttack : MonoBehaviour
     private ZombieMoving _zombieMoving;
     [SerializeField]
     private float _attackDistance;
+    [SerializeField]
+    private float _lookAtTargetWhileAttackingLerpRate;
 
     private void OnValidate()
     {
@@ -33,10 +35,24 @@ public class ZombieAttack : MonoBehaviour
             {
                 _animator.SetBool(AttackingHash, false);
             }
+
+            if (_animator.GetBool(AttackingHash))
+            {
+                transform.rotation = Quaternion.Lerp(
+                    transform.rotation,
+                    Quaternion.LookRotation(_zombieMoving.Target.position - transform.position),
+                    _lookAtTargetWhileAttackingLerpRate * Time.deltaTime);
+            }
         }
         else
         {
             _animator.SetBool(AttackingHash, false);
         }
+    }
+
+    public void OnDied()
+    {
+        _animator.SetBool(AttackingHash, false);
+        enabled = false;
     }
 }

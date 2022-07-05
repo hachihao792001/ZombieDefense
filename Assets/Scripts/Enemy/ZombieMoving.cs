@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class ZombieMoving : MonoBehaviour
 {
     private readonly int WalkingHash = Animator.StringToHash("Walking");
-    private readonly int DeadHash = Animator.StringToHash("Dead");
 
     [HideInInspector]
     [SerializeField]
@@ -27,7 +26,7 @@ public class ZombieMoving : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(SeekForTarget), 0f, 1f);
+        StartCoroutine(SeekForTarget());
     }
 
     private void Update()
@@ -56,24 +55,37 @@ public class ZombieMoving : MonoBehaviour
         _animator.SetBool(WalkingHash, false);
     }
 
-    private void SeekForTarget()
+    IEnumerator SeekForTarget()
     {
-        if (GameController.Instance.Allies.Count == 0)
-            Target = null;
-        else
+        while (true)
         {
-            float[] distancesToAllies = GameController.Instance.GetDistanceToAllies(transform.position);
-            int closestAllyIndex = 0;
-
-            for (int i = 1; i < distancesToAllies.Length; i++)
+            if (GameController.Instance.Allies.Count == 0)
+                Target = null;
+            else
             {
-                if (distancesToAllies[i] < distancesToAllies[closestAllyIndex])
+                float[] distancesToAllies = GameController.Instance.GetDistanceToAllies(transform.position);
+                int closestAllyIndex = 0;
+
+                for (int i = 1; i < distancesToAllies.Length; i++)
                 {
-                    closestAllyIndex = i;
+                    if (distancesToAllies[i] < distancesToAllies[closestAllyIndex])
+                    {
+                        closestAllyIndex = i;
+                    }
                 }
+
+                Target = GameController.Instance.Allies[closestAllyIndex];
             }
 
-            Target = GameController.Instance.Allies[closestAllyIndex];
+            yield return new WaitForSeconds(1f);
         }
+    }
+
+    public void OnDied()
+    {
+        StopCoroutine(SeekForTarget());
+        Target = null;
+        StopMoving();
+        enabled = false;
     }
 }
