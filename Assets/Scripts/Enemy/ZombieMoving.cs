@@ -90,4 +90,9 @@ public class ZombieMoving : MonoBehaviour
         StopMoving();
         enabled = false;
     }
+
+    public void WarpAgent(Vector3 pos)
+    {
+        _navMesh.Warp(pos);
+    }
 }

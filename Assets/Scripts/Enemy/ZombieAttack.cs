@@ -15,14 +15,14 @@ public class ZombieAttack : MonoBehaviour
     [SerializeField]
     private ZombieMoving _zombieMoving;
 
+    private Health _targetHealth;
+
     [SerializeField]
     private float _damage;
     [SerializeField]
     private float _attackDistance;
     [SerializeField]
     private float _lookAtTargetWhileAttackingLerpRate;
-
-    public UnityEvent<float> OnDealDamage;
 
     private void OnValidate()
     {
@@ -51,10 +51,14 @@ public class ZombieAttack : MonoBehaviour
                     Quaternion.LookRotation(_zombieMoving.Target.position - transform.position),
                     _lookAtTargetWhileAttackingLerpRate * Time.deltaTime);
             }
+
+            if (_targetHealth == null)
+                _targetHealth = _zombieMoving.Target.GetComponent<Health>();
         }
         else
         {
             _animator.SetBool(AttackingHash, false);
+            _targetHealth = null;
         }
     }
 
@@ -66,6 +70,7 @@ public class ZombieAttack : MonoBehaviour
 
     public void DealDamage()
     {
-        OnDealDamage?.Invoke(_damage);
+        if (_targetHealth != null)
+            _targetHealth.TakeDamage(_damage);
     }
 }
