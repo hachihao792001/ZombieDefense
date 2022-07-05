@@ -2086,6 +2086,7 @@ GameObject:
   - component: {fileID: 615572906464446221}
   - component: {fileID: 615572906464446219}
   - component: {fileID: 485622008396243285}
+  - component: {fileID: 3891659002878227351}
   - component: {fileID: 1894931315143484630}
   - component: {fileID: 615572906464446220}
   - component: {fileID: 933187349}
@@ -2171,7 +2172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 1894931315143484630}
   _zombieMoving: {fileID: 615572906464446221}
-  _damage: 1
+  _damage: 5
   _attackDistance: 2.02
   _lookAtTargetWhileAttackingLerpRate: 3
   OnDealDamage:
@@ -2207,34 +2208,10 @@ MonoBehaviour:
   OnDied:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 615572906464446221}
-        m_TargetAssemblyTypeName: ZombieMoving, Assembly-CSharp
-        m_MethodName: OnDied
+      - m_Target: {fileID: 3891659002878227351}
+        m_TargetAssemblyTypeName: ZombieDead, Assembly-CSharp
+        m_MethodName: OnZombieDead
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 615572906464446219}
-        m_TargetAssemblyTypeName: ZombieAttack, Assembly-CSharp
-        m_MethodName: OnDied
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 9125291148077108156}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2246,6 +2223,21 @@ MonoBehaviour:
   OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3891659002878227351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894931315136170526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df953315fc018c498a58045024a9a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _zombieMoving: {fileID: 615572906464446221}
+  _zombieAttack: {fileID: 615572906464446219}
+  _healthBarCanvas: {fileID: 9125291148077108156}
 --- !u!95 &1894931315143484630
 Animator:
   serializedVersion: 3
@@ -6402,7 +6394,7 @@ GameObject:
   - component: {fileID: 7173118693252758260}
   - component: {fileID: 8517197928040651620}
   m_Layer: 6
-  m_Name: Canvas
+  m_Name: HealthBarCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

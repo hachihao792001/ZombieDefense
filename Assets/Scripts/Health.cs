@@ -19,10 +19,7 @@ public class Health : MonoBehaviour
     public UnityEvent OnDied;
     public UnityEvent<float> OnHealthChanged;
 
-    private void OnValidate()
-    {
-        _animator = GetComponent<Animator>();
-    }
+    private void OnValidate() => _animator = GetComponent<Animator>();
 
     private void Start()
     {
@@ -35,12 +32,10 @@ public class Health : MonoBehaviour
         OnHealthChanged?.Invoke(_currentHealth / _fullHealth);
         if (_currentHealth <= 0)
         {
-            _animator.SetTrigger(DeadHash);
+            if (_animator != null)
+                _animator.SetTrigger(DeadHash);
             _currentHealth = 0;
             OnDied?.Invoke();
-
-            Destroy(gameObject, 5f);
         }
     }
-
 }
