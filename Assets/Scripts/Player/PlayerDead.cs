@@ -32,7 +32,7 @@ public class PlayerDead : MonoBehaviour
 
         _rb.freezeRotation = false;
 
-        transform.eulerAngles = -Vector3.right;
+        transform.eulerAngles = new Vector3(-1, transform.eulerAngles.y, 0);
 
         GameController.Instance.Allies.Remove(transform);
     }

@@ -34,16 +34,17 @@ public class ZombieAttack : MonoBehaviour
     {
         if (_zombieMoving.Target != null)
         {
-            if (Vector3.Distance(transform.position, _zombieMoving.Target.position) <= _attackDistance)
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, _attackDistance))
             {
-                _animator.SetBool(AttackingHash, true);
+                if (hitInfo.transform == _zombieMoving.Target)
+                    _animator.SetBool(AttackingHash, true);
             }
             else
             {
                 _animator.SetBool(AttackingHash, false);
             }
 
-            if (_animator.GetBool(AttackingHash))
+            if (Vector3.Distance(transform.position, _zombieMoving.Target.position) <= _attackDistance * 2)
             {
                 transform.rotation = Quaternion.Lerp(
                     transform.rotation,

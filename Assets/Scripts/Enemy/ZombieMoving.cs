@@ -33,9 +33,11 @@ public class ZombieMoving : MonoBehaviour
     {
         if (Target != null)
         {
-            if (Vector3.Distance(transform.position, Target.position) <= _stoppingDistance)
+
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, _stoppingDistance))
             {
-                StopMoving();
+                if (hitInfo.transform == Target)
+                    StopMoving();
             }
             else
             {
