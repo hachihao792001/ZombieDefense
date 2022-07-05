@@ -7,6 +7,7 @@ TagManager:
   - Target
   - Metal
   - ExplosiveBarrel
+  - Head
   layers:
   - Default
   - TransparentFX

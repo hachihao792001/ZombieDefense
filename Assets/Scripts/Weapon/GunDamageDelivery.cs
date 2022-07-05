@@ -29,13 +29,18 @@ public class GunDamageDelivery : MonoBehaviour
         Ray aimingRay = new Ray(aimingCamera.position, aimingCamera.forward);
         if (Physics.Raycast(aimingRay, out RaycastHit hitInfo))
         {
-            Health health = hitInfo.collider.gameObject.GetComponent<Health>();
+            GameObject hitObject = hitInfo.collider.gameObject;
+            Health health = hitObject.GetComponent<Health>();
             if (health != null)
             {
                 health.TakeDamage(_damage);
             }
+            else if (hitObject.tag == "Head")
+            {
+                hitObject.GetComponentInParent<Health>().TakeDamage(_damage * 2);
+            }
 
-            if (hitInfo.collider.gameObject.layer == _zombieLayer)
+            if (hitObject.layer == _zombieLayer)
             {
                 CreateHitEffect(_zombieBloodPrefab, hitInfo);
             }

@@ -15,7 +15,7 @@ public class HealthTextBinding : MonoBehaviour
 
     void Start()
     {
-        _health.OnHealthChanged += UpdateHealth;
+        _health.OnHealthChanged.AddListener(UpdateHealth);
         UpdateHealth(1f);
     }
 

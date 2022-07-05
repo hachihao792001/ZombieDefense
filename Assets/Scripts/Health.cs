@@ -17,7 +17,7 @@ public class Health : MonoBehaviour
     private Animator _animator;
 
     public UnityEvent OnDied;
-    public Action<float> OnHealthChanged;
+    public UnityEvent<float> OnHealthChanged;
 
     private void OnValidate()
     {
