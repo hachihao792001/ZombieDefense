@@ -8,6 +8,7 @@ public class GameController : MonoSingleton<GameController>
     [SerializeField]
     private NeedDefendingBuilding[] PossibleNeedDefendingBuildings;
     public List<Transform> Allies;
+    public List<Transform> Enemies;
     private NeedDefendingBuilding _currentDefendingBuilding;
 
     [SerializeField]
@@ -49,6 +50,7 @@ public class GameController : MonoSingleton<GameController>
         {
             GameObject newZombie = Instantiate(_zombiePrefab, _zombiesParent);
             PutZombieAtRandomPosition(newZombie);
+            Enemies.Add(newZombie.transform);
         }
     }
 
