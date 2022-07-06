@@ -8,7 +8,9 @@ public class Player : MonoBehaviour
     public GameObject _deadScreen;
 
     [SerializeField]
-    private FPS_PC _FPS_PC;
+    private MoveByJoyStick _moveByJoyStick;
+    [SerializeField]
+    private LookByDrag _lookByDrag;
     [SerializeField]
     private GunSwitcher _gunSwitcher;
     [SerializeField]
@@ -31,7 +33,8 @@ public class Player : MonoBehaviour
 
         _deadScreen.SetActive(true);
 
-        _FPS_PC.enabled = false;
+        _moveByJoyStick.enabled = false;
+        _lookByDrag.enabled = false;
         _gunSwitcher.enabled = false;
         _health.enabled = false;
         _handGun.SetActive(false);

@@ -715,6 +715,7 @@ GameObject:
   - component: {fileID: 1632893006720203551}
   - component: {fileID: 4025767295783878327}
   - component: {fileID: 4025767295783878326}
+  - component: {fileID: 1779123428}
   m_Layer: 0
   m_Name: RV
   m_TagString: Untagged
@@ -819,6 +820,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4025767295783878281}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1779123428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4025767295783878281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a00d56d44c1767146bb2202a087488e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loseScreen: {fileID: 0}
+  _health: {fileID: 4025767295783878325}
 --- !u!1 &4025767296384477726
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public class MoveByJoyStick : MonoBehaviour
     [SerializeField]
     private JoyStick _joyStick;
 
+    [HideInInspector]
+    [SerializeField]
     Rigidbody _bodyRb;
 
     [Space]

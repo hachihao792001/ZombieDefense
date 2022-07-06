@@ -6,6 +6,7 @@ public class FPS_PC : MonoBehaviour
 {
     [SerializeField]
     Transform _cameraAndWeapon;
+    [SerializeField]
     Rigidbody _bodyRb;
 
     [Header("Mouse")]

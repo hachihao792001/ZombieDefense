@@ -14,7 +14,7 @@ public class GunDamageDelivery : MonoBehaviour
     private float bulletForce;
     [SerializeField]
     private int _damage;
-
+    [SerializeField]
     private int _zombieLayer;
 
     private void OnValidate() => _zombieLayer = LayerMask.NameToLayer("Enemy");

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    [SerializeField]
     private Zombie _target;
     [SerializeField]
     private Transform _head;
@@ -26,12 +25,21 @@ public class Turret : MonoBehaviour
     [SerializeField]
     private ParticleSystem _lightRay;
 
+    private void Start()
+    {
+        LookForTarget();
+    }
+
     private void Update()
     {
         if (_target != null)
         {
             _head.LookAt(_target.transform);
             UpdateFiring();
+            if (_target != null && Vector3.Distance(_head.position, _target.transform.position) > _range)
+            {
+                _target = null;
+            }
         }
         else
         {
@@ -74,11 +82,24 @@ public class Turret : MonoBehaviour
 
     private void LookForTarget()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _range, _zombieLayer);
+        Collider[] colliders = Physics.OverlapSphere(_head.position, _range, _zombieLayer);
         if (colliders.Length > 0)
         {
-            _target = colliders[0].GetComponent<Zombie>();
-            _target.OnZombieDied += OnTargetDied;
+            Zombie foundZombie = null;
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (!colliders[i].CompareTag("Head"))
+                {
+                    foundZombie = colliders[i].gameObject.GetComponent<Zombie>();
+                    break;
+                }
+            }
+            if (foundZombie != null)
+            {
+                _target = foundZombie;
+                if (_target != null)
+                    _target.OnZombieDied += OnTargetDied;
+            }
         }
     }
 }

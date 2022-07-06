@@ -9,6 +9,7 @@ public class AutomaticZombieShooting : MonoBehaviour
     [HideInInspector]
     [SerializeField]
     private GunSwitcher _gunSwitcher;
+    [SerializeField]
     private int _zombieLayer;
 
     private float lastShotTime;
