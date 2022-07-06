@@ -7,58 +7,38 @@ using Random = UnityEngine.Random;
 public class GameController : MonoSingleton<GameController>
 {
     [SerializeField]
-    private NeedDefendingBuilding[] PossibleNeedDefendingBuildings;
     public List<Transform> Allies;
-    public List<Transform> Enemies;
-    private NeedDefendingBuilding _currentDefendingBuilding;
+    public List<Zombie> Enemies;
+
+    [SerializeField]
+    private NeedDefendingBuilding _RV;
 
     [SerializeField]
     private int _zombieSpawnCount;
     [SerializeField]
-    private GameObject _zombiePrefab;
+    private Zombie _zombiePrefab;
     [SerializeField]
     private Transform _zombiesParent;
 
-    public Action<Health> onZombieDied;
+    public Action<Zombie> onZombieDied;
 
     private void Start()
     {
-        if (PossibleNeedDefendingBuildings.Length > 0)
-            AssignNewBuildingToDefend();
         SpawnZombies();
-    }
-
-    private void AssignNewBuildingToDefend()
-    {
-        if (_currentDefendingBuilding != null)
-        {
-            _currentDefendingBuilding.Deactivate();
-            Allies.Remove(_currentDefendingBuilding.transform);
-        }
-
-        NeedDefendingBuilding newBuildingToDefend = PossibleNeedDefendingBuildings[Random.Range(0, PossibleNeedDefendingBuildings.Length)];
-        while (newBuildingToDefend == _currentDefendingBuilding)
-        {
-            newBuildingToDefend = PossibleNeedDefendingBuildings[Random.Range(0, PossibleNeedDefendingBuildings.Length)];
-        }
-        _currentDefendingBuilding = newBuildingToDefend;
-
-        _currentDefendingBuilding.Activate();
-        Allies.Add(_currentDefendingBuilding.transform);
     }
 
     private void SpawnZombies()
     {
         for (int i = 0; i < _zombieSpawnCount; i++)
         {
-            GameObject newZombie = Instantiate(_zombiePrefab, _zombiesParent);
-            newZombie.GetComponent<Health>().OnDied.AddListener(OnZombieDied);
+            Zombie newZombie = Instantiate(_zombiePrefab, _zombiesParent);
+            newZombie.OnZombieDied = OnZombieDied;
             PutZombieAtRandomPosition(newZombie);
-            Enemies.Add(newZombie.transform);
+            Enemies.Add(newZombie);
         }
     }
 
-    private void PutZombieAtRandomPosition(GameObject zombie)
+    private void PutZombieAtRandomPosition(Zombie zombie)
     {
         NavMeshTriangulation triangulation = NavMesh.CalculateTriangulation();
 
@@ -67,16 +47,16 @@ public class GameController : MonoSingleton<GameController>
         NavMeshHit hit;
         if (NavMesh.SamplePosition(triangulation.vertices[vertexIndex], out hit, 2f, 0))
         {
-            zombie.GetComponent<ZombieMoving>().WarpAgent(hit.position);
+            zombie.ZombieMoving.WarpAgent(hit.position);
         }
     }
 
-    private void OnZombieDied(Health whichZombie)
+    private void OnZombieDied(Zombie whichZombie)
     {
         onZombieDied?.Invoke(whichZombie);
 
-        whichZombie.OnDied.RemoveListener(OnZombieDied);
-        Enemies.Remove(whichZombie.transform);
+        whichZombie.OnZombieDied -= OnZombieDied;
+        Enemies.Remove(whichZombie);
     }
 
     public float[] GetDistanceToAllies(Vector3 pos)

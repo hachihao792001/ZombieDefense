@@ -2222,6 +2222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _zombieMoving: {fileID: 615572906464446221}
   _zombieAttack: {fileID: 615572906464446219}
+  zombieHealth: {fileID: 485622008396243285}
   _healthBarCanvas: {fileID: 9125291148077108156}
 --- !u!95 &1894931315143484630
 Animator:
@@ -2252,7 +2253,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 300

@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
     [SerializeField]
     private Animator _animator;
 
-    public UnityEvent<Health> OnDied;
+    public Action OnDied;
     public UnityEvent<float> OnHealthChanged;
 
     private void OnValidate() => _animator = GetComponent<Animator>();
@@ -35,7 +35,7 @@ public class Health : MonoBehaviour
             if (_animator != null)
                 _animator.SetTrigger(DeadHash);
             _currentHealth = 0;
-            OnDied?.Invoke(this);
+            OnDied?.Invoke();
         }
     }
 }

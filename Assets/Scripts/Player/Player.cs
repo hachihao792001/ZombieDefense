@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDead : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField]
     public GameObject _deadScreen;
@@ -20,8 +20,15 @@ public class PlayerDead : MonoBehaviour
     [SerializeField]
     private Rigidbody _rb;
 
+    private void Start()
+    {
+        _health.OnDied = OnPlayerDied;
+    }
+
     public void OnPlayerDied()
     {
+        _health.OnDied -= OnPlayerDied;
+
         _deadScreen.SetActive(true);
 
         _FPS_PC.enabled = false;
