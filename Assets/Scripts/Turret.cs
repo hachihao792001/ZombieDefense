@@ -63,10 +63,22 @@ public class Turret : MonoBehaviour
         }
     }
 
+    public void OnTargetDied(Zombie zombie)
+    {
+        if (_target != null && _target == zombie)
+        {
+            _target = null;
+            LookForTarget();
+        }
+    }
+
     private void LookForTarget()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _range, _zombieLayer);
         if (colliders.Length > 0)
+        {
             _target = colliders[0].GetComponent<Zombie>();
+            _target.OnZombieDied += OnTargetDied;
+        }
     }
 }

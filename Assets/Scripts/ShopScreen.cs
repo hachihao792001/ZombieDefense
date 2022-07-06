@@ -16,6 +16,8 @@ public class ShopScreen : MonoBehaviour
     [SerializeField]
     private TMP_Text _healRVPriceText;
     [SerializeField]
+    private TMP_Text _turretPriceText;
+    [SerializeField]
     private TMP_Text _currentMoneyText;
 
 
@@ -25,6 +27,8 @@ public class ShopScreen : MonoBehaviour
     private int _ammoPrice;
     [SerializeField]
     private int _healRVPrice;
+    [SerializeField]
+    private int _turretPrice;
 
     [SerializeField]
     private float _healAmount;
@@ -34,12 +38,14 @@ public class ShopScreen : MonoBehaviour
     public UnityEvent<float> OnBuyHeal;
     public UnityEvent OnBuyAmmo;
     public UnityEvent<float> OnBuyHealRV;
+    public UnityEvent OnBuyTurret;
 
     private void OnEnable()
     {
         _healPriceText.text = "$" + _healPrice;
         _ammoPriceText.text = "$" + _ammoPrice;
         _healRVPriceText.text = "$" + _healRVPrice;
+        _turretPriceText.text = "$" + _turretPrice;
 
         _currentMoneyText.text = "$" + _moneyManager.CurrentMoney;
     }
@@ -67,6 +73,15 @@ public class ShopScreen : MonoBehaviour
         BuyItem(_healRVPrice, () =>
         {
             OnBuyHealRV?.Invoke(_healRVAmount);
+            _currentMoneyText.text = "$" + _moneyManager.CurrentMoney;
+        });
+    }
+
+    public void TurretOnClick()
+    {
+        BuyItem(_turretPrice, () =>
+        {
+            OnBuyTurret?.Invoke();
             _currentMoneyText.text = "$" + _moneyManager.CurrentMoney;
         });
     }
