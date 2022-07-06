@@ -13,7 +13,7 @@ public class MovingAnimation : MonoBehaviour
     private Animator _animator;
 
     [SerializeField]
-    private FPS_PC fps;
+    private MoveByJoyStick fps;
 
     private void OnValidate()
     {

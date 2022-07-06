@@ -9,7 +9,6 @@ public class LookByDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     Transform _player;
     [SerializeField]
     Transform _cameraAndWeapon;
-    Rigidbody _bodyRb;
 
     [SerializeField]
     private float _sensitivity = 2;
@@ -39,7 +38,6 @@ public class LookByDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Vector2 deltaDragPosition = -(eventData.position - _startDraggingPos) / Screen.dpi;
         _lastYaw = _cameraAndWeapon.eulerAngles.y;
         _lastPitch = _cameraAndWeapon.eulerAngles.x;
     }
