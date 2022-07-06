@@ -18,12 +18,15 @@ public class Shooting : MonoBehaviour
     [SerializeField]
     protected Animator _animator;
     [SerializeField]
+    private ParticleSystem _lightRay;
+    [SerializeField]
     private AudioSource _fireSound;
     private void OnValidate() => _animator = GetComponent<Animator>();
 
 
     public virtual void Shoot()
     {
+        _lightRay.Emit(1);
         OnShoot?.Invoke();
     }
     public void PlayFireSound() => _fireSound.Play();
