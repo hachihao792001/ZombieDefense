@@ -1725,6 +1725,7 @@ MonoBehaviour:
   _zombieBloodPrefab: {fileID: 194062, guid: cd866e641ee6f104e9235a7717cf1c7f, type: 3}
   bulletForce: 100
   _damage: 2
+  _zombieLayer: 6
 --- !u!114 &1318684055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3033,6 +3034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _joyStick: {fileID: 0}
+  _bodyRb: {fileID: 7738954408158036789}
   _walkSpeed: 3
   _runButton: {fileID: 0}
   _groundDistance: 1.3
@@ -3051,6 +3053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimingCamera: {fileID: 7738954409401875652}
   _gunSwitcher: {fileID: 1950446156}
+  _zombieLayer: 6
 --- !u!114 &1950446156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5730,6 +5733,7 @@ MonoBehaviour:
   _zombieBloodPrefab: {fileID: 194062, guid: cd866e641ee6f104e9235a7717cf1c7f, type: 3}
   bulletForce: 100
   _damage: 1
+  _zombieLayer: 6
 --- !u!1 &7738954409878843285
 GameObject:
   m_ObjectHideFlags: 0

@@ -38349,10 +38349,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2091873800}
+    - target: {fileID: 1052669951, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1784809669, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2091873800}
+    - target: {fileID: 1954859880, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6780043231189255907, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
       propertyPath: _moneyManager
       value: 
