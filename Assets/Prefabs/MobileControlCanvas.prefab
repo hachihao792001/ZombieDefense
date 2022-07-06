@@ -1118,6 +1118,8 @@ MonoBehaviour:
   _player: {fileID: 0}
   _cameraAndWeapon: {fileID: 0}
   _sensitivity: 8
+  _minSensitivity: 3
+  _maxSensitivity: 15
   _minPitch: -60
   _maxPitch: 60
 --- !u!114 &8009301973637814

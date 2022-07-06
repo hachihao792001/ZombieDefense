@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d70ea55948513b42973bf384a5bb2e2, type: 3}
   m_Name: ZombieSpawningData
   m_EditorClassIdentifier: 
-  ZombieSpawnCount: 050000000a0000000f0000001400000019000000
+  RoundSpawningDatas:
+  - NormalZombieCount: 5
+    FastZombieCount: 0
+  - NormalZombieCount: 6
+    FastZombieCount: 1
+  - NormalZombieCount: 8
+    FastZombieCount: 2
+  - NormalZombieCount: 10
+    FastZombieCount: 3
+  - NormalZombieCount: 13
+    FastZombieCount: 4
+  - NormalZombieCount: 5
+    FastZombieCount: 7
+  - NormalZombieCount: 10
+    FastZombieCount: 10
+  - NormalZombieCount: 15
+    FastZombieCount: 5
+  - NormalZombieCount: 3
+    FastZombieCount: 18
+  - NormalZombieCount: 15
+    FastZombieCount: 15

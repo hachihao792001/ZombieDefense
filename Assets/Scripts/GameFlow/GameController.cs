@@ -14,12 +14,14 @@ public class GameController : MonoSingleton<GameController>
 
     public Action<Zombie> OnZombieDiedAction;
     public Action OnNewRound;
-    public int CurrentRoundZombieCount => _zombieSpawningData.ZombieSpawnCount[CurrentRound - 1];
+    public int CurrentRoundZombieCount => _zombieSpawningData.RoundSpawningDatas[CurrentRound - 1].Total;
 
     [SerializeField]
     private ZombieSpawningData _zombieSpawningData;
     [SerializeField]
     private Zombie _zombiePrefab;
+    [SerializeField]
+    private Zombie _fastZombiePrefab;
     [SerializeField]
     private Transform _zombiesParent;
     [SerializeField]
@@ -40,14 +42,24 @@ public class GameController : MonoSingleton<GameController>
 
     private void SpawnZombies()
     {
-
-        for (int i = 0; i < CurrentRoundZombieCount; i++)
+        int normalZombieCount = _zombieSpawningData.RoundSpawningDatas[CurrentRound - 1].NormalZombieCount;
+        int fastZombieCount = _zombieSpawningData.RoundSpawningDatas[CurrentRound - 1].FastZombieCount;
+        for (int i = 0; i < normalZombieCount; i++)
         {
-            Zombie newZombie = Instantiate(_zombiePrefab, _zombiesParent);
-            newZombie.OnZombieDied = OnZombieDied;
-            AssignZombiePosition(newZombie);
-            Enemies.Add(newZombie);
+            SpawnAZombie(_zombiePrefab);
         }
+        for (int i = 0; i < fastZombieCount; i++)
+        {
+            SpawnAZombie(_fastZombiePrefab);
+        }
+    }
+
+    private void SpawnAZombie(Zombie zombiePrefab)
+    {
+        Zombie newZombie = Instantiate(zombiePrefab, _zombiesParent);
+        newZombie.OnZombieDied = OnZombieDied;
+        AssignZombiePosition(newZombie);
+        Enemies.Add(newZombie);
     }
 
     int _currentSpawnPositionIndex = 0;

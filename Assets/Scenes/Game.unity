@@ -23666,10 +23666,6 @@ PrefabInstance:
       propertyPath: _runButton
       value: 
       objectReference: {fileID: 1262800092}
-    - target: {fileID: 3786626677163516535, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
-      propertyPath: _FPS_PC
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7738954408158036784, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
       propertyPath: m_Name
       value: Player
@@ -33291,18 +33287,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 367615052, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1242015692, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1621044862, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5111377152402468557, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
       propertyPath: _zombiesParent
       value: 
