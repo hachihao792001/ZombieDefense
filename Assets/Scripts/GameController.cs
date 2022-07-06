@@ -10,41 +10,48 @@ public class GameController : MonoSingleton<GameController>
     public List<Transform> Allies;
     public List<Zombie> Enemies;
 
+    public int CurrentRound = 1;
+
+    public Action<Zombie> OnZombieDiedAction;
+    public Action OnNewRound;
+    public int CurrentRoundZombieCount => _zombieSpawningData.ZombieSpawnCount[CurrentRound - 1];
+
     [SerializeField]
-    private int _zombieSpawnCount;
+    private ZombieSpawningData _zombieSpawningData;
     [SerializeField]
     private Zombie _zombiePrefab;
     [SerializeField]
     private Transform _zombiesParent;
     [SerializeField]
-    private Vector3 _minSpawnPosition;
-    [SerializeField]
-    private Vector3 _maxSpawnPosition;
+    private List<Transform> _zombieSpawnPositions;
 
-    public Action<Zombie> onZombieDied;
+
 
     private void Start()
     {
         SpawnZombies();
+        OnNewRound?.Invoke();
     }
 
     private void SpawnZombies()
     {
-        for (int i = 0; i < _zombieSpawnCount; i++)
+
+        for (int i = 0; i < CurrentRoundZombieCount; i++)
         {
             Zombie newZombie = Instantiate(_zombiePrefab, _zombiesParent);
             newZombie.OnZombieDied = OnZombieDied;
-            PutZombieAtRandomPosition(newZombie);
+            AssignZombiePosition(newZombie);
             Enemies.Add(newZombie);
         }
     }
 
-    private void PutZombieAtRandomPosition(Zombie zombie)
+    int _currentSpawnPositionIndex = 0;
+    private void AssignZombiePosition(Zombie zombie)
     {
-        Vector3 randomPosition = new Vector3(
-            Random.Range(_minSpawnPosition.x, _maxSpawnPosition.x),
-            Random.Range(_minSpawnPosition.y, _maxSpawnPosition.y),
-            Random.Range(_minSpawnPosition.z, _maxSpawnPosition.z));
+        Vector3 randomPosition = _zombieSpawnPositions[_currentSpawnPositionIndex].position;
+        _currentSpawnPositionIndex++;
+        if (_currentSpawnPositionIndex >= _zombieSpawnPositions.Count)
+            _currentSpawnPositionIndex = 0;
 
         NavMeshHit hit;
         if (NavMesh.SamplePosition(randomPosition, out hit, Mathf.Infinity, NavMesh.AllAreas))
@@ -55,10 +62,17 @@ public class GameController : MonoSingleton<GameController>
 
     private void OnZombieDied(Zombie whichZombie)
     {
-        onZombieDied?.Invoke(whichZombie);
-
-        whichZombie.OnZombieDied -= OnZombieDied;
         Enemies.Remove(whichZombie);
+
+        if (Enemies.Count == 0)
+        {
+            CurrentRound++;
+            OnNewRound?.Invoke();
+            SpawnZombies();
+        }
+
+        OnZombieDiedAction?.Invoke(whichZombie);
+        whichZombie.OnZombieDied -= OnZombieDied;
     }
 
     public float[] GetDistanceToAllies(Vector3 pos)

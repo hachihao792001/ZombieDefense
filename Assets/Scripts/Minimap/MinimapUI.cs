@@ -18,7 +18,7 @@ public class MinimapUI : MonoBehaviour
     {
         _enemyIndicatorPairs = new Dictionary<Zombie, EnemyIndicator>();
 
-        GameController.Instance.onZombieDied = OnZombieDied;
+        GameController.Instance.OnZombieDiedAction += OnZombieDied;
     }
 
     void Update()

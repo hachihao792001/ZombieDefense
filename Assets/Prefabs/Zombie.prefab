@@ -2172,7 +2172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 1894931315143484630}
   _zombieMoving: {fileID: 615572906464446221}
-  _damage: 5
+  _damage: 2
   _attackDistance: 1.6
   _lookAtTargetWhileAttackingLerpRate: 3
 --- !u!114 &485622008396243285
@@ -2187,7 +2187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88348bac709895244ba9c145570a7486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fullHealth: 10
+  _fullHealth: 35
   _currentHealth: 0
   _animator: {fileID: 1894931315143484630}
   OnHealthChanged:
@@ -2238,7 +2238,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 300

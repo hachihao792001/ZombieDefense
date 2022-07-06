@@ -46,9 +46,21 @@ MonoBehaviour:
   Allies:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Enemies: []
-  _zombieSpawnCount: 3
+  CurrentRound: 1
+  _zombieSpawningData: {fileID: 11400000, guid: 33c5ed57dac59e042a59da5d96459cdf, type: 2}
   _zombiePrefab: {fileID: 3891659002878227351, guid: 508e4b61d73ccb94fa5f2e65d3604557, type: 3}
   _zombiesParent: {fileID: 0}
-  _minSpawnPosition: {x: 7, y: 0, z: -14}
-  _maxSpawnPosition: {x: 94, y: 0, z: 50}
+  _zombieSpawnPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

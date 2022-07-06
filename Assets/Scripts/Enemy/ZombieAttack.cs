@@ -52,7 +52,7 @@ public class ZombieAttack : MonoBehaviour
                     _lookAtTargetWhileAttackingLerpRate * Time.deltaTime);
             }
 
-            if (_targetHealth == null)
+            if (_targetHealth == null || _targetHealth.transform != _zombieMoving.Target)
                 _targetHealth = _zombieMoving.Target.GetComponent<Health>();
         }
         else
