@@ -37,6 +37,7 @@ public class GameController : MonoSingleton<GameController>
         SpawnZombies();
         OnNewRound?.Invoke();
 
+        _pauseScreen.ResumeOnClick();
         _pauseScreen.OnSensititySliderChangedAction = (float v) => OnSensitivitySliderChanged?.Invoke(v);
     }
 

@@ -19,7 +19,6 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     private static void AssignSingleton(T instance)
     {
         s_singleton = instance;
-        DontDestroyOnLoad(s_singleton);
     }
 
     private void Awake()

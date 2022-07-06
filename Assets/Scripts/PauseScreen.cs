@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PauseScreen : MonoBehaviour
 {
     public Action<float> OnSensititySliderChangedAction;
@@ -13,7 +13,8 @@ public class PauseScreen : MonoBehaviour
     }
     public void MenuOnClick()
     {
-
+        SceneManager.LoadScene("MainMenu");
+        gameObject.SetActive(false);
     }
 
     public void OnSensititySliderChanged(float value)
