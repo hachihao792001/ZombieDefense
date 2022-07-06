@@ -57,7 +57,10 @@ public class GunAmmo : MonoBehaviour
         LoadedAmmo = _magazineSize;
         _shooting.OnShoot.AddListener(OnShoot);
     }
-    private void OnShoot() => LoadedAmmo--;
+    private void OnShoot()
+    {
+        LoadedAmmo--;
+    }
 
     private void Update()
     {
@@ -66,6 +69,12 @@ public class GunAmmo : MonoBehaviour
         {
             Reload();
         }
+    }
+
+    public void ReloadOnClick()
+    {
+        if (gameObject.activeSelf && !_isReloading)
+            Reload();
     }
 
     private void Reload()

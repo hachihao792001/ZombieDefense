@@ -11,6 +11,10 @@ public class Zombie : MonoBehaviour
     public ZombieAttack ZombieAttack;
     [HideInInspector]
     public Health ZombieHealth;
+    [HideInInspector]
+    public Collider ZombieCollider;
+    [SerializeField]
+    private Collider _headCollider;
     [SerializeField]
     private GameObject _healthBarCanvas;
 
@@ -21,6 +25,7 @@ public class Zombie : MonoBehaviour
         ZombieMoving = GetComponent<ZombieMoving>();
         ZombieAttack = GetComponent<ZombieAttack>();
         ZombieHealth = GetComponent<Health>();
+        ZombieCollider = GetComponent<Collider>();
     }
 
     private void Start()
@@ -33,6 +38,8 @@ public class Zombie : MonoBehaviour
         ZombieMoving.OnDied();
         ZombieAttack.OnDied();
         ZombieHealth.enabled = false;
+        ZombieCollider.enabled = false;
+        _headCollider.enabled = false;
         _healthBarCanvas.SetActive(false);
 
         OnZombieDied?.Invoke(this);

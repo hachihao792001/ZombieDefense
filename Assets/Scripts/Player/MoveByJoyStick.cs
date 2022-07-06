@@ -33,14 +33,6 @@ public class MoveByJoyStick : MonoBehaviour
     void Update()
     {
         UpdateMoving();
-        UpdateJumping();
-    }
-
-    private void UpdateJumping()
-    {
-        _grounded = Physics.Raycast(transform.position, Vector3.down, _groundDistance);
-        if (_grounded && Input.GetKeyDown(KeyCode.Space))
-            _bodyRb.AddForce(Vector3.up * _jumpForce);
     }
 
     private void UpdateMoving()
@@ -51,5 +43,12 @@ public class MoveByJoyStick : MonoBehaviour
         _bodyRb.velocity = transform.TransformDirection(new Vector3(input.x, _bodyRb.velocity.y, input.y));
 
         IsMoving = input != Vector2.zero;
+    }
+
+    public void JumpOnClick()
+    {
+        _grounded = Physics.Raycast(transform.position, Vector3.down, _groundDistance);
+        if (_grounded)
+            _bodyRb.AddForce(Vector3.up * _jumpForce);
     }
 }

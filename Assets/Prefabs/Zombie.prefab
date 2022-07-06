@@ -2208,6 +2208,8 @@ MonoBehaviour:
   ZombieMoving: {fileID: 615572906464446221}
   ZombieAttack: {fileID: 615572906464446219}
   ZombieHealth: {fileID: 485622008396243285}
+  ZombieCollider: {fileID: 933187349}
+  _headCollider: {fileID: 772193336}
   _healthBarCanvas: {fileID: 9125291148077108156}
 --- !u!95 &1894931315143484630
 Animator:

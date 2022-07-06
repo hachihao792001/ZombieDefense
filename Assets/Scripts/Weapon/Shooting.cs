@@ -12,6 +12,8 @@ public class Shooting : MonoBehaviour
 
     public UnityEvent OnShoot;
 
+    public float Rpm;
+
     [HideInInspector]
     [SerializeField]
     protected Animator _animator;
@@ -20,7 +22,7 @@ public class Shooting : MonoBehaviour
     private void OnValidate() => _animator = GetComponent<Animator>();
 
 
-    protected virtual void Shoot()
+    public virtual void Shoot()
     {
         OnShoot?.Invoke();
     }

@@ -6,7 +6,10 @@ using UnityEngine;
 public class GunSwitcher : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] guns;
+    private Shooting[] guns;
+
+    private int _currentGunIndex = 0;
+    public Shooting CurrentGun => guns[_currentGunIndex];
 
     private void Update()
     {
@@ -24,15 +27,13 @@ public class GunSwitcher : MonoBehaviour
     {
         for (int i = 0; i < guns.Length; i++)
         {
-            guns[i].SetActive(i == gunIndex);
+            guns[i].gameObject.SetActive(i == gunIndex);
         }
+        _currentGunIndex = gunIndex;
     }
 
-    public void HideAllGuns()
+    public void SwitchGunOnClick()
     {
-        for (int i = 0; i < guns.Length; i++)
-        {
-            guns[i].SetActive(false);
-        }
+        SwitchToGun(guns.Length - 1 - _currentGunIndex);
     }
 }

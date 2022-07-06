@@ -36,7 +36,6 @@ public class ZombieMoving : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, _stoppingDistance))
             {
-                Debug.Log(hitInfo.transform.gameObject.name);
                 if (hitInfo.transform == Target)
                     StopMoving();
             }

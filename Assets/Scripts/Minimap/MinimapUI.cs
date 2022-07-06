@@ -56,6 +56,6 @@ public class MinimapUI : MonoBehaviour
     private bool IsVisbleOnMinimap(Zombie enemy)
     {
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(_minimapCamera);
-        return GeometryUtility.TestPlanesAABB(planes, enemy.GetComponent<Collider>().bounds);
+        return GeometryUtility.TestPlanesAABB(planes, enemy.ZombieCollider.bounds);
     }
 }
