@@ -28,7 +28,7 @@ public class LookByDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 deltaDragPosition = (eventData.position - _startDraggingPos) / Screen.dpi;
-        deltaDragPosition.x = -deltaDragPosition.x;
+        deltaDragPosition.y = -deltaDragPosition.y;
 
         _player.eulerAngles = new Vector3(0, _lastYaw + deltaDragPosition.x * _sensitivity, 0);
         _cameraAndWeapon.localEulerAngles = new Vector3(_lastPitch + deltaDragPosition.y * _sensitivity, 0, 0);

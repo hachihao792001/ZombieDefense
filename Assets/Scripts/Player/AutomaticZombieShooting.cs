@@ -9,14 +9,14 @@ public class AutomaticZombieShooting : MonoBehaviour
     [HideInInspector]
     [SerializeField]
     private GunSwitcher _gunSwitcher;
-    [SerializeField]
-    private LayerMask _enemyMask;
+    private int _zombieLayer;
 
     private float lastShotTime;
 
     private void OnValidate()
     {
         _gunSwitcher = GetComponent<GunSwitcher>();
+        _zombieLayer = LayerMask.NameToLayer("Enemy");
     }
 
     private void Update()
@@ -25,9 +25,9 @@ public class AutomaticZombieShooting : MonoBehaviour
         if (Time.time - lastShotTime >= interval)
         {
             Ray aimingRay = new Ray(aimingCamera.position, aimingCamera.forward);
-            if (Physics.Raycast(aimingRay, out RaycastHit hitInfo, Mathf.Infinity, _enemyMask))
+            if (Physics.Raycast(aimingRay, out RaycastHit hitInfo))
             {
-                if (_gunSwitcher.CurrentGun.enabled)
+                if (_gunSwitcher.CurrentGun.enabled && hitInfo.transform.gameObject.layer == _zombieLayer)
                     _gunSwitcher.CurrentGun.Shoot();
             }
             lastShotTime = Time.time;

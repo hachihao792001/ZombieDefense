@@ -74,7 +74,7 @@ public class ZombieAttack : MonoBehaviour
         {
             _targetHealth.TakeDamage(_damage);
         }
-        else
+        else if (_zombieMoving.Target != null)
         {
             Health parentHealth = _zombieMoving.Target.GetComponentInParent<Health>();
             if (parentHealth != null)
