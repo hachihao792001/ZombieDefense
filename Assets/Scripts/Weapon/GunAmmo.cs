@@ -7,6 +7,8 @@ public class GunAmmo : MonoBehaviour
 {
     private readonly int ReloadTriggerHash = Animator.StringToHash("Reload");
 
+    [SerializeField]
+    public int FullRemainingAmmo;
     [field: SerializeField]
     public int RemainingAmmo { get; private set; }
 
@@ -55,6 +57,7 @@ public class GunAmmo : MonoBehaviour
     private void Start()
     {
         LoadedAmmo = _magazineSize;
+        RemainingAmmo = FullRemainingAmmo;
         _shooting.OnShoot.AddListener(OnShoot);
     }
     private void OnShoot()
@@ -108,5 +111,11 @@ public class GunAmmo : MonoBehaviour
         {
             _shooting.Unlock();
         }
+    }
+
+    public void RefillAmmo()
+    {
+        RemainingAmmo = FullRemainingAmmo;
+        LoadedAmmo = _magazineSize;
     }
 }

@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum ZombieType
+{
+    Normal = 0,
+    Fast = 1
+}
+
 public class Zombie : MonoBehaviour
 {
+    public ZombieType ZombieType;
+
     [HideInInspector]
     public ZombieMoving ZombieMoving;
     [HideInInspector]

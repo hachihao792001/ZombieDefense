@@ -10,6 +10,11 @@ public class GameController : MonoSingleton<GameController>
     public List<Transform> Allies;
     public List<Zombie> Enemies;
 
+    [SerializeField]
+    private MoneyManager _moneyManager;
+    [SerializeField]
+    private MoneyEarningData _moneyEarningData;
+
     public int CurrentRound = 1;
 
     public Action<Zombie> OnZombieDiedAction;
@@ -86,11 +91,22 @@ public class GameController : MonoSingleton<GameController>
         {
             CurrentRound++;
             OnNewRound?.Invoke();
+            _moneyManager.EarnMoney(_moneyEarningData.Finish1Round);
             SpawnZombies();
         }
 
         OnZombieDiedAction?.Invoke(whichZombie);
         whichZombie.OnZombieDied -= OnZombieDied;
+
+        if (whichZombie.ZombieType == ZombieType.Normal)
+        {
+            _moneyManager.EarnMoney(_moneyEarningData.KillingZombie);
+        }
+        else if (whichZombie.ZombieType == ZombieType.Fast)
+        {
+            _moneyManager.EarnMoney(_moneyEarningData.KillingFastZombie);
+        }
+
     }
 
     public float[] GetDistanceToAllies(Vector3 pos)

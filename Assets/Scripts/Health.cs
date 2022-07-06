@@ -38,4 +38,13 @@ public class Health : MonoBehaviour
             OnDied?.Invoke();
         }
     }
+
+    public void Heal(float amount)
+    {
+        _currentHealth += amount;
+        if (_currentHealth > _fullHealth)
+            _currentHealth = _fullHealth;
+
+        OnHealthChanged?.Invoke(_currentHealth / _fullHealth);
+    }
 }

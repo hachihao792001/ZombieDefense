@@ -2112,6 +2112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f18d52a6a49a1b42a6c906a2751ff51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FullRemainingAmmo: 90
   <RemainingAmmo>k__BackingField: 90
   _animator: {fileID: 3029593477192001474}
   _shooting: {fileID: 1318684051}
@@ -6067,6 +6068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f18d52a6a49a1b42a6c906a2751ff51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FullRemainingAmmo: 45
   <RemainingAmmo>k__BackingField: 45
   _animator: {fileID: 7738954409844212428}
   _shooting: {fileID: 7738954409844212431}
