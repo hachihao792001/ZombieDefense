@@ -11,14 +11,15 @@ public class GameController : MonoSingleton<GameController>
     public List<Zombie> Enemies;
 
     [SerializeField]
-    private NeedDefendingBuilding _RV;
-
-    [SerializeField]
     private int _zombieSpawnCount;
     [SerializeField]
     private Zombie _zombiePrefab;
     [SerializeField]
     private Transform _zombiesParent;
+    [SerializeField]
+    private Vector3 _minSpawnPosition;
+    [SerializeField]
+    private Vector3 _maxSpawnPosition;
 
     public Action<Zombie> onZombieDied;
 
@@ -40,12 +41,13 @@ public class GameController : MonoSingleton<GameController>
 
     private void PutZombieAtRandomPosition(Zombie zombie)
     {
-        NavMeshTriangulation triangulation = NavMesh.CalculateTriangulation();
-
-        int vertexIndex = Random.Range(0, triangulation.vertices.Length);
+        Vector3 randomPosition = new Vector3(
+            Random.Range(_minSpawnPosition.x, _maxSpawnPosition.x),
+            Random.Range(_minSpawnPosition.y, _maxSpawnPosition.y),
+            Random.Range(_minSpawnPosition.z, _maxSpawnPosition.z));
 
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(triangulation.vertices[vertexIndex], out hit, 2f, 0))
+        if (NavMesh.SamplePosition(randomPosition, out hit, Mathf.Infinity, NavMesh.AllAreas))
         {
             zombie.ZombieMoving.WarpAgent(hit.position);
         }

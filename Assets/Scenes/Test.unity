@@ -537,6 +537,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5111377152402468557, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
+      propertyPath: Allies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5111377152402468557, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
       propertyPath: Allies.Array.data[0]
       value: 
       objectReference: {fileID: 7738954409768837770}

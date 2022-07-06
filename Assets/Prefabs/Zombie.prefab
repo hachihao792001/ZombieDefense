@@ -2173,7 +2173,7 @@ MonoBehaviour:
   _animator: {fileID: 1894931315143484630}
   _zombieMoving: {fileID: 615572906464446221}
   _damage: 5
-  _attackDistance: 1.55
+  _attackDistance: 1.6
   _lookAtTargetWhileAttackingLerpRate: 3
 --- !u!114 &485622008396243285
 MonoBehaviour:
@@ -2190,21 +2190,6 @@ MonoBehaviour:
   _fullHealth: 10
   _currentHealth: 0
   _animator: {fileID: 1894931315143484630}
-  OnDied:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3891659002878227351}
-        m_TargetAssemblyTypeName: ZombieDead, Assembly-CSharp
-        m_MethodName: OnZombieDead
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2220,9 +2205,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4df953315fc018c498a58045024a9a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zombieMoving: {fileID: 615572906464446221}
-  _zombieAttack: {fileID: 615572906464446219}
-  zombieHealth: {fileID: 485622008396243285}
+  ZombieMoving: {fileID: 615572906464446221}
+  ZombieAttack: {fileID: 615572906464446219}
+  ZombieHealth: {fileID: 485622008396243285}
   _healthBarCanvas: {fileID: 9125291148077108156}
 --- !u!95 &1894931315143484630
 Animator:
