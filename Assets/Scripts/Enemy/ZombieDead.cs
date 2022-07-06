@@ -10,10 +10,11 @@ public class ZombieDead : MonoBehaviour
     private ZombieAttack _zombieAttack;
     [SerializeField]
     private GameObject _healthBarCanvas;
-    public void OnZombieDead()
+    public void OnZombieDead(Health zombieHealth)
     {
         _zombieMoving.OnDied();
         _zombieAttack.OnDied();
+        zombieHealth.enabled = false;
         _healthBarCanvas.SetActive(false);
 
         Destroy(gameObject, 5f);

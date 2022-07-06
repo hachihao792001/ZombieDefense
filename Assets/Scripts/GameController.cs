@@ -1,7 +1,8 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class GameController : MonoSingleton<GameController>
 {
@@ -17,6 +18,8 @@ public class GameController : MonoSingleton<GameController>
     private GameObject _zombiePrefab;
     [SerializeField]
     private Transform _zombiesParent;
+
+    public Action<Health> onZombieDied;
 
     private void Start()
     {
@@ -49,6 +52,7 @@ public class GameController : MonoSingleton<GameController>
         for (int i = 0; i < _zombieSpawnCount; i++)
         {
             GameObject newZombie = Instantiate(_zombiePrefab, _zombiesParent);
+            newZombie.GetComponent<Health>().OnDied.AddListener(OnZombieDied);
             PutZombieAtRandomPosition(newZombie);
             Enemies.Add(newZombie.transform);
         }
@@ -65,6 +69,14 @@ public class GameController : MonoSingleton<GameController>
         {
             zombie.GetComponent<ZombieMoving>().WarpAgent(hit.position);
         }
+    }
+
+    private void OnZombieDied(Health whichZombie)
+    {
+        onZombieDied?.Invoke(whichZombie);
+
+        whichZombie.OnDied.RemoveListener(OnZombieDied);
+        Enemies.Remove(whichZombie.transform);
     }
 
     public float[] GetDistanceToAllies(Vector3 pos)

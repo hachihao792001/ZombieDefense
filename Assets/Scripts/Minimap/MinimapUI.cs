@@ -17,6 +17,8 @@ public class MinimapUI : MonoBehaviour
     void Start()
     {
         _enemyIndicatorPairs = new Dictionary<Transform, EnemyIndicator>();
+
+        GameController.Instance.onZombieDied = OnZombieDied;
     }
 
     void Update()
@@ -42,6 +44,13 @@ public class MinimapUI : MonoBehaviour
                 }
             }
         }
+
+    }
+
+    public void OnZombieDied(Health whichZombie)
+    {
+        LeanPool.Despawn(_enemyIndicatorPairs[whichZombie.transform].gameObject);
+        _enemyIndicatorPairs.Remove(whichZombie.transform);
     }
 
     private bool IsVisbleOnMinimap(Transform enemy)

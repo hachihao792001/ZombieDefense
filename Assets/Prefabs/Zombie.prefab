@@ -2196,7 +2196,7 @@ MonoBehaviour:
       - m_Target: {fileID: 3891659002878227351}
         m_TargetAssemblyTypeName: ZombieDead, Assembly-CSharp
         m_MethodName: OnZombieDead
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
