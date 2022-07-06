@@ -12,6 +12,11 @@ public class LookByDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     [SerializeField]
     private float _sensitivity = 2;
+    [SerializeField]
+    private float _minSensitivity = 3;
+    [SerializeField]
+    private float _maxSensitivity = 15;
+
     private float _lastYaw, _lastPitch;
     [SerializeField]
     private float _minPitch;
@@ -19,6 +24,12 @@ public class LookByDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     private float _maxPitch;
 
     private Vector2 _startDraggingPos;
+
+    private void Start()
+    {
+        GameController.Instance.OnSensitivitySliderChanged =
+            (float value) => _sensitivity = value * (_maxSensitivity - _minSensitivity) + _minSensitivity;
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {

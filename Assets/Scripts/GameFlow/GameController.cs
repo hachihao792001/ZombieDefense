@@ -25,12 +25,17 @@ public class GameController : MonoSingleton<GameController>
     [SerializeField]
     private List<Transform> _zombieSpawnPositions;
 
-
+    public bool IsPaused = false;
+    [SerializeField]
+    private PauseScreen _pauseScreen;
+    public Action<float> OnSensitivitySliderChanged;
 
     private void Start()
     {
         SpawnZombies();
         OnNewRound?.Invoke();
+
+        _pauseScreen.OnSensititySliderChangedAction = (float v) => OnSensitivitySliderChanged?.Invoke(v);
     }
 
     private void SpawnZombies()
@@ -83,5 +88,18 @@ public class GameController : MonoSingleton<GameController>
             distances[i] = Vector3.Distance(pos, Allies[i].position);
         }
         return distances;
+    }
+
+    public void PauseOnClick()
+    {
+        Time.timeScale = 0;
+        IsPaused = true;
+        _pauseScreen.gameObject.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        IsPaused = false;
     }
 }
