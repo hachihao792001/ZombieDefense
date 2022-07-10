@@ -1739,7 +1739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 3029593477192001474}
-  fps: {fileID: 2937647522485511780}
+  _playerMoving: {fileID: 1994105685}
 --- !u!1 &3029593477182641168
 GameObject:
   m_ObjectHideFlags: 0
@@ -2989,7 +2989,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7738954408158036787}
-  - component: {fileID: 2937647522485511780}
   - component: {fileID: 5649905187873746896}
   - component: {fileID: 1950446156}
   - component: {fileID: 5337052509420140982}
@@ -2998,6 +2997,8 @@ GameObject:
   - component: {fileID: 7738954408158036789}
   - component: {fileID: 7738954408158036786}
   - component: {fileID: 1348600536}
+  - component: {fileID: 1994105685}
+  - component: {fileID: 1994105689}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3021,24 +3022,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2937647522485511780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7738954408158036784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 165a7681a87827d498d8e5b4708277be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _joyStick: {fileID: 0}
-  _bodyRb: {fileID: 7738954408158036789}
-  _walkSpeed: 3
-  _runButton: {fileID: 0}
-  _groundDistance: 1.3
-  _jumpForce: 200
 --- !u!114 &5649905187873746896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3112,7 +3095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deadScreen: {fileID: 0}
-  _moveByJoyStick: {fileID: 2937647522485511780}
+  _moveByJoyStick: {fileID: 0}
   _lookByDrag: {fileID: 0}
   _gunSwitcher: {fileID: 1950446156}
   _health: {fileID: 5337052509420140982}
@@ -3179,6 +3162,40 @@ MonoBehaviour:
   _gunAmmos:
   - {fileID: 7738954409844212430}
   - {fileID: 1318684053}
+--- !u!114 &1994105685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7738954408158036784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87f4e92002bd014488f0e3f1c2fb2e23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bodyRb: {fileID: 7738954408158036789}
+  _walkSpeed: 3
+  _groundDistance: 1.3
+  _jumpForce: 200
+--- !u!114 &1994105689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7738954408158036784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fa7d080cae4d68409983c34d21dec2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraAndWeapon: {fileID: 7738954408731878775}
+  _sensitivity: 2
+  _minSensitivity: 3
+  _maxSensitivity: 15
+  _minPitch: -60
+  _maxPitch: 60
 --- !u!1 &7738954408313122028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5715,7 +5732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 7738954409844212428}
-  fps: {fileID: 2937647522485511780}
+  _playerMoving: {fileID: 1994105685}
 --- !u!114 &1608677120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6154,14 +6171,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7513b8a531b5fa419a375beb9e1fb84, type: 3}
---- !u!4 &711365223363730062 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 711365223339541793, guid: c7513b8a531b5fa419a375beb9e1fb84, type: 3}
-  m_PrefabInstance: {fileID: 110174127}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &711365223363730060 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 711365223339541795, guid: c7513b8a531b5fa419a375beb9e1fb84, type: 3}
+  m_PrefabInstance: {fileID: 110174127}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &711365223363730062 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 711365223339541793, guid: c7513b8a531b5fa419a375beb9e1fb84, type: 3}
   m_PrefabInstance: {fileID: 110174127}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2058602513

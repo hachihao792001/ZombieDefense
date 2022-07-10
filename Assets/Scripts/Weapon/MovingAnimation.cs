@@ -12,20 +12,24 @@ public class MovingAnimation : MonoBehaviour
     [SerializeField]
     private Animator _animator;
 
-    [SerializeField]
-    private MoveByJoyStick fps;
+    private PlayerMoving _playerMoving;
 
     private void OnValidate()
     {
         _animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        _playerMoving = GameController.Instance.Player.PlayerMoving;
+    }
+
     private void Update()
     {
-        if (fps.IsMoving)
+        if (_playerMoving.IsMoving)
         {
-            _animator.SetBool(WalkingHash, !fps.IsRunning);
-            _animator.SetBool(RunningHash, fps.IsRunning);
+            _animator.SetBool(WalkingHash, !_playerMoving.IsRunning);
+            _animator.SetBool(RunningHash, _playerMoving.IsRunning);
         }
         else
         {

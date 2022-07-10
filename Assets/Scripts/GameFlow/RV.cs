@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RV : MonoBehaviour
 {
+    public Transform[] AttackPositions;
+
     [SerializeField]
     private GameObject _loseScreen;
     [HideInInspector]

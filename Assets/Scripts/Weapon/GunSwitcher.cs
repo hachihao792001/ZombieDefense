@@ -21,6 +21,9 @@ public class GunSwitcher : MonoBehaviour
                 break;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+            SwitchGunOnClick();
     }
 
     public void SwitchToGun(int gunIndex)

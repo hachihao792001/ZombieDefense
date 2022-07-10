@@ -7,6 +7,14 @@ using Random = UnityEngine.Random;
 public class GameController : MonoSingleton<GameController>
 {
     [SerializeField]
+    private Player _pcPlayer;
+    [SerializeField]
+    private Player _mobilePlayer;
+    public Player Player;
+    [SerializeField]
+    private RV _rv;
+
+    [SerializeField]
     public List<Transform> Allies;
     public List<Zombie> Enemies;
 
@@ -44,6 +52,18 @@ public class GameController : MonoSingleton<GameController>
 
         _pauseScreen.ResumeOnClick();
         _pauseScreen.OnSensititySliderChangedAction = (float v) => OnSensitivitySliderChanged?.Invoke(v);
+    }
+
+    public void SetMobileControl(bool mobileControl)
+    {
+        _pcPlayer.gameObject.SetActive(!mobileControl);
+        _mobilePlayer.gameObject.SetActive(mobileControl);
+        Player = mobileControl ? _mobilePlayer : _pcPlayer;
+
+        Allies = new List<Transform>();
+        for (int i = 0; i < _rv.AttackPositions.Length; i++)
+            Allies.Add(_rv.AttackPositions[i]);
+        Allies.Add(Player.transform);
     }
 
     private void SpawnZombies()
