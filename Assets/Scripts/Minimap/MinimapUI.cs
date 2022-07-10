@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
@@ -39,7 +39,7 @@ public class MinimapUI : MonoBehaviour
             {
                 if (!IsVisbleOnMinimap(enemies[i]))
                 {
-                    LeanPool.Despawn(_enemyIndicatorPairs[enemies[i]]);
+                    LeanPool.Despawn(_enemyIndicatorPairs[enemies[i]].gameObject);
                     _enemyIndicatorPairs.Remove(enemies[i]);
                 }
             }
@@ -49,8 +49,11 @@ public class MinimapUI : MonoBehaviour
 
     public void OnZombieDied(Zombie whichZombie)
     {
-        LeanPool.Despawn(_enemyIndicatorPairs[whichZombie].gameObject);
-        _enemyIndicatorPairs.Remove(whichZombie);
+        if (_enemyIndicatorPairs.ContainsKey(whichZombie))  //nhìn thấy trên map
+        {
+            LeanPool.Despawn(_enemyIndicatorPairs[whichZombie].gameObject);
+            _enemyIndicatorPairs.Remove(whichZombie);
+        }
     }
 
     private bool IsVisbleOnMinimap(Zombie enemy)

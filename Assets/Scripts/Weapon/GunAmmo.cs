@@ -68,7 +68,7 @@ public class GunAmmo : MonoBehaviour
     private void Update()
     {
         if (_isReloading) return;
-        if (Input.GetKeyDown(KeyCode.R) || LoadedAmmo <= 0)
+        if (LoadedAmmo < _magazineSize && (Input.GetKeyDown(KeyCode.R) || LoadedAmmo <= 0))
         {
             Reload();
         }

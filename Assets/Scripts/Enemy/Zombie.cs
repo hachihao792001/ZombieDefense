@@ -52,6 +52,6 @@ public class Zombie : MonoBehaviour
 
         OnZombieDied?.Invoke(this);
 
-        Destroy(gameObject, 5f);
+        Lean.Pool.LeanPool.Despawn(gameObject, 5f);
     }
 }

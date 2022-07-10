@@ -300,28 +300,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 7ca1a3d739d94e94987803ec607c3d33, type: 3}
---- !u!114 &11573181 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1994105689, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
-  m_PrefabInstance: {fileID: 161786013}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fa7d080cae4d68409983c34d21dec2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11573182 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1994105685, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
-  m_PrefabInstance: {fileID: 161786013}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87f4e92002bd014488f0e3f1c2fb2e23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11573187 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3786626677163516535, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
@@ -2093,25 +2071,9 @@ PrefabInstance:
       propertyPath: _deadScreen
       value: 
       objectReference: {fileID: 1052669950}
-    - target: {fileID: 3786626677163516535, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
-      propertyPath: PlayerMoving
-      value: 
-      objectReference: {fileID: 11573182}
-    - target: {fileID: 3786626677163516535, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
-      propertyPath: PlayerLooking
-      value: 
-      objectReference: {fileID: 11573181}
-    - target: {fileID: 3786626677163516535, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
-      propertyPath: _moveByJoyStick
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7738954408158036784, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
       propertyPath: m_Name
       value: PCPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 7738954408158036784, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7738954408158036787, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
       propertyPath: m_RootOrder

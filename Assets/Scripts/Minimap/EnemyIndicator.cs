@@ -13,6 +13,9 @@ public class EnemyIndicator : MonoBehaviour
         _minimapCamera = minimapCamera;
         _minimap = minimap;
         _target = target;
+
+        transform.position = _minimapCamera.WorldToScreenPoint(_target.position) + _minimap.position
+            - new Vector3(400f / 2f, 250f / 2f, 0);
     }
 
     private void Update()

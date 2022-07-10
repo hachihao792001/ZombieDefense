@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Lean.Pool;
 
 public class ZombieSpawner : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class ZombieSpawner : MonoBehaviour
 
     private void SpawnAZombie(Zombie zombiePrefab)
     {
-        Zombie newZombie = Instantiate(zombiePrefab, transform);
+        Zombie newZombie = LeanPool.Spawn(zombiePrefab, transform);
         newZombie.OnZombieDied = OnZombieDied;
         AssignZombiePosition(newZombie);
         Zombies.Add(newZombie);
