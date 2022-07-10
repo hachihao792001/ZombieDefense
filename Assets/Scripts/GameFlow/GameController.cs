@@ -16,28 +16,24 @@ public class GameController : MonoSingleton<GameController>
     [Header("Game")]
     [SerializeField]
     public ZombieSpawner ZombieSpawner;
-
     [SerializeField]
     private RV _rv;
-    [SerializeField]
-    public List<Transform> Allies;
-
-
     [SerializeField]
     private MoneyManager _moneyManager;
     [SerializeField]
     private MoneyEarningData _moneyEarningData;
-
-    public int CurrentRound = 1;
-
-    public Action OnNewRound;
-
-    public bool IsPaused = false;
     [SerializeField]
     private PauseScreen _pauseScreen;
-    public Action<float> OnSensitivitySliderChanged;
+    [SerializeField]
+    private GameObject _winScreen;
 
+    public List<Transform> Allies;
+    public int CurrentRound = 1;
+    public Action OnNewRound;
+    public bool IsPaused = false;
+    public Action<float> OnSensitivitySliderChanged;
     public Action<Zombie> OnZombieDiedAction;
+
 
     private void Start()
     {
@@ -82,7 +78,16 @@ public class GameController : MonoSingleton<GameController>
         CurrentRound++;
         OnNewRound?.Invoke();
         _moneyManager.EarnMoney(_moneyEarningData.Finish1Round);
-        ZombieSpawner.SpawnZombies();
+
+        if (ZombieSpawner.HasSpawningData(CurrentRound))
+            ZombieSpawner.SpawnZombies();
+        else
+        {
+            _winScreen.gameObject.SetActive(true);
+
+            Time.timeScale = 0;
+            IsPaused = true;
+        }
     }
 
     public float[] GetDistanceToAllies(Vector3 pos)

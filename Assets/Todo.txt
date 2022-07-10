@@ -6,3 +6,7 @@ Melee
 Make turret smaller
 UI animation
 Better main menu
+More sounds
+
+Big zombie
+Grenade

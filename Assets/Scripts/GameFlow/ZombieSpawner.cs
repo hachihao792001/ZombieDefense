@@ -9,7 +9,16 @@ public class ZombieSpawner : MonoBehaviour
     public List<Zombie> Zombies;
 
     public Action<Zombie> OnZombieDiedAction;
-    public int CurrentRoundZombieCount => _zombieSpawningData.RoundSpawningDatas[GameController.Instance.CurrentRound - 1].Total;
+    public int CurrentRoundZombieCount
+    {
+        get
+        {
+            if (HasSpawningData(GameController.Instance.CurrentRound))
+                return _zombieSpawningData.RoundSpawningDatas[GameController.Instance.CurrentRound - 1].Total;
+            else
+                return 0;
+        }
+    }
 
     [SerializeField]
     private ZombieSpawningData _zombieSpawningData;
@@ -19,6 +28,11 @@ public class ZombieSpawner : MonoBehaviour
     private Zombie _fastZombiePrefab;
     [SerializeField]
     private List<Transform> _zombieSpawnPositions;
+
+    public bool HasSpawningData(int round)
+    {
+        return round - 1 < _zombieSpawningData.RoundSpawningDatas.Length;
+    }
 
     public void SpawnZombies()
     {

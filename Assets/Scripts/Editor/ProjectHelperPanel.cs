@@ -12,8 +12,14 @@ public class ProjectHelperPanel : EditorWindow
     private void OnGUI()
     {
         if (GUILayout.Button("To Mobile Control"))
+        {
             GameController.Instance.SetMobileControl(true);
+            EditorUtility.SetDirty(GameController.Instance);
+        }
         if (GUILayout.Button("To PC Control"))
+        {
             GameController.Instance.SetMobileControl(false);
+            EditorUtility.SetDirty(GameController.Instance);
+        }
     }
 }
