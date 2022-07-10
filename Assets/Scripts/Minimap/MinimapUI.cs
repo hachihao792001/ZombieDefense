@@ -23,7 +23,7 @@ public class MinimapUI : MonoBehaviour
 
     void Update()
     {
-        List<Zombie> enemies = GameController.Instance.Enemies;
+        List<Zombie> enemies = GameController.Instance.ZombieSpawner.Zombies;
         for (int i = 0; i < enemies.Count; i++)
         {
             if (!_enemyIndicatorPairs.ContainsKey(enemies[i]))

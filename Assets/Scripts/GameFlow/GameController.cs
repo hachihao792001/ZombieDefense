@@ -6,17 +6,22 @@ using Random = UnityEngine.Random;
 
 public class GameController : MonoSingleton<GameController>
 {
+    [Header("FPS Controller")]
     [SerializeField]
     private Player _pcPlayer;
     [SerializeField]
     private Player _mobilePlayer;
     public Player Player;
+
+    [Header("Game")]
     [SerializeField]
-    private RV _rv;
+    public ZombieSpawner ZombieSpawner;
 
     [SerializeField]
+    private RV _rv;
+    [SerializeField]
     public List<Transform> Allies;
-    public List<Zombie> Enemies;
+
 
     [SerializeField]
     private MoneyManager _moneyManager;
@@ -25,29 +30,20 @@ public class GameController : MonoSingleton<GameController>
 
     public int CurrentRound = 1;
 
-    public Action<Zombie> OnZombieDiedAction;
     public Action OnNewRound;
-    public int CurrentRoundZombieCount => _zombieSpawningData.RoundSpawningDatas[CurrentRound - 1].Total;
-
-    [SerializeField]
-    private ZombieSpawningData _zombieSpawningData;
-    [SerializeField]
-    private Zombie _zombiePrefab;
-    [SerializeField]
-    private Zombie _fastZombiePrefab;
-    [SerializeField]
-    private Transform _zombiesParent;
-    [SerializeField]
-    private List<Transform> _zombieSpawnPositions;
 
     public bool IsPaused = false;
     [SerializeField]
     private PauseScreen _pauseScreen;
     public Action<float> OnSensitivitySliderChanged;
 
+    public Action<Zombie> OnZombieDiedAction;
+
     private void Start()
     {
-        SpawnZombies();
+        ZombieSpawner.SpawnZombies();
+        ZombieSpawner.OnZombieDiedAction += OnZombieDied;
+
         OnNewRound?.Invoke();
 
         _pauseScreen.ResumeOnClick();
@@ -66,58 +62,9 @@ public class GameController : MonoSingleton<GameController>
         Allies.Add(Player.transform);
     }
 
-    private void SpawnZombies()
-    {
-        int normalZombieCount = _zombieSpawningData.RoundSpawningDatas[CurrentRound - 1].NormalZombieCount;
-        int fastZombieCount = _zombieSpawningData.RoundSpawningDatas[CurrentRound - 1].FastZombieCount;
-        for (int i = 0; i < normalZombieCount; i++)
-        {
-            SpawnAZombie(_zombiePrefab);
-        }
-        for (int i = 0; i < fastZombieCount; i++)
-        {
-            SpawnAZombie(_fastZombiePrefab);
-        }
-    }
-
-    private void SpawnAZombie(Zombie zombiePrefab)
-    {
-        Zombie newZombie = Instantiate(zombiePrefab, _zombiesParent);
-        newZombie.OnZombieDied = OnZombieDied;
-        AssignZombiePosition(newZombie);
-        Enemies.Add(newZombie);
-    }
-
-    int _currentSpawnPositionIndex = 0;
-    private void AssignZombiePosition(Zombie zombie)
-    {
-        Vector3 randomPosition = _zombieSpawnPositions[_currentSpawnPositionIndex].position;
-        _currentSpawnPositionIndex++;
-        if (_currentSpawnPositionIndex >= _zombieSpawnPositions.Count)
-            _currentSpawnPositionIndex = 0;
-
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPosition, out hit, Mathf.Infinity, NavMesh.AllAreas))
-        {
-            zombie.ZombieMoving.WarpAgent(hit.position);
-        }
-    }
 
     private void OnZombieDied(Zombie whichZombie)
     {
-        Enemies.Remove(whichZombie);
-
-        if (Enemies.Count == 0)
-        {
-            CurrentRound++;
-            OnNewRound?.Invoke();
-            _moneyManager.EarnMoney(_moneyEarningData.Finish1Round);
-            SpawnZombies();
-        }
-
-        OnZombieDiedAction?.Invoke(whichZombie);
-        whichZombie.OnZombieDied -= OnZombieDied;
-
         if (whichZombie.ZombieType == ZombieType.Normal)
         {
             _moneyManager.EarnMoney(_moneyEarningData.KillingZombie);
@@ -127,6 +74,15 @@ public class GameController : MonoSingleton<GameController>
             _moneyManager.EarnMoney(_moneyEarningData.KillingFastZombie);
         }
 
+        OnZombieDiedAction?.Invoke(whichZombie);
+    }
+
+    public void EndRound()
+    {
+        CurrentRound++;
+        OnNewRound?.Invoke();
+        _moneyManager.EarnMoney(_moneyEarningData.Finish1Round);
+        ZombieSpawner.SpawnZombies();
     }
 
     public float[] GetDistanceToAllies(Vector3 pos)

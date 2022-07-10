@@ -46,6 +46,7 @@ MonoBehaviour:
   _pcPlayer: {fileID: 0}
   _mobilePlayer: {fileID: 0}
   Player: {fileID: 0}
+  ZombieSpawner: {fileID: 0}
   _rv: {fileID: 0}
   Allies:
   - {fileID: 0}
@@ -56,20 +57,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  Enemies: []
   _moneyManager: {fileID: 0}
   _moneyEarningData: {fileID: 11400000, guid: 82b592988eb6eb6468b7100db4891c93, type: 2}
   CurrentRound: 1
-  _zombieSpawningData: {fileID: 11400000, guid: 33c5ed57dac59e042a59da5d96459cdf, type: 2}
-  _zombiePrefab: {fileID: 3891659002878227351, guid: 508e4b61d73ccb94fa5f2e65d3604557, type: 3}
-  _fastZombiePrefab: {fileID: 3891659002878227351, guid: 22f29fbde0aec1f43bf795db760d7191, type: 3}
-  _zombiesParent: {fileID: 0}
-  _zombieSpawnPositions:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   IsPaused: 0
   _pauseScreen: {fileID: 0}

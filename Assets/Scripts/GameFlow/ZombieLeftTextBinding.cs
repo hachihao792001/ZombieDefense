@@ -18,6 +18,7 @@ public class ZombieLeftTextBinding : MonoBehaviour
 
     private void OnZombieDied(Zombie _)
     {
-        _zombieLeftText.text = $"Zombie: {GameController.Instance.Enemies.Count}/{GameController.Instance.CurrentRoundZombieCount}";
+
+        _zombieLeftText.text = $"Zombie: {GameController.Instance.ZombieSpawner.Zombies.Count}/{GameController.Instance.ZombieSpawner.CurrentRoundZombieCount}";
     }
 }
