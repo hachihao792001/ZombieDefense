@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthTextBinding : MonoBehaviour
+public class HealthBarBinding : MonoBehaviour
 {
     [SerializeField]
     private Health _health;
@@ -15,9 +15,16 @@ public class HealthTextBinding : MonoBehaviour
 
     void Start()
     {
-        _health.OnHealthChanged.AddListener(UpdateHealth);
+        _health.OnLoseHealth.AddListener(UpdateHealth);
+        _health.OnGainHealth.AddListener(UpdateHealth);
         UpdateHealth(1f);
     }
 
     private void UpdateHealth(float newPercent) => _healthBar.fillAmount = newPercent;
+
+    private void OnDestroy()
+    {
+        _health.OnLoseHealth.RemoveListener(UpdateHealth);
+        _health.OnGainHealth.RemoveListener(UpdateHealth);
+    }
 }

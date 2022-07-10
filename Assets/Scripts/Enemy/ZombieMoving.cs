@@ -26,6 +26,12 @@ public class ZombieMoving : MonoBehaviour
 
     private void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        enabled = true;
         StartCoroutine(SeekForTarget());
     }
 

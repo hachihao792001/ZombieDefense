@@ -53,6 +53,7 @@ public class ZombieSpawner : MonoBehaviour
     {
         Zombie newZombie = LeanPool.Spawn(zombiePrefab, transform);
         newZombie.OnZombieDied = OnZombieDied;
+        newZombie.Init();
         AssignZombiePosition(newZombie);
         Zombies.Add(newZombie);
     }

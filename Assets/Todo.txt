@@ -1,6 +1,4 @@
-Win screen
 Pool everything
-Minimap bug
 Third gate
 Melee
 Make turret smaller

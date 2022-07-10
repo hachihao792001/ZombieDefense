@@ -17,19 +17,27 @@ public class Health : MonoBehaviour
     private Animator _animator;
 
     public Action OnDied;
-    public UnityEvent<float> OnHealthChanged;
+    public UnityEvent<float> OnLoseHealth;
+    public UnityEvent<float> OnGainHealth;
 
     private void OnValidate() => _animator = GetComponent<Animator>();
 
     private void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        enabled = true;
         _currentHealth = _fullHealth;
+        OnGainHealth?.Invoke(_currentHealth / _fullHealth);
     }
 
     public void TakeDamage(float _damage)
     {
         _currentHealth -= _damage;
-        OnHealthChanged?.Invoke(_currentHealth / _fullHealth);
+        OnLoseHealth?.Invoke(_currentHealth / _fullHealth);
         if (_currentHealth <= 0)
         {
             if (_animator != null)
@@ -45,6 +53,6 @@ public class Health : MonoBehaviour
         if (_currentHealth > _fullHealth)
             _currentHealth = _fullHealth;
 
-        OnHealthChanged?.Invoke(_currentHealth / _fullHealth);
+        OnGainHealth?.Invoke(_currentHealth / _fullHealth);
     }
 }

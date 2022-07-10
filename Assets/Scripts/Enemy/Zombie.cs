@@ -54,4 +54,14 @@ public class Zombie : MonoBehaviour
 
         Lean.Pool.LeanPool.Despawn(gameObject, 5f);
     }
+
+    public void Init()
+    {
+        ZombieMoving.Init();
+        ZombieAttack.enabled = true;
+        ZombieHealth.Init();
+        ZombieCollider.enabled = true;
+        _headCollider.enabled = true;
+        _healthBarCanvas.SetActive(true);
+    }
 }

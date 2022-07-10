@@ -2190,7 +2190,7 @@ MonoBehaviour:
   _fullHealth: 26
   _currentHealth: 0
   _animator: {fileID: 1894931315143484630}
-  OnHealthChanged:
+  OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &3891659002878227351
@@ -2205,6 +2205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4df953315fc018c498a58045024a9a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ZombieType: 0
   ZombieMoving: {fileID: 615572906464446221}
   ZombieAttack: {fileID: 615572906464446219}
   ZombieHealth: {fileID: 485622008396243285}
