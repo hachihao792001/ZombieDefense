@@ -29,6 +29,20 @@ public class ZombieSpawner : MonoBehaviour
     [SerializeField]
     private List<Transform> _zombieSpawnPositions;
 
+    private void Awake()
+    {
+        int count = _zombieSpawnPositions.Count;
+        List<Transform> randomizedPositions = new List<Transform>();
+        for (int i = 0; i < count; i++)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, _zombieSpawnPositions.Count);
+            randomizedPositions.Add(_zombieSpawnPositions[randomIndex]);
+            _zombieSpawnPositions.RemoveAt(randomIndex);
+        }
+
+        _zombieSpawnPositions.AddRange(randomizedPositions);
+    }
+
     public bool HasSpawningData(int round)
     {
         return round - 1 < _zombieSpawningData.RoundSpawningDatas.Length;

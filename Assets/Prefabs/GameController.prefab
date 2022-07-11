@@ -48,6 +48,10 @@ MonoBehaviour:
   Player: {fileID: 0}
   ZombieSpawner: {fileID: 0}
   _rv: {fileID: 0}
+  _moneyManager: {fileID: 0}
+  _moneyEarningData: {fileID: 11400000, guid: 82b592988eb6eb6468b7100db4891c93, type: 2}
+  _pauseScreen: {fileID: 0}
+  _winScreen: {fileID: 0}
   Allies:
   - {fileID: 0}
   - {fileID: 0}
@@ -57,8 +61,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _moneyManager: {fileID: 0}
-  _moneyEarningData: {fileID: 11400000, guid: 82b592988eb6eb6468b7100db4891c93, type: 2}
   CurrentRound: 1
   IsPaused: 0
-  _pauseScreen: {fileID: 0}
