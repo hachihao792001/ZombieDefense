@@ -11,7 +11,7 @@ public class PlayerTurretPlacer : MonoBehaviour
     [SerializeField]
     private float _placeDistance;
 
-    public void OnBuyTurret()
+    public void PlaceNewTurret()
     {
         Instantiate(_turretPrefab, transform.position + transform.forward.normalized * _placeDistance, Quaternion.identity, _turretsParent);
     }

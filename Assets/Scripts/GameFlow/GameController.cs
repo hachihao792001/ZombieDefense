@@ -46,6 +46,22 @@ public class GameController : MonoSingleton<GameController>
         _pauseScreen.OnSensititySliderChangedAction = (float v) => OnSensitivitySliderChanged?.Invoke(v);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!IsPaused)
+            {
+                PauseOnClick();
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                _pauseScreen.ResumeOnClick();
+            }
+        }
+    }
+
     public void SetMobileControl(bool mobileControl)
     {
         _pcPlayer.gameObject.SetActive(!mobileControl);
@@ -111,5 +127,7 @@ public class GameController : MonoSingleton<GameController>
     {
         Time.timeScale = 1;
         IsPaused = false;
+        if (Player == _pcPlayer)
+            Cursor.lockState = CursorLockMode.Locked;
     }
 }

@@ -10,4 +10,8 @@ public class AlwaysLookAt : MonoBehaviour
     {
         transform.LookAt(_target);
     }
+    public void SetTarget(Transform target)
+    {
+        _target = target;
+    }
 }

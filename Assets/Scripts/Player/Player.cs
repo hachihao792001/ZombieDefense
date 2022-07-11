@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 
     public PlayerMoving PlayerMoving;
     public PlayerLooking PlayerLooking;
+    public PlayerTurretPlacer PlayerTurretPlacer;
     [SerializeField]
     private GunSwitcher _gunSwitcher;
     [SerializeField]
@@ -23,6 +24,13 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _health.OnDied = OnPlayerDied;
+    }
+
+    private void OnValidate()
+    {
+        PlayerMoving = GetComponent<PlayerMoving>();
+        PlayerLooking = GetComponent<PlayerLooking>();
+        PlayerTurretPlacer = GetComponent<PlayerTurretPlacer>();
     }
 
     public void OnPlayerDied()

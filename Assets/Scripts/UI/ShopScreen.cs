@@ -38,8 +38,6 @@ public class ShopScreen : MonoBehaviour
     public UnityEvent<float> OnBuyHeal;
     public UnityEvent OnBuyAmmo;
     public UnityEvent<float> OnBuyHealRV;
-    public UnityEvent OnBuyTurret;
-
     private void OnEnable()
     {
         _healPriceText.text = "$" + _healPrice;
@@ -55,7 +53,6 @@ public class ShopScreen : MonoBehaviour
         BuyItem(_healPrice, () =>
         {
             OnBuyHeal?.Invoke(_healAmount);
-            _currentMoneyText.text = "$" + _moneyManager.CurrentMoney;
         });
     }
 
@@ -64,7 +61,6 @@ public class ShopScreen : MonoBehaviour
         BuyItem(_ammoPrice, () =>
         {
             OnBuyAmmo?.Invoke();
-            _currentMoneyText.text = "$" + _moneyManager.CurrentMoney;
         });
     }
 
@@ -73,7 +69,6 @@ public class ShopScreen : MonoBehaviour
         BuyItem(_healRVPrice, () =>
         {
             OnBuyHealRV?.Invoke(_healRVAmount);
-            _currentMoneyText.text = "$" + _moneyManager.CurrentMoney;
         });
     }
 
@@ -81,8 +76,7 @@ public class ShopScreen : MonoBehaviour
     {
         BuyItem(_turretPrice, () =>
         {
-            OnBuyTurret?.Invoke();
-            _currentMoneyText.text = "$" + _moneyManager.CurrentMoney;
+            GameController.Instance.Player.PlayerTurretPlacer.PlaceNewTurret();
         });
     }
 
@@ -91,6 +85,7 @@ public class ShopScreen : MonoBehaviour
         if (_moneyManager.UseMoney(price))
         {
             successAction?.Invoke();
+            _currentMoneyText.text = "$" + _moneyManager.CurrentMoney;
         }
     }
 }

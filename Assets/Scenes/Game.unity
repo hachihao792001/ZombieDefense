@@ -1105,6 +1105,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &51795004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,6 +1361,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &75075448
@@ -1621,6 +1627,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &105184942
@@ -2098,6 +2107,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &129425649 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 196252, guid: 7ff7f705d790596449e465a0fc6375b7, type: 3}
@@ -2278,6 +2290,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2059930253984134012, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
+      propertyPath: _turretsParent
+      value: 
+      objectReference: {fileID: 49197108}
     - target: {fileID: 3786626677163516535, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
       propertyPath: _deadScreen
       value: 
@@ -3509,6 +3525,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &232869930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3717,6 +3736,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &242042454 stripped
@@ -4471,6 +4493,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &281451571 stripped
@@ -5533,6 +5558,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &396791498 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 196252, guid: 7ff7f705d790596449e465a0fc6375b7, type: 3}
@@ -6064,6 +6092,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &436177394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6147,6 +6178,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &437312749
@@ -7281,6 +7315,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &542089119
@@ -8486,6 +8523,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &629873930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9007,6 +9047,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &681555564 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 681555564, guid: bb3dc2b70dce3cf43ab16fee2228682e, type: 3}
@@ -9099,6 +9142,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &684887078
@@ -9420,6 +9466,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &702631718 stripped
@@ -11534,6 +11583,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &828739197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12448,6 +12500,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &889200109
@@ -14168,6 +14223,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &965367292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14905,6 +14963,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1039221061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15328,6 +15389,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &1059785091
@@ -17349,6 +17413,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1194567866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18096,6 +18163,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1261187751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18775,6 +18845,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &1313012324
@@ -19766,6 +19839,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &1361369242
@@ -21579,6 +21655,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &1474576829
@@ -23975,6 +24054,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1644098558
 GameObject:
   m_ObjectHideFlags: 0
@@ -24383,6 +24465,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &1666667736
@@ -24947,6 +25032,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1695451757 stripped
@@ -26151,6 +26239,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1759612298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26808,6 +26899,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1790551590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27325,6 +27419,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1812059691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27480,6 +27577,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &1821688256
@@ -27994,6 +28094,9 @@ MonoBehaviour:
   OnLoseHealth:
     m_PersistentCalls:
       m_Calls: []
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1834273771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28143,6 +28246,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &1837119535
@@ -29466,6 +29572,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &1917811021
@@ -31787,6 +31896,9 @@ MonoBehaviour:
   _currentHealth: 0
   _animator: {fileID: 0}
   OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &2073099569 stripped

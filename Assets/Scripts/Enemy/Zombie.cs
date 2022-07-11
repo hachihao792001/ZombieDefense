@@ -39,6 +39,7 @@ public class Zombie : MonoBehaviour
     private void Start()
     {
         ZombieHealth.OnDied = OnZombieDead;
+        _healthBarCanvas.GetComponent<AlwaysLookAt>().SetTarget(GameController.Instance.Player.transform);
     }
 
     public void OnZombieDead()
