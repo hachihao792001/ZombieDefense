@@ -28,6 +28,8 @@ public class Zombie : MonoBehaviour
 
     public Action<Zombie> OnZombieDied;
 
+    public Transform TurretTarget;
+
     private void OnValidate()
     {
         ZombieMoving = GetComponent<ZombieMoving>();

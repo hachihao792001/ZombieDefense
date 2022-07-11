@@ -3081,6 +3081,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnGainHealth:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3786626677163516535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3096,8 +3099,10 @@ MonoBehaviour:
   _deadScreen: {fileID: 0}
   PlayerMoving: {fileID: 1994105685}
   PlayerLooking: {fileID: 1994105689}
+  PlayerTurretPlacer: {fileID: 2059930253984134012}
+  PlayerAmmoRefiller: {fileID: 1348600536}
+  Health: {fileID: 5337052509420140982}
   _gunSwitcher: {fileID: 1950446156}
-  _health: {fileID: 5337052509420140982}
   _handGun: {fileID: 7738954409844212426}
   _rifle: {fileID: 3029593477182641166}
   _rb: {fileID: 7738954408158036789}

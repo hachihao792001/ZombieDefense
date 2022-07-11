@@ -1,7 +1,6 @@
 Pool everything
 Third gate
 Melee
-Make turret smaller
 UI animation
 More sounds
 

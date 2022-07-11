@@ -35,9 +35,10 @@ public class ShopScreen : MonoBehaviour
     [SerializeField]
     private float _healRVAmount;
 
-    public UnityEvent<float> OnBuyHeal;
-    public UnityEvent OnBuyAmmo;
     public UnityEvent<float> OnBuyHealRV;
+
+    private Player _player;
+
     private void OnEnable()
     {
         _healPriceText.text = "$" + _healPrice;
@@ -46,16 +47,18 @@ public class ShopScreen : MonoBehaviour
         _turretPriceText.text = "$" + _turretPrice;
 
         _currentMoneyText.text = "$" + _moneyManager.CurrentMoney;
+
+        _player = GameController.Instance.Player;
     }
 
     public void HealOnClick()
     {
-        BuyItem(_healPrice, () => OnBuyHeal?.Invoke(_healAmount));
+        BuyItem(_healPrice, () => _player.Health.Heal(_healAmount));
     }
 
     public void AmmoOnClick()
     {
-        BuyItem(_ammoPrice, () => OnBuyAmmo?.Invoke());
+        BuyItem(_ammoPrice, () => _player.PlayerAmmoRefiller.RefillAmmo());
     }
 
     public void HealRVOnClick()
@@ -65,7 +68,7 @@ public class ShopScreen : MonoBehaviour
 
     public void TurretOnClick()
     {
-        BuyItem(_turretPrice, () => GameController.Instance.Player.PlayerTurretPlacer.PlaceNewTurret());
+        BuyItem(_turretPrice, () => _player.PlayerTurretPlacer.PlaceNewTurret());
     }
 
     private void BuyItem(int price, Action successAction)

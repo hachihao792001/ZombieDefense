@@ -25,7 +25,7 @@ public class MuzzleFlash : MonoBehaviour
     private void RotateMuzzle()
     {
         int angle = Random.Range(0, 360);
-        muzzleFlash.localRotation = Quaternion.Euler(0, 0, angle);
+        muzzleFlash.localRotation = Quaternion.Euler(muzzleFlash.localEulerAngles.x, 0, angle);
     }
 
     private void Update()

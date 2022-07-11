@@ -10,10 +10,10 @@ public class Player : MonoBehaviour
     public PlayerMoving PlayerMoving;
     public PlayerLooking PlayerLooking;
     public PlayerTurretPlacer PlayerTurretPlacer;
+    public PlayerAmmoRefiller PlayerAmmoRefiller;
+    public Health Health;
     [SerializeField]
     private GunSwitcher _gunSwitcher;
-    [SerializeField]
-    private Health _health;
     [SerializeField]
     private GameObject _handGun;
     [SerializeField]
@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        _health.OnDied = OnPlayerDied;
+        Health.OnDied = OnPlayerDied;
     }
 
     private void OnValidate()
@@ -31,18 +31,20 @@ public class Player : MonoBehaviour
         PlayerMoving = GetComponent<PlayerMoving>();
         PlayerLooking = GetComponent<PlayerLooking>();
         PlayerTurretPlacer = GetComponent<PlayerTurretPlacer>();
+        PlayerAmmoRefiller = GetComponent<PlayerAmmoRefiller>();
+        Health = GetComponent<Health>();
     }
 
     public void OnPlayerDied()
     {
-        _health.OnDied -= OnPlayerDied;
+        Health.OnDied -= OnPlayerDied;
 
         _deadScreen.SetActive(true);
 
         PlayerMoving.enabled = false;
         PlayerLooking.enabled = false;
         _gunSwitcher.enabled = false;
-        _health.enabled = false;
+        Health.enabled = false;
         _handGun.SetActive(false);
         _rifle.SetActive(false);
 
