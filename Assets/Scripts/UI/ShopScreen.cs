@@ -50,34 +50,22 @@ public class ShopScreen : MonoBehaviour
 
     public void HealOnClick()
     {
-        BuyItem(_healPrice, () =>
-        {
-            OnBuyHeal?.Invoke(_healAmount);
-        });
+        BuyItem(_healPrice, () => OnBuyHeal?.Invoke(_healAmount));
     }
 
     public void AmmoOnClick()
     {
-        BuyItem(_ammoPrice, () =>
-        {
-            OnBuyAmmo?.Invoke();
-        });
+        BuyItem(_ammoPrice, () => OnBuyAmmo?.Invoke());
     }
 
     public void HealRVOnClick()
     {
-        BuyItem(_healRVPrice, () =>
-        {
-            OnBuyHealRV?.Invoke(_healRVAmount);
-        });
+        BuyItem(_healRVPrice, () => OnBuyHealRV?.Invoke(_healRVAmount));
     }
 
     public void TurretOnClick()
     {
-        BuyItem(_turretPrice, () =>
-        {
-            GameController.Instance.Player.PlayerTurretPlacer.PlaceNewTurret();
-        });
+        BuyItem(_turretPrice, () => GameController.Instance.Player.PlayerTurretPlacer.PlaceNewTurret());
     }
 
     private void BuyItem(int price, Action successAction)
