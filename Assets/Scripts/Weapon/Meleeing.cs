@@ -2,25 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunDamageDelivery : MonoBehaviour
+public class Meleeing : MonoBehaviour
 {
+    private readonly int MeleeHash = Animator.StringToHash("Melee");
+
+    public float Distance;
+    public int Rpm;
+
     [SerializeField]
     private Transform aimingCamera;
     [SerializeField]
-    private GameObject _bulletImpactPrefab;
+    private Animator _animator;
     [SerializeField]
     private GameObject _zombieBloodPrefab;
-    [SerializeField]
-    private float bulletForce;
     [SerializeField]
     private int _damage;
     [HideInInspector]
     [SerializeField]
     private int _zombieLayer;
 
-    private void OnValidate() => _zombieLayer = LayerMask.NameToLayer("Enemy");
+    private void OnValidate()
+    {
+        _zombieLayer = LayerMask.NameToLayer("Enemy");
+        _animator = GetComponent<Animator>();
+    }
 
-    public void OnShoot()
+    public void DoMelee()
+    {
+        _animator.Play(MeleeHash, 0, 0);
+    }
+
+    public void MeleeDealDamage()   //animation event
     {
         PerformRaycasting();
     }
@@ -28,7 +40,7 @@ public class GunDamageDelivery : MonoBehaviour
     private void PerformRaycasting()
     {
         Ray aimingRay = new Ray(aimingCamera.position, aimingCamera.forward);
-        if (Physics.Raycast(aimingRay, out RaycastHit hitInfo))
+        if (Physics.Raycast(aimingRay, out RaycastHit hitInfo, Distance))
         {
             GameObject hitObject = hitInfo.collider.gameObject;
             Health health = hitObject.GetComponent<Health>();
@@ -45,13 +57,6 @@ public class GunDamageDelivery : MonoBehaviour
             {
                 CreateHitEffect(_zombieBloodPrefab, hitInfo);
             }
-            else
-            {
-                CreateHitEffect(_bulletImpactPrefab, hitInfo);
-            }
-
-            if (hitInfo.rigidbody)
-                AddForceToHit(hitInfo);
         }
     }
 
@@ -60,9 +65,7 @@ public class GunDamageDelivery : MonoBehaviour
         Quaternion holeRotation = Quaternion.LookRotation(hitInfo.normal);
         Instantiate(impactEffect, hitInfo.point, holeRotation).transform.parent = hitInfo.collider.transform;
     }
-    private void AddForceToHit(RaycastHit hitInfo)
-    {
-        hitInfo.rigidbody.AddForce(-hitInfo.normal * bulletForce);
-    }
 
+    public void Lock() => enabled = false;
+    public void Unlock() => enabled = true;
 }

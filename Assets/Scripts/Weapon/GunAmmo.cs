@@ -19,7 +19,7 @@ public class GunAmmo : MonoBehaviour
     private Animator _animator;
     [HideInInspector]
     [SerializeField]
-    private Shooting _shooting;
+    private ArmController _arm;
 
     [SerializeField]
     private AudioSource _reloadSound;
@@ -45,20 +45,20 @@ public class GunAmmo : MonoBehaviour
     private void OnValidate()
     {
         _animator = GetComponent<Animator>();
-        _shooting = GetComponent<Shooting>();
+        _arm = GetComponent<ArmController>();
     }
 
     private void OnEnable()
     {
         _isReloading = false;
-        UnlockShooting();
+        UnlockAttacking();
     }
 
     private void Start()
     {
         LoadedAmmo = _magazineSize;
         RemainingAmmo = FullRemainingAmmo;
-        _shooting.OnShoot.AddListener(OnShoot);
+        _arm.Shooting.OnShoot.AddListener(OnShoot);
     }
     private void OnShoot()
     {
@@ -87,7 +87,7 @@ public class GunAmmo : MonoBehaviour
             _animator.SetTrigger(ReloadTriggerHash);
             _isReloading = true;
             _reloadSound.Play();
-            LockShooting();
+            LockAttacking();
         }
     }
     public void AddAmmo()
@@ -101,16 +101,26 @@ public class GunAmmo : MonoBehaviour
     public void DoneReloading()
     {
         _isReloading = false;
-        UnlockShooting();
+        UnlockAttacking();
     }
 
-    private void LockShooting() => _shooting.Lock();
-    private void UnlockShooting()
+    private void LockShooting()
+    {
+        _arm.Shooting.Lock();
+    }
+
+    private void LockAttacking()
+    {
+        _arm.Shooting.Lock();
+        _arm.Meleeing.Lock();
+    }
+    private void UnlockAttacking()
     {
         if (LoadedAmmo > 0)
         {
-            _shooting.Unlock();
+            _arm.Shooting.Unlock();
         }
+        _arm.Meleeing.Unlock();
     }
 
     public void RefillAmmo()

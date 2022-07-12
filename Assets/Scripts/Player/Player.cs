@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public PlayerAmmoRefiller PlayerAmmoRefiller;
     public Health Health;
     [SerializeField]
-    private GunSwitcher _gunSwitcher;
+    private ArmSwitcher _gunSwitcher;
     [SerializeField]
     private GameObject _handGun;
     [SerializeField]
