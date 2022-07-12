@@ -1,5 +1,3 @@
-Pool everything
-UI animation
 More sounds
 
 Big zombie

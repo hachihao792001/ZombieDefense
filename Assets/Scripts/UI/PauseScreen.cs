@@ -13,6 +13,7 @@ public class PauseScreen : MonoBehaviour
     }
     public void MenuOnClick()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
         gameObject.SetActive(false);
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lean.Pool;
 
 public class GunDamageDelivery : MonoBehaviour
 {
@@ -58,7 +59,10 @@ public class GunDamageDelivery : MonoBehaviour
     private void CreateHitEffect(GameObject impactEffect, RaycastHit hitInfo)
     {
         Quaternion holeRotation = Quaternion.LookRotation(hitInfo.normal);
-        Instantiate(impactEffect, hitInfo.point, holeRotation).transform.parent = hitInfo.collider.transform;
+        if (impactEffect == _bulletImpactPrefab)
+            LeanPool.Spawn(impactEffect, hitInfo.point, holeRotation).transform.parent = hitInfo.collider.transform;
+        else
+            Instantiate(impactEffect, hitInfo.point, holeRotation).transform.parent = hitInfo.collider.transform;
     }
     private void AddForceToHit(RaycastHit hitInfo)
     {
