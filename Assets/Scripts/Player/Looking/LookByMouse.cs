@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LookByMouse : PlayerLooking
 {
+    private float _yaw, _pitch;
+
     private new void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;

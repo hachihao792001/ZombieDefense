@@ -311,11 +311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b9882a422f83b4eb98d8bb4ca3ee9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &11573191 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7738954408158036787, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
-  m_PrefabInstance: {fileID: 161786013}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &13611855
 GameObject:
   m_ObjectHideFlags: 0
@@ -12857,6 +12852,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 065029c6a35077d4693780add9fe6530, type: 3}
+--- !u!4 &898894164 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4525370097652418255, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
+  m_PrefabInstance: {fileID: 6173047680553010995}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &898894165 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6047299215031837844, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
+  m_PrefabInstance: {fileID: 6173047680553010995}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef606d8bf6995a34b8614f0e304ebc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &898894166 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9184742202096048639, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
+  m_PrefabInstance: {fileID: 6173047680553010995}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165a7681a87827d498d8e5b4708277be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &899451434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18466,6 +18488,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1348600531}
+    - target: {fileID: 8009301329090898, guid: 0d1b0bbe2037096448176d449408c56d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 898894166}
     - target: {fileID: 8009301591765443, guid: 0d1b0bbe2037096448176d449408c56d, type: 3}
       propertyPath: m_Name
       value: MobileControlCanvas
@@ -18558,6 +18584,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1348600533}
+    - target: {fileID: 174575004759501168, guid: 0d1b0bbe2037096448176d449408c56d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 898894165}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d1b0bbe2037096448176d449408c56d, type: 3}
 --- !u!114 &1262800092 stripped
@@ -29027,7 +29057,7 @@ PrefabInstance:
     - target: {fileID: 5111377152402468557, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 11573187}
+      objectReference: {fileID: 1994105686}
     - target: {fileID: 5111377152402468557, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
       propertyPath: _pcPlayer
       value: 
@@ -29083,7 +29113,7 @@ PrefabInstance:
     - target: {fileID: 5111377152402468557, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
       propertyPath: Allies.Array.data[7]
       value: 
-      objectReference: {fileID: 11573191}
+      objectReference: {fileID: 898894164}
     - target: {fileID: 5111377152402468594, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -34021,10 +34051,6 @@ PrefabInstance:
     - target: {fileID: 4525370097652418252, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
       propertyPath: m_Name
       value: Player Mobile
-      objectReference: {fileID: 0}
-    - target: {fileID: 4525370097652418252, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4525370097652418255, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
       propertyPath: m_RootOrder

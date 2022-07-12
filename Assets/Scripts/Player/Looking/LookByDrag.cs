@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class LookByDrag : PlayerLooking
 {
@@ -41,5 +40,18 @@ public class LookByDrag : PlayerLooking
     {
         _lastYaw = _cameraAndWeapon.eulerAngles.y;
         _lastPitch = _cameraAndWeapon.eulerAngles.x;
+    }
+
+    public void TurnAroundOnClick()
+    {
+        StopCoroutine(TurnAround());
+        StartCoroutine(TurnAround());
+    }
+
+    private IEnumerator TurnAround()
+    {
+        _lastYaw = _cameraAndWeapon.eulerAngles.y + 180;
+        yield return _cameraAndWeapon.DORotate(_cameraAndWeapon.eulerAngles + Vector3.up * 180, 0.2f);
+        ClampPitchAngle();
     }
 }

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public PlayerLooking PlayerLooking;
     public PlayerTurretPlacer PlayerTurretPlacer;
     public PlayerAmmoRefiller PlayerAmmoRefiller;
+    public Transform CameraAndWeapon;
     public Health Health;
     [SerializeField]
     private ArmSwitcher _gunSwitcher;

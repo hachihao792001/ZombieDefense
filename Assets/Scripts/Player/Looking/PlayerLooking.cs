@@ -18,8 +18,6 @@ public class PlayerLooking : MonoBehaviour
     [SerializeField]
     protected float _maxPitch = 60;
 
-    protected float _yaw, _pitch;
-
     protected void Start()
     {
         GameController.Instance.OnSensitivitySliderChanged =

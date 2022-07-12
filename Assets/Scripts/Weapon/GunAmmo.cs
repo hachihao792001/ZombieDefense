@@ -82,7 +82,7 @@ public class GunAmmo : MonoBehaviour
 
     private void Reload()
     {
-        if (RemainingAmmo > 0)
+        if (RemainingAmmo > 0 && LoadedAmmo < _magazineSize)
         {
             _animator.SetTrigger(ReloadTriggerHash);
             _isReloading = true;

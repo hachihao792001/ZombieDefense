@@ -16,7 +16,7 @@ public class MoneyTextBinding : MonoBehaviour
         _moneyText = GetComponent<TMP_Text>();
     }
 
-    void Start()
+    void Awake()
     {
         _moneyManager.OnMoneyChanged = () => _moneyText.text = "Money: $" + _moneyManager.CurrentMoney;
     }

@@ -3039,7 +3039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7738954408158036787
 Transform:
   m_ObjectHideFlags: 0
@@ -3136,6 +3136,7 @@ MonoBehaviour:
   PlayerLooking: {fileID: 1994105689}
   PlayerTurretPlacer: {fileID: 2059930253984134012}
   PlayerAmmoRefiller: {fileID: 1348600536}
+  CameraAndWeapon: {fileID: 7738954408731878775}
   Health: {fileID: 5337052509420140982}
   _gunSwitcher: {fileID: 1950446156}
   _handGun: {fileID: 7738954409844212426}
