@@ -1,5 +1,4 @@
 Pool everything
-Third gate
 Melee
 UI animation
 More sounds
