@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class RoundTextBinding : MonoBehaviour
 {
@@ -19,5 +20,9 @@ public class RoundTextBinding : MonoBehaviour
     private void OnNewRound()
     {
         _roundText.text = $"Round {GameController.Instance.CurrentRound}";
+        transform.DOScale(Vector3.one * 1.2f, 0.2f).OnComplete(() =>
+        {
+            transform.DOScale(Vector3.one, 0.2f);
+        });
     }
 }
