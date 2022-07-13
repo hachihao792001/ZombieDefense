@@ -25,6 +25,8 @@ public class Zombie : MonoBehaviour
     private Collider _headCollider;
     [SerializeField]
     private GameObject _healthBarCanvas;
+    [SerializeField]
+    private GameObject _minimapIndicator;
 
     public Action<Zombie> OnZombieDied;
 
@@ -52,6 +54,7 @@ public class Zombie : MonoBehaviour
         ZombieCollider.enabled = false;
         _headCollider.enabled = false;
         _healthBarCanvas.SetActive(false);
+        _minimapIndicator.SetActive(false);
 
         OnZombieDied?.Invoke(this);
 
@@ -66,5 +69,6 @@ public class Zombie : MonoBehaviour
         ZombieCollider.enabled = true;
         _headCollider.enabled = true;
         _healthBarCanvas.SetActive(true);
+        _minimapIndicator.SetActive(true);
     }
 }

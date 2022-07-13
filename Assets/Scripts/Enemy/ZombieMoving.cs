@@ -39,22 +39,32 @@ public class ZombieMoving : MonoBehaviour
     {
         if (Target != null)
         {
-
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, _stoppingDistance))
             {
                 if (hitInfo.transform == Target)
+                {
                     StopMoving();
+                }
+                else
+                {
+                    GoToTarget();
+                }
             }
             else
             {
-                _navMesh.SetDestination(Target.position);
-                _animator.SetBool(WalkingHash, true);
+                GoToTarget();
             }
         }
         else
         {
             StopMoving();
         }
+    }
+
+    private void GoToTarget()
+    {
+        _navMesh.SetDestination(Target.position);
+        _animator.SetBool(WalkingHash, true);
     }
 
     private void StopMoving()
