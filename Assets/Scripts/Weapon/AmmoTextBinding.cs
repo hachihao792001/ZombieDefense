@@ -19,5 +19,5 @@ public class AmmoTextBinding : MonoBehaviour
         UpdateAmmo();
     }
 
-    private void UpdateAmmo() => ammoText.text = $"{gunAmmo.LoadedAmmo}/{gunAmmo.RemainingAmmo}";
+    private void UpdateAmmo() => ammoText.text = $"<sprite index=0>{gunAmmo.LoadedAmmo}/{gunAmmo.RemainingAmmo}";
 }
