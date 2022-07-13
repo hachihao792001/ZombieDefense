@@ -126,7 +126,8 @@ public class ZombieSpawner : MonoBehaviour
         NavMeshHit hit;
         if (NavMesh.SamplePosition(randomPosition, out hit, Mathf.Infinity, NavMesh.AllAreas))
         {
-            zombie.ZombieMoving.WarpAgent(hit.position);
+            zombie.transform.position = hit.position;
+            zombie.ZombieMoving.SetAgentEnable(true);
         }
     }
 

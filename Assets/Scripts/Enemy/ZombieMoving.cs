@@ -104,11 +104,12 @@ public class ZombieMoving : MonoBehaviour
         StopCoroutine(SeekForTarget());
         Target = null;
         StopMoving();
+        SetAgentEnable(false);
         enabled = false;
     }
 
-    public void WarpAgent(Vector3 pos)
+    public void SetAgentEnable(bool enabled)
     {
-        _navMesh.Warp(pos);
+        _navMesh.enabled = enabled;
     }
 }
