@@ -15,21 +15,46 @@ MonoBehaviour:
   RoundSpawningDatas:
   - NormalZombieCount: 5
     FastZombieCount: 0
+    BigZombieCount: 0
   - NormalZombieCount: 6
     FastZombieCount: 1
+    BigZombieCount: 0
   - NormalZombieCount: 8
     FastZombieCount: 2
+    BigZombieCount: 0
   - NormalZombieCount: 10
     FastZombieCount: 3
-  - NormalZombieCount: 13
+    BigZombieCount: 1
+  - NormalZombieCount: 12
     FastZombieCount: 4
+    BigZombieCount: 1
   - NormalZombieCount: 5
     FastZombieCount: 7
+    BigZombieCount: 1
   - NormalZombieCount: 10
     FastZombieCount: 10
-  - NormalZombieCount: 15
+    BigZombieCount: 2
+  - NormalZombieCount: 12
     FastZombieCount: 5
+    BigZombieCount: 2
   - NormalZombieCount: 3
-    FastZombieCount: 18
+    FastZombieCount: 15
+    BigZombieCount: 3
+  - NormalZombieCount: 6
+    FastZombieCount: 15
+    BigZombieCount: 3
+  - NormalZombieCount: 8
+    FastZombieCount: 10
+    BigZombieCount: 5
+  - NormalZombieCount: 10
+    FastZombieCount: 10
+    BigZombieCount: 5
+  - NormalZombieCount: 12
+    FastZombieCount: 12
+    BigZombieCount: 6
+  - NormalZombieCount: 12
+    FastZombieCount: 15
+    BigZombieCount: 6
   - NormalZombieCount: 15
     FastZombieCount: 15
+    BigZombieCount: 7

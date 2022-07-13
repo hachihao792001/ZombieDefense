@@ -6,7 +6,8 @@ using UnityEngine.Events;
 public enum ZombieType
 {
     Normal = 0,
-    Fast = 1
+    Fast = 1,
+    Big = 2
 }
 
 public class Zombie : MonoBehaviour

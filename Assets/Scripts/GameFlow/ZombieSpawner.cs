@@ -28,25 +28,13 @@ public class ZombieSpawner : MonoBehaviour
     [SerializeField]
     private Zombie _fastZombiePrefab;
     [SerializeField]
+    private Zombie _bigZombiePrefab;
+    [SerializeField]
     private List<Transform> _zombieSpawnPositions;
 
     private void Awake()
     {
-        RandomizeSpawnPositions();
-    }
-
-    private void RandomizeSpawnPositions()
-    {
-        int count = _zombieSpawnPositions.Count;
-        List<Transform> randomizedPositions = new List<Transform>();
-        for (int i = 0; i < count; i++)
-        {
-            int randomIndex = UnityEngine.Random.Range(0, _zombieSpawnPositions.Count);
-            randomizedPositions.Add(_zombieSpawnPositions[randomIndex]);
-            _zombieSpawnPositions.RemoveAt(randomIndex);
-        }
-
-        _zombieSpawnPositions.AddRange(randomizedPositions);
+        RandomizeList(_zombieSpawnPositions);
     }
 
     public bool HasSpawningData(int round)
@@ -57,41 +45,17 @@ public class ZombieSpawner : MonoBehaviour
     public void SpawnZombies()
     {
         int currentRound = GameController.Instance.CurrentRound;
-        int normalZombieCount = _zombieSpawningData.RoundSpawningDatas[currentRound - 1].NormalZombieCount;
-        int fastZombieCount = _zombieSpawningData.RoundSpawningDatas[currentRound - 1].FastZombieCount;
+        RoundSpawningData currentRoundSpawningData = _zombieSpawningData.RoundSpawningDatas[currentRound - 1];
 
         List<Zombie> thisRoundZombies = new List<Zombie>();
-        for (int i = 0; i < _zombieSpawningData.RoundSpawningDatas[currentRound - 1].Total; i++)
-        {
-            int random = UnityEngine.Random.Range(0, 2);
-            if (random == 0)
-            {
-                if (normalZombieCount > 0)
-                {
-                    thisRoundZombies.Add(_zombiePrefab);
-                    normalZombieCount--;
-                }
-                else
-                {
-                    thisRoundZombies.Add(_fastZombiePrefab);
-                    fastZombieCount--;
-                }
-            }
-            else
-            {
-                if (fastZombieCount > 0)
-                {
-                    thisRoundZombies.Add(_fastZombiePrefab);
-                    fastZombieCount--;
-                }
-                else
-                {
-                    thisRoundZombies.Add(_zombiePrefab);
-                    normalZombieCount--;
-                }
-            }
-        }
+        for (int i = 0; i < currentRoundSpawningData.NormalZombieCount; i++)
+            thisRoundZombies.Add(_zombiePrefab);
+        for (int i = 0; i < currentRoundSpawningData.FastZombieCount; i++)
+            thisRoundZombies.Add(_fastZombiePrefab);
+        for (int i = 0; i < currentRoundSpawningData.BigZombieCount; i++)
+            thisRoundZombies.Add(_bigZombiePrefab);
 
+        RandomizeList(thisRoundZombies);
         StartCoroutine(spawnZombieCoroutine(thisRoundZombies));
     }
 
@@ -142,5 +106,19 @@ public class ZombieSpawner : MonoBehaviour
 
         OnZombieDiedAction?.Invoke(whichZombie);
         whichZombie.OnZombieDied -= OnZombieDied;
+    }
+
+    private void RandomizeList<T>(List<T> list)
+    {
+        int count = list.Count;
+        List<T> randomized = new List<T>();
+        for (int i = 0; i < count; i++)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, list.Count);
+            randomized.Add(list[randomIndex]);
+            list.RemoveAt(randomIndex);
+        }
+
+        list.AddRange(randomized);
     }
 }

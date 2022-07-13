@@ -8,8 +8,9 @@ public struct RoundSpawningData
 {
     public int NormalZombieCount;
     public int FastZombieCount;
+    public int BigZombieCount;
 
-    public int Total => NormalZombieCount + FastZombieCount;
+    public int Total => NormalZombieCount + FastZombieCount + BigZombieCount;
 }
 
 [CreateAssetMenu(fileName = "ZombieSpawningData", menuName = "ScriptableObjects/ZombieSpawningData", order = 1)]

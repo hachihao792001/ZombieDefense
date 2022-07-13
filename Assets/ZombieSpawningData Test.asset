@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ZombieSpawningData Test
   m_EditorClassIdentifier: 
   RoundSpawningDatas:
-  - NormalZombieCount: 0
-    FastZombieCount: 5
+  - NormalZombieCount: 2
+    FastZombieCount: 2
+    BigZombieCount: 2

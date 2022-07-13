@@ -755,7 +755,10 @@ MonoBehaviour:
   _fullHealth: 100
   _currentHealth: 0
   _animator: {fileID: 0}
-  OnHealthChanged:
+  OnLoseHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1632893006720203551

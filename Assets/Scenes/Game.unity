@@ -3878,7 +3878,8 @@ MonoBehaviour:
   Zombies: []
   _zombieSpawningData: {fileID: 11400000, guid: 33c5ed57dac59e042a59da5d96459cdf, type: 2}
   _zombiePrefab: {fileID: 3891659002878227351, guid: 508e4b61d73ccb94fa5f2e65d3604557, type: 3}
-  _fastZombiePrefab: {fileID: 3891659002878227351, guid: 22f29fbde0aec1f43bf795db760d7191, type: 3}
+  _fastZombiePrefab: {fileID: 987655223641923097, guid: b4da356620a890546a36d8ebe7357446, type: 3}
+  _bigZombiePrefab: {fileID: 7038744408305579732, guid: 6bb4231737ada4647a61368d7aed9697, type: 3}
   _zombieSpawnPositions:
   - {fileID: 427632114}
   - {fileID: 1644098562}
@@ -18552,10 +18553,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 898894165}
-    - target: {fileID: 6504089578171301452, guid: 0d1b0bbe2037096448176d449408c56d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 468.9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d1b0bbe2037096448176d449408c56d, type: 3}
 --- !u!114 &1262800092 stripped
@@ -19991,39 +19988,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44d5052d3f6e4e04ca98eb199d565a8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1348600534 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2286164853906439242, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
-  m_PrefabInstance: {fileID: 6173047680553010995}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88348bac709895244ba9c145570a7486, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1348600535 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5277450816654325376, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
-  m_PrefabInstance: {fileID: 6173047680553010995}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db7fe3d7ac15bf42a0ed59d62b7d214, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1348600536 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6173047680553010980, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
-  m_PrefabInstance: {fileID: 6173047680553010995}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 072e03cd6de20ee4098f8410a39e77ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1351252337
@@ -33913,10 +33877,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RV
       objectReference: {fileID: 0}
-    - target: {fileID: 4025767295783878327, guid: bb3dc2b70dce3cf43ab16fee2228682e, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb3dc2b70dce3cf43ab16fee2228682e, type: 3}
 --- !u!114 &4025767295115792216 stripped
@@ -34018,110 +33978,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 157183990, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 1074a566cf92f0742a081fdc341bf530, type: 3}
-    - target: {fileID: 173133906, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 280168619, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2091873800}
-    - target: {fileID: 461699327, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 1074a566cf92f0742a081fdc341bf530, type: 3}
     - target: {fileID: 631096751, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2091873800}
-    - target: {fileID: 837251697, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 1074a566cf92f0742a081fdc341bf530, type: 3}
     - target: {fileID: 1784809669, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2091873800}
-    - target: {fileID: 6780043231139096279, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
-    - target: {fileID: 6780043231139096279, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6780043231189255907, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
       propertyPath: _moneyManager
       value: 
       objectReference: {fileID: 1906945730}
-    - target: {fileID: 6780043231189255907, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: OnBuyAmmo.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1348600536}
-    - target: {fileID: 6780043231189255907, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: OnBuyHeal.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1348600534}
     - target: {fileID: 6780043231189255907, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
       propertyPath: OnBuyHealRV.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4025767295115792216}
-    - target: {fileID: 6780043231189255907, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: OnBuyTurret.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1348600535}
     - target: {fileID: 6780043231192255316, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
       propertyPath: _moneyManager
       value: 
       objectReference: {fileID: 1906945730}
-    - target: {fileID: 6780043231192255322, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
-    - target: {fileID: 6780043231192255322, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -7295144032307903166, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
-    - target: {fileID: 6780043231299194116, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
-    - target: {fileID: 6780043231299194116, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6780043231375649949, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
-    - target: {fileID: 6780043231375649949, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -7295144032307903166, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
     - target: {fileID: 6780043231494306785, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1846050874}
-    - target: {fileID: 6780043231792037575, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
-    - target: {fileID: 6780043231792037575, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6780043232379369179, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
-    - target: {fileID: 6780043232379369179, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6780043232403072834, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -34210,21 +34094,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameFlowCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 6780043233055424689, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
-    - target: {fileID: 6780043233055424689, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6780043233176378495, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
-    - target: {fileID: 6780043233176378495, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -7295144032307903166, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
