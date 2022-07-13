@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -31,6 +32,11 @@ public class ZombieSpawner : MonoBehaviour
 
     private void Awake()
     {
+        RandomizeSpawnPositions();
+    }
+
+    private void RandomizeSpawnPositions()
+    {
         int count = _zombieSpawnPositions.Count;
         List<Transform> randomizedPositions = new List<Transform>();
         for (int i = 0; i < count; i++)
@@ -53,13 +59,49 @@ public class ZombieSpawner : MonoBehaviour
         int currentRound = GameController.Instance.CurrentRound;
         int normalZombieCount = _zombieSpawningData.RoundSpawningDatas[currentRound - 1].NormalZombieCount;
         int fastZombieCount = _zombieSpawningData.RoundSpawningDatas[currentRound - 1].FastZombieCount;
-        for (int i = 0; i < normalZombieCount; i++)
+
+        List<Zombie> thisRoundZombies = new List<Zombie>();
+        for (int i = 0; i < _zombieSpawningData.RoundSpawningDatas[currentRound - 1].Total; i++)
         {
-            SpawnAZombie(_zombiePrefab);
+            int random = UnityEngine.Random.Range(0, 2);
+            if (random == 0)
+            {
+                if (normalZombieCount > 0)
+                {
+                    thisRoundZombies.Add(_zombiePrefab);
+                    normalZombieCount--;
+                }
+                else
+                {
+                    thisRoundZombies.Add(_fastZombiePrefab);
+                    fastZombieCount--;
+                }
+            }
+            else
+            {
+                if (fastZombieCount > 0)
+                {
+                    thisRoundZombies.Add(_fastZombiePrefab);
+                    fastZombieCount--;
+                }
+                else
+                {
+                    thisRoundZombies.Add(_zombiePrefab);
+                    normalZombieCount--;
+                }
+            }
         }
-        for (int i = 0; i < fastZombieCount; i++)
+
+        StartCoroutine(spawnZombieCoroutine(thisRoundZombies));
+    }
+
+    IEnumerator spawnZombieCoroutine(List<Zombie> thisRoundZombies)
+    {
+        while (thisRoundZombies.Count > 0)
         {
-            SpawnAZombie(_fastZombiePrefab);
+            SpawnAZombie(thisRoundZombies[0]);
+            thisRoundZombies.RemoveAt(0);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 

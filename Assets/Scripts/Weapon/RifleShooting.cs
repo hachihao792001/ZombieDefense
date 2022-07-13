@@ -31,9 +31,6 @@ public class RifleShooting : Shooting
     public override void Shoot()
     {
         _animator.Play(FireStateHash, layer: 0, normalizedTime: 0);
-        PlayFireSound();
         base.Shoot();
     }
-
-
 }

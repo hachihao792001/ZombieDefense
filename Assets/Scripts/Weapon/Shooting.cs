@@ -27,6 +27,7 @@ public class Shooting : MonoBehaviour
     public virtual void Shoot()
     {
         _lightRay.Emit(1);
+        PlayFireSound();
         OnShoot?.Invoke();
     }
     public void PlayFireSound() => _fireSound.Play();

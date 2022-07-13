@@ -51,7 +51,7 @@ public class LookByDrag : PlayerLooking
     private IEnumerator TurnAround()
     {
         _lastYaw = _cameraAndWeapon.eulerAngles.y + 180;
-        yield return _cameraAndWeapon.DORotate(_cameraAndWeapon.eulerAngles + Vector3.up * 180, 0.2f);
+        yield return transform.DORotate(transform.eulerAngles + Vector3.up * 180, 0.2f);
         ClampPitchAngle();
     }
 }

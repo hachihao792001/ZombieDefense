@@ -10,9 +10,6 @@ public class PistolShooting : Shooting
     public override void Shoot()
     {
         _animator.Play(FireHash, 0, 0);
-
-        PlayFireSound();
-
         base.Shoot();
     }
 }
