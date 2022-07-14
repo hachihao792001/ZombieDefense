@@ -36,7 +36,7 @@ public class ZombieSpawner : MonoBehaviour
 
     private void Awake()
     {
-        RandomizeList(_zombieSpawnPositions);
+        _zombieSpawnPositions.Randomize();
     }
 
     public bool HasSpawningData(int round)
@@ -57,7 +57,7 @@ public class ZombieSpawner : MonoBehaviour
         for (int i = 0; i < currentRoundSpawningData.BigZombieCount; i++)
             thisRoundZombies.Add(_bigZombiePrefab);
 
-        RandomizeList(thisRoundZombies);
+        thisRoundZombies.Randomize();
         StartCoroutine(spawnZombieCoroutine(thisRoundZombies));
     }
 
@@ -108,19 +108,5 @@ public class ZombieSpawner : MonoBehaviour
         {
             GameController.Instance.EndRound();
         }
-    }
-
-    private void RandomizeList<T>(List<T> list)
-    {
-        int count = list.Count;
-        List<T> randomized = new List<T>();
-        for (int i = 0; i < count; i++)
-        {
-            int randomIndex = UnityEngine.Random.Range(0, list.Count);
-            randomized.Add(list[randomIndex]);
-            list.RemoveAt(randomIndex);
-        }
-
-        list.AddRange(randomized);
     }
 }

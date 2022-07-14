@@ -3035,6 +3035,7 @@ GameObject:
   - component: {fileID: 1348600536}
   - component: {fileID: 1994105685}
   - component: {fileID: 1994105689}
+  - component: {fileID: 1853223572}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3141,7 +3142,8 @@ MonoBehaviour:
   PlayerAmmoRefiller: {fileID: 1348600536}
   CameraAndWeapon: {fileID: 7738954408731878775}
   Health: {fileID: 5337052509420140982}
-  _gunSwitcher: {fileID: 1950446156}
+  ArmSwitcher: {fileID: 1950446156}
+  GrenadeThrowing: {fileID: 1853223572}
   _handGun: {fileID: 7738954409844212426}
   _rifle: {fileID: 3029593477182641166}
   _rb: {fileID: 7738954408158036789}
@@ -3239,6 +3241,23 @@ MonoBehaviour:
   _maxSensitivity: 15
   _minPitch: -60
   _maxPitch: 60
+--- !u!114 &1853223572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7738954408158036784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d97b290047b81f8489aa1e1544a6a4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startGrenade: 5
+  _grenadeLeft: 5
+  _throwDir: {x: 0, y: 0, z: 1}
+  _throwForce: 700
+  _grenadePrefab: {fileID: 7435795714784573221, guid: 35a44ba7eb401a74280298480fb84063, type: 3}
 --- !u!1 &7738954408313122028
 GameObject:
   m_ObjectHideFlags: 0

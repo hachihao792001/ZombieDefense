@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public Transform CameraAndWeapon;
     public Health Health;
     public ArmSwitcher ArmSwitcher;
+    public GrenadeThrowing GrenadeThrowing;
 
     [SerializeField]
     private GameObject _handGun;
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
         PlayerAmmoRefiller = GetComponent<PlayerAmmoRefiller>();
         Health = GetComponent<Health>();
         ArmSwitcher = GetComponent<ArmSwitcher>();
+        GrenadeThrowing = GetComponent<GrenadeThrowing>();
     }
 
     public void OnPlayerDied()
