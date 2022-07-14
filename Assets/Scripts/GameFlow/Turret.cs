@@ -13,6 +13,8 @@ public class Turret : MonoBehaviour
     [SerializeField]
     private float _damage;
     [SerializeField]
+    private float _headRotateLerpRate;
+    [SerializeField]
     private float _rpm;
     [SerializeField]
     private AudioSource _fireSound;
@@ -24,7 +26,6 @@ public class Turret : MonoBehaviour
     private GameObject _bulletImpactPrefab;
     [SerializeField]
     private GameObject _zombieBloodPrefab;
-
     [SerializeField]
     private ParticleSystem _lightRay;
 
@@ -39,7 +40,11 @@ public class Turret : MonoBehaviour
     {
         if (_target != null)
         {
-            _head.LookAt(_target.TurretTarget);
+            _head.forward = Vector3.Lerp(
+                _head.forward,
+                (_target.TurretTarget.position - _head.position).normalized,
+                _headRotateLerpRate * Time.deltaTime);
+
             UpdateFiring();
             if (_target != null && Vector3.Distance(_head.position, _target.transform.position) > _range)
             {

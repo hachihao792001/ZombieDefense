@@ -647,6 +647,7 @@ MonoBehaviour:
   _head: {fileID: 3485517400929304530}
   _range: 10
   _damage: 0.6
+  _headRotateLerpRate: 8
   _rpm: 600
   _fireSound: {fileID: 3485517400136644431}
   _notTurretLayer:
