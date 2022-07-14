@@ -2313,6 +2313,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PCPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 7738954408158036784, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7738954408158036787, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -34002,6 +34006,10 @@ PrefabInstance:
       propertyPath: _moneyManager
       value: 
       objectReference: {fileID: 1906945730}
+    - target: {fileID: 6780043231375649949, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
+      propertyPath: m_text
+      value: 'Zombie: 10/10'
+      objectReference: {fileID: 0}
     - target: {fileID: 6780043231494306785, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -34093,6 +34101,22 @@ PrefabInstance:
     - target: {fileID: 6780043232403072838, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
       propertyPath: m_Name
       value: GameFlowCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6780043233176378494, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 223.7499
+      objectReference: {fileID: 0}
+    - target: {fileID: 6780043233176378494, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -652
+      objectReference: {fileID: 0}
+    - target: {fileID: 6780043233176378494, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -146.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6780043233176378495, guid: 85425b4b1002d664daecbb76798aac78, type: 3}
+      propertyPath: m_text
+      value: Round 15/15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85425b4b1002d664daecbb76798aac78, type: 3}

@@ -10,16 +10,23 @@ public class RoundTextBinding : MonoBehaviour
     [SerializeField]
     private TMP_Text _roundText;
 
-    private void OnValidate() => _roundText = GetComponent<TMP_Text>();
+    [SerializeField]
+    private int _totalRound;
+
+    private void OnValidate()
+    {
+        _roundText = GetComponent<TMP_Text>();
+        _totalRound = GameController.Instance.ZombieSpawner.TotalRound;
+    }
 
     private void Start()
     {
-        GameController.Instance.OnNewRound = OnNewRound;
+        GameController.Instance.OnNewRound += OnNewRound;
     }
 
     private void OnNewRound()
     {
-        _roundText.text = $"Round {GameController.Instance.CurrentRound}";
+        _roundText.text = $"Round {GameController.Instance.CurrentRound}/{_totalRound}";
         transform.DOScale(Vector3.one * 1.2f, 0.2f).OnComplete(() =>
         {
             transform.DOScale(Vector3.one, 0.2f);

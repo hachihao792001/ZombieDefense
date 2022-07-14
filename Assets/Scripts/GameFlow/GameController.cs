@@ -92,14 +92,17 @@ public class GameController : MonoSingleton<GameController>
     public void EndRound()
     {
         CurrentRound++;
-        OnNewRound?.Invoke();
         _moneyManager.EarnMoney(_moneyEarningData.Finish1Round);
 
         if (ZombieSpawner.HasSpawningData(CurrentRound))
+        {
             ZombieSpawner.SpawnZombies();
+            OnNewRound?.Invoke();
+        }
         else
         {
             _winScreen.gameObject.SetActive(true);
+            OnNewRound?.Invoke();
 
             Time.timeScale = 0;
             IsPaused = true;

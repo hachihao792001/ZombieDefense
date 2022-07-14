@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using System;
 
 public class ZombieLeftTextBinding : MonoBehaviour
 {
@@ -12,17 +13,25 @@ public class ZombieLeftTextBinding : MonoBehaviour
 
     private void OnValidate() => _zombieLeftText = GetComponent<TMP_Text>();
 
-    private void Start()
+    private void Awake()
     {
         GameController.Instance.OnZombieDiedAction += OnZombieDied;
+        GameController.Instance.OnNewRound += OnNewRound;
+    }
 
-        _zombieLeftText.text = $"Zombie: " +
-            $"{GameController.Instance.ZombieSpawner.CurrentRoundZombieCount}/{GameController.Instance.ZombieSpawner.CurrentRoundZombieCount}";
+    private void OnNewRound()
+    {
+        UpdateText(GameController.Instance.ZombieSpawner.CurrentRoundZombieCount);
     }
 
     private void OnZombieDied(Zombie _)
     {
-        _zombieLeftText.text = $"Zombie: {GameController.Instance.ZombieSpawner.Zombies.Count}/{GameController.Instance.ZombieSpawner.CurrentRoundZombieCount}";
+        UpdateText(GameController.Instance.ZombieSpawner.Zombies.Count);
+    }
+
+    private void UpdateText(int zombieLeft)
+    {
+        _zombieLeftText.text = $"Zombie: {zombieLeft}/{GameController.Instance.ZombieSpawner.CurrentRoundZombieCount}";
         transform.DOScale(Vector3.one * 1.2f, 0.2f).OnComplete(() =>
         {
             transform.DOScale(Vector3.one, 0.2f);

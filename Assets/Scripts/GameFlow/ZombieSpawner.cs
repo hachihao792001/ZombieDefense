@@ -21,6 +21,8 @@ public class ZombieSpawner : MonoBehaviour
         }
     }
 
+    public int TotalRound => _zombieSpawningData.RoundSpawningDatas.Length;
+
     [SerializeField]
     private ZombieSpawningData _zombieSpawningData;
     [SerializeField]
@@ -99,13 +101,13 @@ public class ZombieSpawner : MonoBehaviour
     {
         Zombies.Remove(whichZombie);
 
+        OnZombieDiedAction?.Invoke(whichZombie);
+        whichZombie.OnZombieDied -= OnZombieDied;
+
         if (Zombies.Count == 0)
         {
             GameController.Instance.EndRound();
         }
-
-        OnZombieDiedAction?.Invoke(whichZombie);
-        whichZombie.OnZombieDied -= OnZombieDied;
     }
 
     private void RandomizeList<T>(List<T> list)
