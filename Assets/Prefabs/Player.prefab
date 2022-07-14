@@ -3253,7 +3253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97b290047b81f8489aa1e1544a6a4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startGrenade: 5
+  _startGrenadeCount: 5
   _grenadeLeft: 5
   _throwDir: {x: 0, y: 0, z: 1}
   _throwForce: 700

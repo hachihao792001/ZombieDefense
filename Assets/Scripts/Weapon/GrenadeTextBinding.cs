@@ -14,9 +14,9 @@ public class GrenadeTextBinding : MonoBehaviour
     void Start()
     {
         _grenadeThrowing = GameController.Instance.Player.GrenadeThrowing;
-        _grenadeThrowing.OnThrowGrenade += OnThrowGrenade;
-        OnThrowGrenade();
+        _grenadeThrowing.OnGrenadeCountChanged += OnGrenadeCountChanged;
+        OnGrenadeCountChanged();
     }
 
-    private void OnThrowGrenade() => _grenadeText.text = $"{_grenadeThrowing.GrenadeLeft}/{_grenadeThrowing.StartGrenadeCount}";
+    private void OnGrenadeCountChanged() => _grenadeText.text = $"{_grenadeThrowing.GrenadeLeft}/{_grenadeThrowing.StartGrenadeCount}";
 }

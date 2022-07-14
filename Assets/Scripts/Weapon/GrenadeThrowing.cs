@@ -5,7 +5,7 @@ using UnityEngine;
 public class GrenadeThrowing : MonoBehaviour
 {
     [SerializeField]
-    private int _startGrenade;
+    private int _startGrenadeCount;
     [SerializeField]
     private int _grenadeLeft;
     [SerializeField]
@@ -15,13 +15,13 @@ public class GrenadeThrowing : MonoBehaviour
     [SerializeField]
     private Grenade _grenadePrefab;
 
-    public Action OnThrowGrenade;
+    public Action OnGrenadeCountChanged;
     public int GrenadeLeft => _grenadeLeft;
-    public int StartGrenadeCount => _startGrenade;
+    public int StartGrenadeCount => _startGrenadeCount;
 
     private void Start()
     {
-        _grenadeLeft = _startGrenade;
+        _grenadeLeft = _startGrenadeCount;
     }
 
     private void Update()
@@ -39,12 +39,18 @@ public class GrenadeThrowing : MonoBehaviour
             newGrenade.AddForce(transform.TransformDirection(_throwDir.normalized * _throwForce));
             _grenadeLeft--;
 
-            OnThrowGrenade?.Invoke();
+            OnGrenadeCountChanged?.Invoke();
         }
     }
 
     public void ThrowGrenadeOnClick()
     {
         ThrowGrenade();
+    }
+
+    public void RefillGrenade()
+    {
+        _grenadeLeft = _startGrenadeCount;
+        OnGrenadeCountChanged?.Invoke();
     }
 }

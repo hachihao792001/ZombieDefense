@@ -58,7 +58,11 @@ public class ShopScreen : MonoBehaviour
 
     public void AmmoOnClick()
     {
-        BuyItem(_ammoPrice, () => _player.PlayerAmmoRefiller.RefillAmmo());
+        BuyItem(_ammoPrice, () =>
+        {
+            _player.PlayerAmmoRefiller.RefillAmmo();
+            _player.GrenadeThrowing.RefillGrenade();
+        });
     }
 
     public void HealRVOnClick()
