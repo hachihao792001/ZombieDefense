@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,8 @@ public class Player : MonoBehaviour
     public PlayerAmmoRefiller PlayerAmmoRefiller;
     public Transform CameraAndWeapon;
     public Health Health;
-    [SerializeField]
-    private ArmSwitcher _gunSwitcher;
+    public ArmSwitcher ArmSwitcher;
+
     [SerializeField]
     private GameObject _handGun;
     [SerializeField]
@@ -24,7 +25,13 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        Health.OnDied = OnPlayerDied;
+        Health.OnDied += OnPlayerDied;
+        PlayerAmmoRefiller.OnAmmoRefill += OnAmmoRefill;
+    }
+
+    private void OnAmmoRefill()
+    {
+        ArmSwitcher.CurrentArm.Shooting.Unlock();
     }
 
     private void OnValidate()
@@ -34,6 +41,7 @@ public class Player : MonoBehaviour
         PlayerTurretPlacer = GetComponent<PlayerTurretPlacer>();
         PlayerAmmoRefiller = GetComponent<PlayerAmmoRefiller>();
         Health = GetComponent<Health>();
+        ArmSwitcher = GetComponent<ArmSwitcher>();
     }
 
     public void OnPlayerDied()
@@ -44,7 +52,7 @@ public class Player : MonoBehaviour
 
         PlayerMoving.enabled = false;
         PlayerLooking.enabled = false;
-        _gunSwitcher.enabled = false;
+        ArmSwitcher.enabled = false;
         Health.enabled = false;
         _handGun.SetActive(false);
         _rifle.SetActive(false);

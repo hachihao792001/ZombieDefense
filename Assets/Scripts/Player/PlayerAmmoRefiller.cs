@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,7 @@ public class PlayerAmmoRefiller : MonoBehaviour
 {
     [SerializeField]
     private GunAmmo[] _gunAmmos;
+    public Action OnAmmoRefill;
 
     public void RefillAmmo()
     {
@@ -13,5 +14,6 @@ public class PlayerAmmoRefiller : MonoBehaviour
         {
             _gunAmmos[i].RefillAmmo();
         }
+        OnAmmoRefill?.Invoke();
     }
 }
