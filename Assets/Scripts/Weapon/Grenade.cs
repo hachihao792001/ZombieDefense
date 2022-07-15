@@ -27,13 +27,8 @@ public class Grenade : MonoBehaviour
         _meshRenderer = GetComponent<MeshRenderer>();
     }
 
-    private void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-        StartCoroutine(countDownToExplode());
-    }
-    IEnumerator countDownToExplode()
-    {
-        yield return new WaitForSeconds(_secondsUntilExplode);
         explode();
     }
 
@@ -41,6 +36,7 @@ public class Grenade : MonoBehaviour
     {
         _explosionEffect.SetActive(true);
         _meshRenderer.enabled = false;
+        _rb.isKinematic = true;
         Collider[] hitZombieColliders = Physics.OverlapSphere(transform.position, _damageRadius, _zombieLayerMask);
         for (int i = 0; i < hitZombieColliders.Length; i++)
         {
@@ -50,7 +46,7 @@ public class Grenade : MonoBehaviour
             }
         }
 
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 3f);
     }
 
     public void AddForce(Vector3 force)

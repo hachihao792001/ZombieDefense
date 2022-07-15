@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7738954408158036784, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7738954408158036787, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
       propertyPath: m_RootOrder
@@ -135,9 +135,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraAndWeapon: {fileID: 4525370097822556299}
-  _sensitivity: 5
-  _minSensitivity: 5
-  _maxSensitivity: 30
+  _sensitivity: 10
+  _minSensitivity: 10
+  _maxSensitivity: 50
   _minPitch: -60
   _maxPitch: 60
   _fPSDragArea: {fileID: 0}

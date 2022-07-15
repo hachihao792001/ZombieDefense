@@ -3255,9 +3255,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startGrenadeCount: 5
   _grenadeLeft: 5
-  _throwDir: {x: 0, y: 0, z: 1}
-  _throwForce: 700
+  _throwForce: 1200
   _grenadePrefab: {fileID: 7435795714784573221, guid: 35a44ba7eb401a74280298480fb84063, type: 3}
+  _cameraAndWeapon: {fileID: 7738954408731878775}
 --- !u!1 &7738954408313122028
 GameObject:
   m_ObjectHideFlags: 0

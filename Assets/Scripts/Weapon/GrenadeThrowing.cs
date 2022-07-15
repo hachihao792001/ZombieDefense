@@ -9,11 +9,11 @@ public class GrenadeThrowing : MonoBehaviour
     [SerializeField]
     private int _grenadeLeft;
     [SerializeField]
-    private Vector3 _throwDir;
-    [SerializeField]
     private float _throwForce;
     [SerializeField]
     private Grenade _grenadePrefab;
+    [SerializeField]
+    private Transform _cameraAndWeapon;
 
     public Action OnGrenadeCountChanged;
     public int GrenadeLeft => _grenadeLeft;
@@ -36,7 +36,7 @@ public class GrenadeThrowing : MonoBehaviour
         {
             Grenade newGrenade = Instantiate(_grenadePrefab, transform.position, Quaternion.identity);
             Physics.IgnoreCollision(newGrenade.GetComponent<Collider>(), GetComponent<Collider>());
-            newGrenade.AddForce(transform.TransformDirection(_throwDir.normalized * _throwForce));
+            newGrenade.AddForce(_cameraAndWeapon.forward * _throwForce);
             _grenadeLeft--;
 
             OnGrenadeCountChanged?.Invoke();

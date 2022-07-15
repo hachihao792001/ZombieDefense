@@ -2313,10 +2313,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PCPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 7738954408158036784, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7738954408158036787, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2363,6 +2359,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
+--- !u!4 &161786014 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7738954408158036787, guid: b0fa42d2f17e3954fa5f197e11ae02a6, type: 3}
+  m_PrefabInstance: {fileID: 161786013}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &162932896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6421,11 +6422,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3502674, y: 2.9997227, z: 5.4979286}
   m_Center: {x: 0.1751337, y: 1.4998614, z: 2.7489643}
---- !u!4 &451063841 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4525370097652418255, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
-  m_PrefabInstance: {fileID: 6173047680553010995}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &451063846 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6173047681460385640, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
@@ -28920,7 +28916,7 @@ PrefabInstance:
     - target: {fileID: 5111377152402468557, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 1994105686}
+      objectReference: {fileID: 11573187}
     - target: {fileID: 5111377152402468557, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
       propertyPath: _pcPlayer
       value: 
@@ -28976,7 +28972,7 @@ PrefabInstance:
     - target: {fileID: 5111377152402468557, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
       propertyPath: Allies.Array.data[7]
       value: 
-      objectReference: {fileID: 451063841}
+      objectReference: {fileID: 161786014}
     - target: {fileID: 5111377152402468594, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -33919,10 +33915,6 @@ PrefabInstance:
     - target: {fileID: 4525370097652418252, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
       propertyPath: m_Name
       value: Player Mobile
-      objectReference: {fileID: 0}
-    - target: {fileID: 4525370097652418252, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4525370097652418255, guid: 9c0f586c49e4b304b90b20a8c3d65838, type: 3}
       propertyPath: m_RootOrder
