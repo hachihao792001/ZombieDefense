@@ -137,7 +137,7 @@ MonoBehaviour:
   _cameraAndWeapon: {fileID: 4525370097822556299}
   _sensitivity: 10
   _minSensitivity: 10
-  _maxSensitivity: 50
+  _maxSensitivity: 70
   _minPitch: -60
   _maxPitch: 60
   _fPSDragArea: {fileID: 0}
