@@ -16,7 +16,8 @@ public class RoundTextBinding : MonoBehaviour
     private void OnValidate()
     {
         _roundText = GetComponent<TMP_Text>();
-        _totalRound = GameController.Instance.ZombieSpawner.TotalRound;
+        if (GameController.Instance != null)
+            _totalRound = GameController.Instance.ZombieSpawner.TotalRound;
     }
 
     private void Start()
