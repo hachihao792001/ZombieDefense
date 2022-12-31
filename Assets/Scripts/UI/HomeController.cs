@@ -9,6 +9,7 @@ public class HomeController : MonoBehaviour
     public PopupChangeName popupChangeName;
     public PopupChangeName popupRoomName;
     public RoomController roomController;
+    public LobbyScreenController lobbyScreenController;
     public TMP_Text username;
 
     public void ChangeName()
@@ -34,7 +35,12 @@ public class HomeController : MonoBehaviour
         PlayerPrefs.SetString("roomname", name);
         roomController.gameObject.SetActive(true);
         roomController.Init(name);
+    }
 
+    public void JoinRoom()
+    {
+        lobbyScreenController.gameObject.SetActive(true);
+        lobbyScreenController.Init();
     }
 
     private void Start()
