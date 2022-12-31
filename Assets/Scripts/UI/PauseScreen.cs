@@ -14,7 +14,7 @@ public class PauseScreen : MonoBehaviour
     public void MenuOnClick()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Home");
         gameObject.SetActive(false);
     }
 
