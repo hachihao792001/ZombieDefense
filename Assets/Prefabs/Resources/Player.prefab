@@ -3036,6 +3036,8 @@ GameObject:
   - component: {fileID: 1994105685}
   - component: {fileID: 1994105689}
   - component: {fileID: 1853223572}
+  - component: {fileID: 155115877209120518}
+  - component: {fileID: 820127250723888005}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3135,7 +3137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b9882a422f83b4eb98d8bb4ca3ee9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deadScreen: {fileID: 0}
   PlayerMoving: {fileID: 1994105685}
   PlayerLooking: {fileID: 1994105689}
   PlayerTurretPlacer: {fileID: 2059930253984134012}
@@ -3147,6 +3148,20 @@ MonoBehaviour:
   _handGun: {fileID: 7738954409844212426}
   _rifle: {fileID: 3029593477182641166}
   _rb: {fileID: 7738954408158036789}
+  _mainCamera: {fileID: 7738954409878843285}
+  _gunCamera: {fileID: 7738954409401875651}
+  _gunLayerObjects:
+  - {fileID: 7738954408732375377}
+  - {fileID: 7738954408732375353}
+  - {fileID: 7738954408732375381}
+  - {fileID: 7738954408732375359}
+  - {fileID: 7738954408732375351}
+  - {fileID: 3029593477182641160}
+  - {fileID: 3029593477182641164}
+  - {fileID: 3029593477182641170}
+  - {fileID: 3029593477182641168}
+  - {fileID: 3029593477182641262}
+  _defaultLayer: 0
 --- !u!114 &2059930253984134012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3258,6 +3273,45 @@ MonoBehaviour:
   _throwForce: 1200
   _grenadePrefab: {fileID: 7435795714784573221, guid: 35a44ba7eb401a74280298480fb84063, type: 3}
   _cameraAndWeapon: {fileID: 7738954408731878775}
+--- !u!114 &155115877209120518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7738954408158036784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 820127250723888005}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &820127250723888005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7738954408158036784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &7738954408313122028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5277,7 +5331,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
@@ -5947,7 +6000,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
@@ -6461,7 +6513,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8834970723210778884}
-  m_LocalRotation: {x: 0.04338351, y: -0.70577466, z: 0.70577466, w: 0.04338351}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.39999998, y: 0.39999998, z: 0.4}
   m_Children:

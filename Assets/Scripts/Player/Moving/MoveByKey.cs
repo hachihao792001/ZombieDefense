@@ -6,6 +6,8 @@ public class MoveByKey : PlayerMoving
 {
     protected override void Update()
     {
+        if (!photonView.IsMine)
+            return;
         if (GameController.IsGameOver) return;
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();

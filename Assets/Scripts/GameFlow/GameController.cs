@@ -7,8 +7,11 @@ using Random = UnityEngine.Random;
 public class GameController : MonoSingleton<GameController>
 {
     [Header("FPS Controller")]
-    [SerializeField]
+    [SerializeField] Player PlayerPrefab;
     public Player Player;
+
+    public string PlayerPrefabName;
+    public Vector3 PlayerStartSpawnPos;
 
     [Header("Game")]
     [SerializeField]
@@ -65,6 +68,12 @@ public class GameController : MonoSingleton<GameController>
         }
     }
 
+    public void SpawnNewPlayer()
+    {
+        GameObject spawned = PhotonLobbyHelper.SpawnNewObject(PlayerPrefabName, PlayerStartSpawnPos, Quaternion.identity);
+        Player = spawned.GetComponent<Player>();
+    }
+
     //public void SetMobileControl(bool mobileControl)
     //{
     //    _pcPlayer.gameObject.SetActive(!mobileControl);
@@ -106,8 +115,6 @@ public class GameController : MonoSingleton<GameController>
         {
             GameOver(true);
             OnNewRound?.Invoke();
-
-            Time.timeScale = 0;
         }
     }
 
@@ -137,14 +144,12 @@ public class GameController : MonoSingleton<GameController>
 
     public void PauseOnClick()
     {
-        Time.timeScale = 0;
         IsPaused = true;
         _pauseScreen.gameObject.SetActive(true);
     }
 
     public void ResumeGame()
     {
-        Time.timeScale = 1;
         IsPaused = false;
         LockCursor();
     }

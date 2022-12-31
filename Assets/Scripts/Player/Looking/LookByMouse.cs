@@ -13,6 +13,8 @@ public class LookByMouse : PlayerLooking
 
     void Update()
     {
+        if (!photonView.IsMine)
+            return;
         if (GameController.Instance.IsPaused || GameController.IsGameOver) return;
         UpdateMouse();
     }
