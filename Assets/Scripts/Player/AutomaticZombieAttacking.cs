@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutomaticZombieAttacking : MonoBehaviour
+public class AutomaticZombieAttacking : MonoBehaviourPun
 {
     [SerializeField]
     private Transform aimingCamera;
@@ -23,6 +24,8 @@ public class AutomaticZombieAttacking : MonoBehaviour
 
     private void Update()
     {
+        if (!photonView.IsMine)
+            return;
         if (GameController.IsGameOver) return;
         Ray aimingRay = new Ray(aimingCamera.position, aimingCamera.forward);
         if (Physics.Raycast(aimingRay, out RaycastHit hitInfo))

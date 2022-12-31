@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
+using Photon.Pun;
 
-public class GunDamageDelivery : MonoBehaviour
+public class GunDamageDelivery : MonoBehaviourPun
 {
     [SerializeField]
     private Transform aimingCamera;
@@ -23,6 +24,8 @@ public class GunDamageDelivery : MonoBehaviour
 
     public void OnShoot()
     {
+        if (!photonView.IsMine)
+            return;
         PerformRaycasting();
     }
 

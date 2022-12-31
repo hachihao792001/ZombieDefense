@@ -18,6 +18,8 @@ public class ZombieMoving : MonoBehaviour
 
     public Transform Target;
 
+    Coroutine seekTargetCoroutine;
+
     private void OnValidate()
     {
         _navMesh = GetComponent<NavMeshAgent>();
@@ -32,7 +34,7 @@ public class ZombieMoving : MonoBehaviour
     public void Init()
     {
         enabled = true;
-        StartCoroutine(SeekForTarget());
+        seekTargetCoroutine = StartCoroutine(SeekForTarget());
     }
 
     private void Update()
@@ -101,7 +103,7 @@ public class ZombieMoving : MonoBehaviour
 
     public void OnDied()
     {
-        StopCoroutine(SeekForTarget());
+        StopCoroutine(seekTargetCoroutine);
         Target = null;
         StopMoving();
         SetAgentEnable(false);

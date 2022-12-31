@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingAnimation : MonoBehaviour
+public class MovingAnimation : MonoBehaviourPun
 {
     private readonly int WalkingHash = Animator.StringToHash("Walking");
     private readonly int RunningHash = Animator.StringToHash("Running");
@@ -26,6 +27,8 @@ public class MovingAnimation : MonoBehaviour
 
     private void Update()
     {
+        if (!photonView.IsMine)
+            return;
         if (_playerMoving.IsMoving)
         {
             _animator.SetBool(WalkingHash, !_playerMoving.IsRunning);

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class GameController : MonoSingleton<GameController>
+public class GameController : OneSceneMonoSingleton<GameController>
 {
     [Header("FPS Controller")]
     [SerializeField] Player PlayerPrefab;
@@ -49,6 +49,8 @@ public class GameController : MonoSingleton<GameController>
         _pauseScreen.OnSensititySliderChangedAction = (float v) => OnSensitivitySliderChanged?.Invoke(v);
 
         IsGameOver = false;
+
+        SpawnNewPlayer();
     }
 
     private void Update()

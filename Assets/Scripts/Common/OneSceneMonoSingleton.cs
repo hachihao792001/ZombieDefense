@@ -1,6 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
-public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
+public class OneSceneMonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T s_singleton;
     public static T Instance
@@ -18,21 +19,17 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     private static void AssignSingleton(T instance)
     {
         s_singleton = instance;
-        DontDestroyOnLoad(s_singleton);
     }
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         if (s_singleton == null)
         {
             AssignSingleton((T)(MonoBehaviour)this);
-            SingletonAwake();
         }
         else if (s_singleton != this)
         {
             Destroy(gameObject);
         }
     }
-
-    protected virtual void SingletonAwake() { }
 }

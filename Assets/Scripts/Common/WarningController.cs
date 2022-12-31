@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class WarningController : MonoSingleton<WarningController>
+public class WarningController : OneSceneMonoSingleton<WarningController>
 {
     public GameObject popup;
     public TMP_Text warningText;
