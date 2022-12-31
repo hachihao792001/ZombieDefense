@@ -75,6 +75,11 @@ public class LobbyScreenController : MonoBehaviour
 
     public void JoinRoom()
     {
+        if (string.IsNullOrEmpty(codeRoom.text))
+        {
+            WarningController.Instance.ShowWarning("Room code cannot be empty");
+            return;
+        }
         gameObject.SetActive(false);
         roomController.gameObject.SetActive(true);
         roomController.Init("Room 1");

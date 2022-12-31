@@ -16,7 +16,6 @@ public class PopupChangeName : MonoBehaviour
     public void ApplyChange()
     {
         OnApplyChange?.Invoke(inputField.text);
-        gameObject.SetActive(false);
     }
 
     public void Init(string value)

@@ -56,7 +56,7 @@ public class GameController : MonoSingleton<GameController>
             if (!IsPaused)
             {
                 PauseOnClick();
-                Cursor.lockState = CursorLockMode.None;
+                UnlockCursor();
             }
             else
             {
@@ -113,7 +113,7 @@ public class GameController : MonoSingleton<GameController>
 
     public void GameOver(bool win, string loseReason = "")
     {
-        Cursor.lockState = CursorLockMode.None;
+        UnlockCursor();
         IsGameOver = true;
         if (win)
         {
@@ -146,6 +146,16 @@ public class GameController : MonoSingleton<GameController>
     {
         Time.timeScale = 1;
         IsPaused = false;
+        LockCursor();
+    }
+
+    public void LockCursor()
+    {
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
     }
 }

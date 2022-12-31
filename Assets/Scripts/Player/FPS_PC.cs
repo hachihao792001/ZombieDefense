@@ -43,7 +43,7 @@ public class FPS_PC : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        GameController.Instance.LockCursor();
     }
 
     void Update()

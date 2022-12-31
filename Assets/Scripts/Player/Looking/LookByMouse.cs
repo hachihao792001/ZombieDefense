@@ -8,7 +8,7 @@ public class LookByMouse : PlayerLooking
 
     private new void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        GameController.Instance.LockCursor();
     }
 
     void Update()

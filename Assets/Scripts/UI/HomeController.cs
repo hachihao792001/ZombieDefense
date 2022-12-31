@@ -20,8 +20,14 @@ public class HomeController : MonoBehaviour
 
     public void ApplyChangeName(string name)
     {
+        if (string.IsNullOrEmpty(name))
+        {
+            WarningController.Instance.ShowWarning("Username cannot be empty");
+            return;
+        }
         username.text = name;
         PlayerPrefs.SetString("username", name);
+        popupChangeName.Close();
     }
 
     public void CreateRoom()
@@ -32,9 +38,15 @@ public class HomeController : MonoBehaviour
 
     public void ApplyChangeRoomName(string name)
     {
+        if (string.IsNullOrEmpty(name))
+        {
+            WarningController.Instance.ShowWarning("Room name cannot be empty");
+            return;
+        }
         PlayerPrefs.SetString("roomname", name);
         roomController.gameObject.SetActive(true);
         roomController.Init(name);
+        popupRoomName.Close();
     }
 
     public void JoinRoom()
