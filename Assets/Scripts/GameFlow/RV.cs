@@ -6,8 +6,6 @@ public class RV : MonoBehaviour
 {
     public Transform[] AttackPositions;
 
-    [SerializeField]
-    private GameObject _loseScreen;
     [HideInInspector]
     [SerializeField]
     private Health _health;
@@ -19,6 +17,6 @@ public class RV : MonoBehaviour
 
     private void Start()
     {
-        _health.OnDied += () => _loseScreen.SetActive(true);
+        _health.OnDied += () => GameController.Instance.GameOver(false, "You failed to save the RV!");
     }
 }

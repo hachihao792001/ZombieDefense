@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MoveByKey : PlayerMoving
 {
-    private new void Update()
+    protected override void Update()
     {
+        if (GameController.IsGameOver) return;
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();
 
