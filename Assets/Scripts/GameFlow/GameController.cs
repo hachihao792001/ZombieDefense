@@ -8,9 +8,6 @@ public class GameController : MonoSingleton<GameController>
 {
     [Header("FPS Controller")]
     [SerializeField]
-    private Player _pcPlayer;
-    [SerializeField]
-    private Player _mobilePlayer;
     public Player Player;
 
     [Header("Game")]
@@ -26,6 +23,8 @@ public class GameController : MonoSingleton<GameController>
     private PauseScreen _pauseScreen;
     [SerializeField]
     private GameObject _winScreen;
+    [SerializeField]
+    private LoseScreenController _loseScreen;
 
     public List<Transform> Allies;
     public int CurrentRound = 1;
@@ -34,6 +33,7 @@ public class GameController : MonoSingleton<GameController>
     public Action<float> OnSensitivitySliderChanged;
     public Action<Zombie> OnZombieDiedAction;
 
+    public static bool IsGameOver = false;
 
     private void Start()
     {
@@ -44,10 +44,13 @@ public class GameController : MonoSingleton<GameController>
 
         _pauseScreen.ResumeOnClick();
         _pauseScreen.OnSensititySliderChangedAction = (float v) => OnSensitivitySliderChanged?.Invoke(v);
+
+        IsGameOver = false;
     }
 
     private void Update()
     {
+        if (IsGameOver) return;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!IsPaused)
@@ -62,17 +65,17 @@ public class GameController : MonoSingleton<GameController>
         }
     }
 
-    public void SetMobileControl(bool mobileControl)
-    {
-        _pcPlayer.gameObject.SetActive(!mobileControl);
-        _mobilePlayer.gameObject.SetActive(mobileControl);
-        Player = mobileControl ? _mobilePlayer : _pcPlayer;
+    //public void SetMobileControl(bool mobileControl)
+    //{
+    //    _pcPlayer.gameObject.SetActive(!mobileControl);
+    //    _mobilePlayer.gameObject.SetActive(mobileControl);
+    //    Player = mobileControl ? _mobilePlayer : _pcPlayer;
 
-        Allies = new List<Transform>();
-        for (int i = 0; i < _rv.AttackPositions.Length; i++)
-            Allies.Add(_rv.AttackPositions[i]);
-        Allies.Add(Player.transform);
-    }
+    //    Allies = new List<Transform>();
+    //    for (int i = 0; i < _rv.AttackPositions.Length; i++)
+    //        Allies.Add(_rv.AttackPositions[i]);
+    //    Allies.Add(Player.transform);
+    //}
 
 
     private void OnZombieDied(Zombie whichZombie)
@@ -101,11 +104,24 @@ public class GameController : MonoSingleton<GameController>
         }
         else
         {
-            _winScreen.gameObject.SetActive(true);
+            GameOver(true);
             OnNewRound?.Invoke();
 
             Time.timeScale = 0;
-            IsPaused = true;
+        }
+    }
+
+    public void GameOver(bool win, string loseReason = "")
+    {
+        Cursor.lockState = CursorLockMode.None;
+        IsGameOver = true;
+        if (win)
+        {
+            _winScreen.gameObject.SetActive(true);
+        }
+        else
+        {
+            _loseScreen.Show(loseReason);
         }
     }
 
@@ -130,7 +146,6 @@ public class GameController : MonoSingleton<GameController>
     {
         Time.timeScale = 1;
         IsPaused = false;
-        if (Player == _pcPlayer)
-            Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

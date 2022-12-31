@@ -31,7 +31,7 @@ public class PlayerMoving : MonoBehaviour
         _bodyRb = GetComponent<Rigidbody>();
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         UpdateMoving();
     }

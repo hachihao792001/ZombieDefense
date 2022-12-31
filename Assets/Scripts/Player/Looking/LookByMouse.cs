@@ -13,7 +13,7 @@ public class LookByMouse : PlayerLooking
 
     void Update()
     {
-        if (GameController.Instance.IsPaused) return;
+        if (GameController.Instance.IsPaused || GameController.IsGameOver) return;
         UpdateMouse();
     }
 

@@ -23,6 +23,7 @@ public class AutomaticZombieAttacking : MonoBehaviour
 
     private void Update()
     {
+        if (GameController.IsGameOver) return;
         Ray aimingRay = new Ray(aimingCamera.position, aimingCamera.forward);
         if (Physics.Raycast(aimingRay, out RaycastHit hitInfo))
         {

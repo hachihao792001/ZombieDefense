@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    public GameObject _deadScreen;
-
     public PlayerMoving PlayerMoving;
     public PlayerLooking PlayerLooking;
     public PlayerTurretPlacer PlayerTurretPlacer;
@@ -50,7 +47,7 @@ public class Player : MonoBehaviour
     {
         Health.OnDied -= OnPlayerDied;
 
-        _deadScreen.SetActive(true);
+        GameController.Instance.GameOver(false, "You died!");
 
         PlayerMoving.enabled = false;
         PlayerLooking.enabled = false;
