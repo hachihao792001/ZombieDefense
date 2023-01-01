@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Lean.Pool;
+using Photon.Pun;
 
 public class ZombieSpawner : MonoBehaviour
 {
@@ -26,16 +27,18 @@ public class ZombieSpawner : MonoBehaviour
     [SerializeField]
     private ZombieSpawningData _zombieSpawningData;
     [SerializeField]
-    private Zombie _zombiePrefab;
+    private string _zombiePrefabName;
     [SerializeField]
-    private Zombie _fastZombiePrefab;
+    private string _fastZombiePrefabName;
     [SerializeField]
-    private Zombie _bigZombiePrefab;
+    private string _bigZombiePrefabName;
     [SerializeField]
     private List<Transform> _zombieSpawnPositions;
 
     private void Awake()
     {
+        if (!PhotonNetwork.IsMasterClient)
+            gameObject.SetActive(false);
         _zombieSpawnPositions.Randomize();
     }
 
@@ -49,19 +52,19 @@ public class ZombieSpawner : MonoBehaviour
         int currentRound = GameController.Instance.CurrentRound;
         RoundSpawningData currentRoundSpawningData = _zombieSpawningData.RoundSpawningDatas[currentRound - 1];
 
-        List<Zombie> thisRoundZombies = new List<Zombie>();
+        List<string> thisRoundZombies = new List<string>();
         for (int i = 0; i < currentRoundSpawningData.NormalZombieCount; i++)
-            thisRoundZombies.Add(_zombiePrefab);
+            thisRoundZombies.Add(_zombiePrefabName);
         for (int i = 0; i < currentRoundSpawningData.FastZombieCount; i++)
-            thisRoundZombies.Add(_fastZombiePrefab);
+            thisRoundZombies.Add(_fastZombiePrefabName);
         for (int i = 0; i < currentRoundSpawningData.BigZombieCount; i++)
-            thisRoundZombies.Add(_bigZombiePrefab);
+            thisRoundZombies.Add(_bigZombiePrefabName);
 
         thisRoundZombies.Randomize();
         StartCoroutine(spawnZombieCoroutine(thisRoundZombies));
     }
 
-    IEnumerator spawnZombieCoroutine(List<Zombie> thisRoundZombies)
+    IEnumerator spawnZombieCoroutine(List<string> thisRoundZombies)
     {
         while (thisRoundZombies.Count > 0)
         {
@@ -71,9 +74,10 @@ public class ZombieSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnAZombie(Zombie zombiePrefab)
+    private void SpawnAZombie(string zombiePrefabName)
     {
-        Zombie newZombie = LeanPool.Spawn(zombiePrefab, transform);
+        Zombie newZombie = PhotonHelper.SpawnNewNetworkObject(zombiePrefabName, Vector3.zero, Quaternion.identity).GetComponent<Zombie>();
+        newZombie.transform.parent = transform;
         newZombie.OnZombieDied = OnZombieDied;
         newZombie.Init();
         AssignZombiePosition(newZombie);

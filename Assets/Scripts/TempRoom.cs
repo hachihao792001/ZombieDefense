@@ -9,11 +9,11 @@ public class TempRoom : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             Debug.Log("C pressed");
-            PhotonLobbyHelper.CreateRoom("a");
+            PhotonHelper.CreateRoom("a");
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
-            PhotonLobbyHelper.JoinRoom("a");
+            PhotonHelper.JoinRoom("a");
         }
     }
 }

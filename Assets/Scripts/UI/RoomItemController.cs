@@ -18,6 +18,6 @@ public class RoomItemController : MonoBehaviour
 
     public void OnClick()
     {
-        PhotonLobbyHelper.JoinRoom(roomDetail.name);
+        PhotonHelper.JoinRoom(roomDetail.name);
     }
 }

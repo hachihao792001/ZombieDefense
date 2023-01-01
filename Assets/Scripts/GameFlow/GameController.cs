@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,8 +41,11 @@ public class GameController : OneSceneMonoSingleton<GameController>
 
     private void Start()
     {
-        ZombieSpawner.SpawnZombies();
-        ZombieSpawner.OnZombieDiedAction += OnZombieDied;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            ZombieSpawner.SpawnZombies();
+            ZombieSpawner.OnZombieDiedAction += OnZombieDied;
+        }
 
         OnNewRound?.Invoke();
 
@@ -72,7 +76,7 @@ public class GameController : OneSceneMonoSingleton<GameController>
 
     public void SpawnNewPlayer()
     {
-        GameObject spawned = PhotonLobbyHelper.SpawnNewObject(PlayerPrefabName, PlayerStartSpawnPos, Quaternion.identity);
+        GameObject spawned = PhotonHelper.SpawnNewNetworkObject(PlayerPrefabName, PlayerStartSpawnPos, Quaternion.identity);
         Player = spawned.GetComponent<Player>();
     }
 
@@ -99,6 +103,10 @@ public class GameController : OneSceneMonoSingleton<GameController>
         {
             _moneyManager.EarnMoney(_moneyEarningData.KillingFastZombie);
         }
+        else if (whichZombie.ZombieType == ZombieType.Big)
+        {
+            _moneyManager.EarnMoney(_moneyEarningData.KillingBigZombie);
+        }
 
         OnZombieDiedAction?.Invoke(whichZombie);
     }
@@ -108,7 +116,7 @@ public class GameController : OneSceneMonoSingleton<GameController>
         CurrentRound++;
         _moneyManager.EarnMoney(_moneyEarningData.Finish1Round);
 
-        if (ZombieSpawner.HasSpawningData(CurrentRound))
+        if (PhotonNetwork.IsMasterClient && ZombieSpawner.HasSpawningData(CurrentRound))
         {
             ZombieSpawner.SpawnZombies();
             OnNewRound?.Invoke();

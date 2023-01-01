@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using Photon.Pun;
 
 public enum ZombieType
 {
@@ -60,7 +62,14 @@ public class Zombie : MonoBehaviour
 
         OnZombieDied?.Invoke(this);
 
-        Lean.Pool.LeanPool.Despawn(gameObject, 5f);
+        if (PhotonNetwork.IsMasterClient)
+            StartCoroutine(destroyAfterSecond(5f));
+    }
+
+    IEnumerator destroyAfterSecond(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        PhotonHelper.DestroyNetworkObject(gameObject);
     }
 
     public void Init()

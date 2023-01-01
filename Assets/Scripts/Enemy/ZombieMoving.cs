@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,11 +35,13 @@ public class ZombieMoving : MonoBehaviour
     public void Init()
     {
         enabled = true;
-        seekTargetCoroutine = StartCoroutine(SeekForTarget());
+        if (PhotonNetwork.IsMasterClient)
+            seekTargetCoroutine = StartCoroutine(SeekForTarget());
     }
 
     private void Update()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
         if (Target != null)
         {
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, _stoppingDistance))
@@ -71,6 +74,7 @@ public class ZombieMoving : MonoBehaviour
 
     private void StopMoving()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
         _navMesh.SetDestination(transform.position);
         _animator.SetBool(WalkingHash, false);
     }
@@ -103,7 +107,8 @@ public class ZombieMoving : MonoBehaviour
 
     public void OnDied()
     {
-        StopCoroutine(seekTargetCoroutine);
+        if (seekTargetCoroutine != null)
+            StopCoroutine(seekTargetCoroutine);
         Target = null;
         StopMoving();
         SetAgentEnable(false);

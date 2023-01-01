@@ -5,17 +5,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PhotonLobbyHelper : MonoBehaviourPunCallbacks
+public class PhotonHelper : MonoBehaviourPunCallbacks
 {
     #region Singleton
-    static PhotonLobbyHelper _instance;
-    public static PhotonLobbyHelper Instance
+    static PhotonHelper _instance;
+    public static PhotonHelper Instance
     {
         get
         {
             if (_instance == null)
             {
-                AssignSingleton(FindObjectOfType<PhotonLobbyHelper>());
+                AssignSingleton(FindObjectOfType<PhotonHelper>());
             }
             return _instance;
         }
@@ -33,7 +33,7 @@ public class PhotonLobbyHelper : MonoBehaviourPunCallbacks
         }
     }
 
-    static void AssignSingleton(PhotonLobbyHelper instance)
+    static void AssignSingleton(PhotonHelper instance)
     {
         _instance = instance;
         DontDestroyOnLoad(_instance.gameObject);
@@ -57,6 +57,8 @@ public class PhotonLobbyHelper : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.GameVersion = "0.0.1";
         PhotonNetwork.NickName = "Player" + Random.Range(1, 100);
+        PhotonNetwork.SendRate = 40; //default 20
+        PhotonNetwork.SerializationRate = 20; //default 10
         PhotonNetwork.ConnectUsingSettings();
     }
     public override void OnConnectedToMaster()
@@ -161,9 +163,14 @@ public class PhotonLobbyHelper : MonoBehaviourPunCallbacks
     #endregion
 
     #region Ingame Helpers
-    public static GameObject SpawnNewObject(string path, Vector3 position, Quaternion rotation)
+    public static GameObject SpawnNewNetworkObject(string path, Vector3 position, Quaternion rotation)
     {
         return PhotonNetwork.Instantiate(path, position, rotation);
+    }
+
+    public static void DestroyNetworkObject(GameObject gameObject)
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
     #endregion
 

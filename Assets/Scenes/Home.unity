@@ -3876,7 +3876,7 @@ GameObject:
   - component: {fileID: 762360436}
   - component: {fileID: 762360437}
   m_Layer: 0
-  m_Name: PhotonLobbyHelper
+  m_Name: PhotonHelper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

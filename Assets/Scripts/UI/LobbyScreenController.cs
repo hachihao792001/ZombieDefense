@@ -26,11 +26,11 @@ public class LobbyScreenController : MonoBehaviour
 
     private void Start()
     {
-        PhotonLobbyHelper.onAvailableRoomListUpdated += RefreshAvailableRoomListUI;
+        PhotonHelper.onAvailableRoomListUpdated += RefreshAvailableRoomListUI;
     }
     private void OnDestroy()
     {
-        PhotonLobbyHelper.onAvailableRoomListUpdated -= RefreshAvailableRoomListUI;
+        PhotonHelper.onAvailableRoomListUpdated -= RefreshAvailableRoomListUI;
     }
 
     public void Init()
@@ -45,7 +45,7 @@ public class LobbyScreenController : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        foreach (var room in PhotonLobbyHelper.GetAvailableRoomDetails())
+        foreach (var room in PhotonHelper.GetAvailableRoomDetails())
         {
             RoomItemController roomItem = Instantiate(roomItemPrefab, roomListContent);
             roomItem.Init(room);

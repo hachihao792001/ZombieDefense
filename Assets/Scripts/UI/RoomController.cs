@@ -12,16 +12,16 @@ public class RoomController : MonoBehaviour
 
     private void Start()
     {
-        PhotonLobbyHelper.onLeftCurrentRoom += OnLeftRoom;
-        PhotonLobbyHelper.onOtherPlayerJoinedRoom += OnOtherPlayerJoinedRoom;
-        PhotonLobbyHelper.onOtherPlayerLeftRoom += OnOtherPlayerLeftRoom;
+        PhotonHelper.onLeftCurrentRoom += OnLeftRoom;
+        PhotonHelper.onOtherPlayerJoinedRoom += OnOtherPlayerJoinedRoom;
+        PhotonHelper.onOtherPlayerLeftRoom += OnOtherPlayerLeftRoom;
     }
 
     private void OnDestroy()
     {
-        PhotonLobbyHelper.onLeftCurrentRoom -= OnLeftRoom;
-        PhotonLobbyHelper.onOtherPlayerJoinedRoom -= OnOtherPlayerJoinedRoom;
-        PhotonLobbyHelper.onOtherPlayerLeftRoom -= OnOtherPlayerLeftRoom;
+        PhotonHelper.onLeftCurrentRoom -= OnLeftRoom;
+        PhotonHelper.onOtherPlayerJoinedRoom -= OnOtherPlayerJoinedRoom;
+        PhotonHelper.onOtherPlayerLeftRoom -= OnOtherPlayerLeftRoom;
     }
     public void Init(string roomName)
     {
@@ -31,7 +31,7 @@ public class RoomController : MonoBehaviour
 
     public void RefreshPlayerListUI()
     {
-        List<Photon.Realtime.Player> playersInRoom = PhotonLobbyHelper.GetPlayerListInRoom();
+        List<Photon.Realtime.Player> playersInRoom = PhotonHelper.GetPlayerListInRoom();
         for (int i = 0; i < playersInRoom.Count; i++)
         {
             _playerItems[i].Init(playersInRoom[i]);
@@ -44,7 +44,7 @@ public class RoomController : MonoBehaviour
 
     public void Close()
     {
-        PhotonLobbyHelper.LeaveCurrentRoom();
+        PhotonHelper.LeaveCurrentRoom();
     }
 
     private void OnLeftRoom()
@@ -64,6 +64,6 @@ public class RoomController : MonoBehaviour
 
     public void StartGame()
     {
-        PhotonLobbyHelper.LoadScene("Game");
+        PhotonHelper.LoadScene("Game");
     }
 }

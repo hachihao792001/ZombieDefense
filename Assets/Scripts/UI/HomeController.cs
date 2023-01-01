@@ -18,7 +18,7 @@ public class HomeController : MonoBehaviour
         popupChangeName.OnApplyChange += ApplyChangeUserName;
         popupRoomName.OnApplyChange += ApplyRoomName;
 
-        PhotonLobbyHelper.onJoinedRoom += OnJoinedRoom;
+        PhotonHelper.onJoinedRoom += OnJoinedRoom;
     }
 
     private void OnDestroy()
@@ -26,7 +26,7 @@ public class HomeController : MonoBehaviour
         popupChangeName.OnApplyChange -= ApplyChangeUserName;
         popupRoomName.OnApplyChange -= ApplyRoomName;
 
-        PhotonLobbyHelper.onJoinedRoom -= OnJoinedRoom;
+        PhotonHelper.onJoinedRoom -= OnJoinedRoom;
     }
 
     public void ChangeUserNameOnClick()
@@ -63,7 +63,7 @@ public class HomeController : MonoBehaviour
         PlayerPrefs.SetString("roomname", name);
         popupRoomName.Close();
 
-        PhotonLobbyHelper.CreateRoom(name);
+        PhotonHelper.CreateRoom(name);
     }
 
     public void OnJoinedRoom(Room room)

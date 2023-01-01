@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -32,6 +33,7 @@ public class ZombieAttack : MonoBehaviour
 
     private void Update()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
         if (_zombieMoving.Target != null)
         {
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, _attackDistance))
@@ -70,6 +72,7 @@ public class ZombieAttack : MonoBehaviour
 
     public void DealDamage()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
         if (_targetHealth != null)
         {
             _targetHealth.TakeDamage(_damage);
