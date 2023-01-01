@@ -1,9 +1,10 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmSwitcher : MonoBehaviour
+public class ArmSwitcher : MonoBehaviourPun, IPunObservable
 {
     [SerializeField]
     private ArmController[] arms;
@@ -13,6 +14,8 @@ public class ArmSwitcher : MonoBehaviour
 
     private void Update()
     {
+        if (!photonView.IsMine)
+            return;
         for (int i = 0; i < arms.Length; i++)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
@@ -38,5 +41,22 @@ public class ArmSwitcher : MonoBehaviour
     public void SwitchGunOnClick()
     {
         SwitchToArm(arms.Length - 1 - _currentArmIndex);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            for (int i = 0; i < arms.Length; i++)
+                stream.SendNext(arms[i].gameObject.activeSelf);
+        }
+        else if (stream.IsReading)
+        {
+            for (int i = 0; i < arms.Length; i++)
+            {
+                bool isArmActive = (bool)stream.ReceiveNext();
+                arms[i].gameObject.SetActive(isArmActive);
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Realtime;
 
 public class HomeController : MonoBehaviour
 {
@@ -12,13 +13,29 @@ public class HomeController : MonoBehaviour
     public LobbyScreenController lobbyScreenController;
     public TMP_Text username;
 
-    public void ChangeName()
+    private void Start()
+    {
+        popupChangeName.OnApplyChange += ApplyChangeUserName;
+        popupRoomName.OnApplyChange += ApplyRoomName;
+
+        PhotonHelper.onJoinedRoom += OnJoinedRoom;
+    }
+
+    private void OnDestroy()
+    {
+        popupChangeName.OnApplyChange -= ApplyChangeUserName;
+        popupRoomName.OnApplyChange -= ApplyRoomName;
+
+        PhotonHelper.onJoinedRoom -= OnJoinedRoom;
+    }
+
+    public void ChangeUserNameOnClick()
     {
         popupChangeName.gameObject.SetActive(true);
         popupChangeName.Init(PlayerPrefs.GetString("username", ""));
     }
 
-    public void ApplyChangeName(string name)
+    public void ApplyChangeUserName(string name)
     {
         if (string.IsNullOrEmpty(name))
         {
@@ -30,13 +47,13 @@ public class HomeController : MonoBehaviour
         popupChangeName.Close();
     }
 
-    public void CreateRoom()
+    public void CreateRoomOnClick()
     {
         popupRoomName.gameObject.SetActive(true);
         popupRoomName.Init("");
     }
 
-    public void ApplyChangeRoomName(string name)
+    public void ApplyRoomName(string name)
     {
         if (string.IsNullOrEmpty(name))
         {
@@ -44,21 +61,21 @@ public class HomeController : MonoBehaviour
             return;
         }
         PlayerPrefs.SetString("roomname", name);
-        roomController.gameObject.SetActive(true);
-        roomController.Init(name);
         popupRoomName.Close();
+
+        PhotonHelper.CreateRoom(name);
     }
 
-    public void JoinRoom()
+    public void OnJoinedRoom(Room room)
+    {
+        roomController.gameObject.SetActive(true);
+        roomController.Init(room.Name);
+    }
+
+    public void LobbyOnClick()
     {
         lobbyScreenController.gameObject.SetActive(true);
         lobbyScreenController.Init();
-    }
-
-    private void Start()
-    {
-        popupChangeName.OnApplyChange += ApplyChangeName;
-        popupRoomName.OnApplyChange += ApplyChangeRoomName;
     }
 
     private void OnEnable()

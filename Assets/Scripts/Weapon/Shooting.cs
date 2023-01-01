@@ -1,14 +1,16 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Shooting : MonoBehaviour
+public class Shooting : MonoBehaviourPun
 {
     protected readonly int FireHash = Animator.StringToHash("Fire");
-    protected readonly int ReloadHash = Animator.StringToHash("Reload");
-    protected readonly int SwitchWeaponHash = Animator.StringToHash("SwitchWeapon");
+    protected readonly int FireStateHash = Animator.StringToHash("AlternateSingleFire");
+    protected readonly byte FireEventCode = 0;
+    protected readonly byte FireStateEventCode = 1;
 
     public UnityEvent OnShoot;
 
@@ -26,6 +28,8 @@ public class Shooting : MonoBehaviour
 
     public virtual void Shoot()
     {
+        if (!photonView.IsMine)
+            return;
         _lightRay.Emit(1);
         PlayFireSound();
         OnShoot?.Invoke();

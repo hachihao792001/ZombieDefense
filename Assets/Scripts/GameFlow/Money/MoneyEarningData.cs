@@ -7,5 +7,6 @@ public class MoneyEarningData : ScriptableObject
 {
     public int KillingZombie;
     public int KillingFastZombie;
+    public int KillingBigZombie;
     public int Finish1Round;
 }

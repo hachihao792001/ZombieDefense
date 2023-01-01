@@ -8,63 +8,47 @@ public struct RoomDetail
     public string name;
     public int playerCount;
     public int maxPlayerCount;
+
+    public RoomDetail(string name, int playerCount, int maxPlayerCount)
+    {
+        this.name = name;
+        this.playerCount = playerCount;
+        this.maxPlayerCount = maxPlayerCount;
+    }
 }
 
 public class LobbyScreenController : MonoBehaviour
 {
-    public List<RoomDetail> exampleRoomList = new List<RoomDetail>(){
-        {
-            new RoomDetail() {
-                name = "Room 1",
-                playerCount = 1,
-                maxPlayerCount = 4
-            }
-        },
-        {
-            new RoomDetail() {
-                name = "Room 2",
-                playerCount = 2,
-                maxPlayerCount = 4
-            }
-        },
-        {
-            new RoomDetail() {
-                name = "Room 3",
-                playerCount = 3,
-                maxPlayerCount = 4
-            }
-        },
-        {
-            new RoomDetail() {
-                name = "Room 4",
-                playerCount = 4,
-                maxPlayerCount = 4
-            }
-        },
-        {
-            new RoomDetail() {
-                name = "Room 5",
-                playerCount = 1,
-                maxPlayerCount = 4
-            }
-        }
-    };
-    public GameObject roomItemPrefab;
+    public RoomItemController roomItemPrefab;
     public Transform roomListContent;
     public RoomController roomController;
     public TMP_InputField codeRoom;
 
+    private void Start()
+    {
+        PhotonHelper.onAvailableRoomListUpdated += RefreshAvailableRoomListUI;
+    }
+    private void OnDestroy()
+    {
+        PhotonHelper.onAvailableRoomListUpdated -= RefreshAvailableRoomListUI;
+    }
+
     public void Init()
+    {
+        RefreshAvailableRoomListUI();
+    }
+
+    private void RefreshAvailableRoomListUI()
     {
         foreach (Transform child in roomListContent)
         {
             Destroy(child.gameObject);
         }
 
-        foreach (var room in exampleRoomList)
+        foreach (var room in PhotonHelper.GetAvailableRoomDetails())
         {
-            var roomItem = Instantiate(roomItemPrefab, roomListContent);
-            roomItem.GetComponent<RoomItemController>().Init(room);
+            RoomItemController roomItem = Instantiate(roomItemPrefab, roomListContent);
+            roomItem.Init(room);
         }
     }
 

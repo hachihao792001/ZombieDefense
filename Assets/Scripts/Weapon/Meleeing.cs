@@ -1,10 +1,14 @@
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Meleeing : MonoBehaviour
+public class Meleeing : MonoBehaviourPun
 {
     private readonly int MeleeHash = Animator.StringToHash("Melee");
+    private readonly byte MeleeEventCode = 3;
 
     public float Distance;
     public int Rpm;
@@ -30,10 +34,30 @@ public class Meleeing : MonoBehaviour
     public void DoMelee()
     {
         _animator.Play(MeleeHash, 0, 0);
+        PhotonNetwork.RaiseEvent(MeleeEventCode, PhotonNetwork.LocalPlayer.ActorNumber, RaiseEventOptions.Default, SendOptions.SendUnreliable);
+    }
+    private void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_EventReceived;
+    }
+    private void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
+    }
+    private void NetworkingClient_EventReceived(EventData obj)
+    {
+        if (obj.Code == MeleeEventCode)
+        {
+            int actorNumber = (int)obj.CustomData;
+            if (photonView.OwnerActorNr == actorNumber && actorNumber != PhotonNetwork.LocalPlayer.ActorNumber)
+                _animator.Play(MeleeHash, 0, 0);
+        }
     }
 
     public void MeleeDealDamage()   //animation event
     {
+        if (!photonView.IsMine)
+            return;
         PerformRaycasting();
     }
 

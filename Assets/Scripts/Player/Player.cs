@@ -1,9 +1,10 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviourPun
 {
     public PlayerMoving PlayerMoving;
     public PlayerLooking PlayerLooking;
@@ -21,10 +22,29 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Rigidbody _rb;
 
+    [SerializeField]
+    private GameObject _mainCamera;
+    [SerializeField]
+    private GameObject _gunCamera;
+    [SerializeField]
+    private GameObject[] _gunLayerObjects;
+    [SerializeField]
+    private int _defaultLayer = 0;
+
     private void Start()
     {
         Health.OnDied += OnPlayerDied;
         PlayerAmmoRefiller.OnAmmoRefill += OnAmmoRefill;
+
+        if (!photonView.IsMine)
+        {
+            _mainCamera.SetActive(false);
+            _gunCamera.SetActive(false);
+            for (int i = 0; i < _gunLayerObjects.Length; i++)
+            {
+                _gunLayerObjects[i].layer = _defaultLayer;
+            }
+        }
     }
 
     private void OnAmmoRefill()

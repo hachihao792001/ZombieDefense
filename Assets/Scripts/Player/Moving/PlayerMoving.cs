@@ -1,9 +1,10 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMoving : MonoBehaviour
+public class PlayerMoving : MonoBehaviourPun
 {
     [HideInInspector]
     [SerializeField]
@@ -33,6 +34,8 @@ public class PlayerMoving : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (!photonView.IsMine)
+            return;
         UpdateMoving();
     }
 

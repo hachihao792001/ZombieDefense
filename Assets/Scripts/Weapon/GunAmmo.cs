@@ -1,11 +1,15 @@
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunAmmo : MonoBehaviour
+public class GunAmmo : MonoBehaviourPun
 {
     private readonly int ReloadTriggerHash = Animator.StringToHash("Reload");
+    private readonly byte ReloadEventCode = 2;
 
     [SerializeField]
     public int FullRemainingAmmo;
@@ -52,6 +56,8 @@ public class GunAmmo : MonoBehaviour
     {
         _isReloading = false;
         UnlockAttacking();
+
+        PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_EventReceived;
     }
 
     private void Start()
@@ -67,6 +73,8 @@ public class GunAmmo : MonoBehaviour
 
     private void Update()
     {
+        if (!photonView.IsMine)
+            return;
         if (_isReloading) return;
         if (LoadedAmmo < _magazineSize && (Input.GetKeyDown(KeyCode.R) || LoadedAmmo <= 0))
         {
@@ -85,11 +93,27 @@ public class GunAmmo : MonoBehaviour
         if (RemainingAmmo > 0 && LoadedAmmo < _magazineSize)
         {
             _animator.SetTrigger(ReloadTriggerHash);
+            PhotonNetwork.RaiseEvent(ReloadEventCode, PhotonNetwork.LocalPlayer.ActorNumber, RaiseEventOptions.Default, SendOptions.SendUnreliable);
+
             _isReloading = true;
             _reloadSound.Play();
             LockAttacking();
         }
     }
+    private void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
+    }
+    private void NetworkingClient_EventReceived(EventData obj)
+    {
+        if (obj.Code == ReloadEventCode)
+        {
+            int actorNumber = (int)obj.CustomData;
+            if (photonView.OwnerActorNr == actorNumber && actorNumber != PhotonNetwork.LocalPlayer.ActorNumber)
+                _animator.SetTrigger(ReloadTriggerHash);
+        }
+    }
+
     public void AddAmmo()
     {
         int requiredAmmo = _magazineSize - LoadedAmmo;

@@ -1,14 +1,18 @@
+using Photon.Pun;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class GameController : MonoSingleton<GameController>
+public class GameController : OneSceneMonoSingleton<GameController>
 {
     [Header("FPS Controller")]
-    [SerializeField]
+    [SerializeField] Player PlayerPrefab;
     public Player Player;
+
+    public string PlayerPrefabName;
+    public Vector3 PlayerStartSpawnPos;
 
     [Header("Game")]
     [SerializeField]
@@ -37,8 +41,11 @@ public class GameController : MonoSingleton<GameController>
 
     private void Start()
     {
-        ZombieSpawner.SpawnZombies();
-        ZombieSpawner.OnZombieDiedAction += OnZombieDied;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            ZombieSpawner.SpawnZombies();
+            ZombieSpawner.OnZombieDiedAction += OnZombieDied;
+        }
 
         OnNewRound?.Invoke();
 
@@ -46,6 +53,8 @@ public class GameController : MonoSingleton<GameController>
         _pauseScreen.OnSensititySliderChangedAction = (float v) => OnSensitivitySliderChanged?.Invoke(v);
 
         IsGameOver = false;
+
+        SpawnNewPlayer();
     }
 
     private void Update()
@@ -63,6 +72,12 @@ public class GameController : MonoSingleton<GameController>
                 _pauseScreen.ResumeOnClick();
             }
         }
+    }
+
+    public void SpawnNewPlayer()
+    {
+        GameObject spawned = PhotonHelper.SpawnNewNetworkObject(PlayerPrefabName, PlayerStartSpawnPos, Quaternion.identity);
+        Player = spawned.GetComponent<Player>();
     }
 
     //public void SetMobileControl(bool mobileControl)
@@ -88,6 +103,10 @@ public class GameController : MonoSingleton<GameController>
         {
             _moneyManager.EarnMoney(_moneyEarningData.KillingFastZombie);
         }
+        else if (whichZombie.ZombieType == ZombieType.Big)
+        {
+            _moneyManager.EarnMoney(_moneyEarningData.KillingBigZombie);
+        }
 
         OnZombieDiedAction?.Invoke(whichZombie);
     }
@@ -97,7 +116,7 @@ public class GameController : MonoSingleton<GameController>
         CurrentRound++;
         _moneyManager.EarnMoney(_moneyEarningData.Finish1Round);
 
-        if (ZombieSpawner.HasSpawningData(CurrentRound))
+        if (PhotonNetwork.IsMasterClient && ZombieSpawner.HasSpawningData(CurrentRound))
         {
             ZombieSpawner.SpawnZombies();
             OnNewRound?.Invoke();
@@ -106,8 +125,6 @@ public class GameController : MonoSingleton<GameController>
         {
             GameOver(true);
             OnNewRound?.Invoke();
-
-            Time.timeScale = 0;
         }
     }
 
@@ -137,14 +154,12 @@ public class GameController : MonoSingleton<GameController>
 
     public void PauseOnClick()
     {
-        Time.timeScale = 0;
         IsPaused = true;
         _pauseScreen.gameObject.SetActive(true);
     }
 
     public void ResumeGame()
     {
-        Time.timeScale = 1;
         IsPaused = false;
         LockCursor();
     }

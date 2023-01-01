@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrenadeThrowing : MonoBehaviour
+public class GrenadeThrowing : MonoBehaviourPun
 {
     [SerializeField]
     private int _startGrenadeCount;
@@ -26,6 +27,8 @@ public class GrenadeThrowing : MonoBehaviour
 
     private void Update()
     {
+        if (!photonView.IsMine)
+            return;
         if (Input.GetKeyDown(KeyCode.G))
             ThrowGrenade();
     }
