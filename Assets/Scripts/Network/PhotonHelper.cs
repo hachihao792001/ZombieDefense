@@ -26,6 +26,7 @@ public class PhotonHelper : MonoBehaviourPunCallbacks
         if (_instance == null)
         {
             AssignSingleton(this);
+            InitPhoton();
         }
         else if (this != _instance)
         {
@@ -47,16 +48,12 @@ public class PhotonHelper : MonoBehaviourPunCallbacks
     public static Action<Photon.Realtime.Player> onOtherPlayerLeftRoom;
 
     #region Init Photon
-    private void Start()
-    {
-        InitPhoton();
-    }
     public static void InitPhoton()
     {
         Debug.Log("Connecting to Photon...");
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.GameVersion = "0.0.1";
-        PhotonNetwork.NickName = "Player" + Random.Range(1, 100);
+        PhotonNetwork.NickName = PlayerPrefs.GetString("username", "Player" + Random.Range(1, 100));
         PhotonNetwork.SendRate = 40; //default 20
         PhotonNetwork.SerializationRate = 20; //default 10
         PhotonNetwork.ConnectUsingSettings();

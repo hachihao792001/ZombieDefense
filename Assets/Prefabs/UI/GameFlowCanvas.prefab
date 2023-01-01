@@ -2412,25 +2412,27 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'P: Help
 
+    Esc: Unlock cursor
+
     WASD: Move
 
     R: Reload
 
-    G: Throw grenade
+    G:
+    Throw grenade
 
-    Q: Switch
-    gun
+    Q: Switch gun
 
     Space: Jump
 
-    1, 2, 3: Buy ammo, grenade, turret
+    1, 2, 3: Buy ammo, grenade,
+    turret
 
 
-    Shooting:
-    Auto shoot when point at zombies
+    Shooting: Auto shoot when point at zombies
 
-    Melee: Auto melee when point at zombies
-    and get close'
+    Melee: Auto melee
+    when point at zombies and get close'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
   m_sharedMaterial: {fileID: -7295144032307903166, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
@@ -3091,7 +3093,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3350,7 +3352,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 15.6965, y: 0}
   m_SizeDelta: {x: 51.3929, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

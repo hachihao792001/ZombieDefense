@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Photon.Realtime;
+using Photon.Pun;
 
 public class HomeController : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class HomeController : MonoBehaviour
         popupRoomName.OnApplyChange += ApplyRoomName;
 
         PhotonHelper.onJoinedRoom += OnJoinedRoom;
+
+        if (PhotonNetwork.CurrentRoom != null)  //back from gameplay
+        {
+            OnJoinedRoom(PhotonNetwork.CurrentRoom);
+        }
     }
 
     private void OnDestroy()
@@ -44,6 +50,7 @@ public class HomeController : MonoBehaviour
         }
         username.text = name;
         PlayerPrefs.SetString("username", name);
+        PhotonNetwork.NickName = name;
         popupChangeName.Close();
     }
 
@@ -80,6 +87,6 @@ public class HomeController : MonoBehaviour
 
     private void OnEnable()
     {
-        username.text = PlayerPrefs.GetString("username", "Username");
+        username.text = PhotonNetwork.NickName;
     }
 }
