@@ -4,11 +4,13 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using Photon.Pun;
 
 public class RoomController : MonoBehaviour
 {
     public TMP_Text textRoomName;
     [SerializeField] List<PlayerItemController> _playerItems;
+    [SerializeField] GameObject _startButton;
 
     private void Start()
     {
@@ -40,6 +42,8 @@ public class RoomController : MonoBehaviour
         {
             _playerItems[i].Init(null);
         }
+
+        _startButton.SetActive(PhotonNetwork.IsMasterClient);
     }
 
     public void Close()

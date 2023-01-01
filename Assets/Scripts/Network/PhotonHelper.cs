@@ -153,7 +153,9 @@ public class PhotonHelper : MonoBehaviourPunCallbacks
         if (PhotonNetwork.CurrentRoom == null)
             return new List<Photon.Realtime.Player>();
 
-        return new List<Photon.Realtime.Player>(PhotonNetwork.CurrentRoom.Players.Values);
+        List<Photon.Realtime.Player> players = new List<Photon.Realtime.Player>(PhotonNetwork.CurrentRoom.Players.Values);
+        players.Sort((a, b) => a.ActorNumber - b.ActorNumber);
+        return players;
     }
 
     public static void LoadScene(string name)

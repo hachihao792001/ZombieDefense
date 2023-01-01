@@ -9,7 +9,8 @@ public class PlayerItemController : MonoBehaviour
     [SerializeField] GameObject _playerInfo;
     [SerializeField] Image _imgPlayerAvatar;
     [SerializeField] TMP_Text _txtPlayerName;
-    [SerializeField] GameObject _hostBorder;
+    [SerializeField] GameObject _hostIcon;
+    [SerializeField] GameObject _meBorder;
     public void Init(Photon.Realtime.Player player)
     {
         if (player == null)
@@ -21,6 +22,7 @@ public class PlayerItemController : MonoBehaviour
         _playerInfo.SetActive(true);
         _txtPlayerName.text = player.NickName;
 
-        _hostBorder.SetActive(player.IsMasterClient);
+        _hostIcon.SetActive(player.IsMasterClient);
+        _meBorder.SetActive(player.IsLocal);
     }
 }
