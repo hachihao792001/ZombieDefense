@@ -3075,6 +3075,7 @@ GameObject:
   - component: {fileID: 1853223572}
   - component: {fileID: 155115877209120518}
   - component: {fileID: 820127250723888005}
+  - component: {fileID: 7236316621670910071}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3146,19 +3147,7 @@ MonoBehaviour:
   _animator: {fileID: 0}
   OnLoseHealth:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1230557006}
-        m_TargetAssemblyTypeName: Fading, Assembly-CSharp
-        m_MethodName: StartFading
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
@@ -3182,12 +3171,28 @@ MonoBehaviour:
   Health: {fileID: 5337052509420140982}
   ArmSwitcher: {fileID: 1950446156}
   GrenadeThrowing: {fileID: 1853223572}
+  PlayerFlying: {fileID: 7236316621670910071}
+  _loseHealthEffect: {fileID: 1230557006}
   _handGun: {fileID: 7738954409844212426}
   _rifle: {fileID: 3029593477182641166}
   _rb: {fileID: 7738954408158036789}
-  _mainCamera: {fileID: 7738954409878843285}
-  _gunCamera: {fileID: 7738954409401875651}
-  _gunLayerObjects:
+  _collider: {fileID: 7738954408158036786}
+  _objectsToHideForNonLocalPlayer:
+  - {fileID: 7738954409401875651}
+  - {fileID: 7738954409878843285}
+  - {fileID: 102751017}
+  _objectsToChangeLayerForNonLocalPlayer:
+  - {fileID: 7738954408732375377}
+  - {fileID: 7738954408732375353}
+  - {fileID: 7738954408732375381}
+  - {fileID: 7738954408732375359}
+  - {fileID: 7738954408732375351}
+  - {fileID: 3029593477182641160}
+  - {fileID: 3029593477182641164}
+  - {fileID: 3029593477182641170}
+  - {fileID: 3029593477182641168}
+  - {fileID: 3029593477182641262}
+  _objectsToHideWhenDied:
   - {fileID: 7738954408732375377}
   - {fileID: 7738954408732375353}
   - {fileID: 7738954408732375381}
@@ -3353,6 +3358,20 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &7236316621670910071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7738954408158036784}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b9ef6fa4a72dce45919afdb2b6c7cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 0.7
+  _sensitivity: 2
 --- !u!1 &7738954408313122028
 GameObject:
   m_ObjectHideFlags: 0

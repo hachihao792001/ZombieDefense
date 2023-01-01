@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,10 @@ public class RV : MonoBehaviour
 
     private void Start()
     {
-        _health.OnDied += () => GameController.Instance.GameOver(false, "You failed to save the RV!");
+        _health.OnDied += () =>
+        {
+            if (PhotonNetwork.IsMasterClient)
+                GameController.Instance.GameOver(false, "You failed to save the RV!");
+        };
     }
 }

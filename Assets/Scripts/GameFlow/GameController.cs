@@ -1,4 +1,6 @@
+using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Realtime;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,12 +9,14 @@ using Random = UnityEngine.Random;
 
 public class GameController : OneSceneMonoSingleton<GameController>
 {
-    [Header("FPS Controller")]
-    public Player Player;
+    private readonly byte GameOverEventCode = 7;
 
     public string PlayerPrefabName;
     public Vector3 PlayerSpawnAreaCenter;
     public float PlayerSpawnAreaRadius;
+
+    public Player Player;
+    public List<Player> AlivePlayers;
 
     [Header("Game")]
     [SerializeField]
@@ -54,7 +58,7 @@ public class GameController : OneSceneMonoSingleton<GameController>
 
         IsGameOver = false;
 
-        SpawnNewPlayer();
+        SpawnLocalPlayer();
     }
 
     private void Update()
@@ -74,13 +78,19 @@ public class GameController : OneSceneMonoSingleton<GameController>
         }
     }
 
-    public void SpawnNewPlayer()
+    public void SpawnLocalPlayer()
     {
         Vector2 randomAreaLocalPos = Random.insideUnitCircle * PlayerSpawnAreaRadius;
         Vector3 newPlayerPos = new Vector3(PlayerSpawnAreaCenter.x + randomAreaLocalPos.x, PlayerSpawnAreaCenter.y, PlayerSpawnAreaCenter.z + randomAreaLocalPos.y);
         GameObject spawned = PhotonHelper.SpawnNewNetworkObject(PlayerPrefabName, newPlayerPos, Quaternion.identity);
         Player = spawned.GetComponent<Player>();
-        Allies.Add(Player.transform);
+    }
+
+    public void OnNewPlayerSpawned(int viewId)
+    {
+        Player newPlayer = PhotonView.Find(viewId).GetComponent<Player>();
+        Allies.Add(newPlayer.transform);
+        AlivePlayers.Add(newPlayer);
     }
 
     //public void SetMobileControl(bool mobileControl)
@@ -126,23 +136,58 @@ public class GameController : OneSceneMonoSingleton<GameController>
         }
         else
         {
-            GameOver(true);
+            if (PhotonNetwork.IsMasterClient)
+                GameOver(true);
             OnNewRound?.Invoke();
         }
     }
 
+    public void OnPlayerDied(int viewId)
+    {
+        Player diedPlayer = PhotonView.Find(viewId).GetComponent<Player>();
+        AlivePlayers.Remove(diedPlayer);
+        Allies.Remove(diedPlayer.transform);
+
+        if (AlivePlayers.Count == 0)
+        {
+            GameOver(false, "All players are dead!");
+        }
+    }
+
+    private void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_EventReceived;
+    }
+    private void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
+    }
+    private void NetworkingClient_EventReceived(EventData obj)
+    {
+        if (obj.Code == GameOverEventCode)
+        {
+            Debug.Log("Receive GameOver event");
+            object[] datas = (object[])obj.CustomData;
+            bool win = (bool)datas[0];
+            string loseReason = (string)datas[1];
+
+            UnlockCursor();
+            IsGameOver = true;
+            if (win)
+            {
+                _winScreen.gameObject.SetActive(true);
+            }
+            else
+            {
+                _loseScreen.Show(loseReason);
+            }
+        }
+    }
     public void GameOver(bool win, string loseReason = "")
     {
-        UnlockCursor();
-        IsGameOver = true;
-        if (win)
-        {
-            _winScreen.gameObject.SetActive(true);
-        }
-        else
-        {
-            _loseScreen.Show(loseReason);
-        }
+        Debug.Log("GameOver() -> RaiseEvent " + PhotonNetwork.IsMasterClient);
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+        PhotonNetwork.RaiseEvent(GameOverEventCode, new object[] { win, loseReason }, raiseEventOptions, SendOptions.SendReliable);
     }
 
     public float[] GetDistanceToAllies(Vector3 pos)

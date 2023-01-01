@@ -14,6 +14,11 @@ public class Player : MonoBehaviourPun
     public Health Health;
     public ArmSwitcher ArmSwitcher;
     public GrenadeThrowing GrenadeThrowing;
+    public AutomaticZombieAttacking AutomaticZombieAttacking;
+    public PlayerFlying PlayerFlying;
+
+    [SerializeField]
+    private Fading _loseHealthEffect;
 
     [SerializeField]
     private GameObject _handGun;
@@ -21,30 +26,52 @@ public class Player : MonoBehaviourPun
     private GameObject _rifle;
     [SerializeField]
     private Rigidbody _rb;
+    [SerializeField]
+    private Collider _collider;
 
     [SerializeField]
-    private GameObject _mainCamera;
+    private GameObject[] _objectsToHideForNonLocalPlayer;
     [SerializeField]
-    private GameObject _gunCamera;
+    private GameObject[] _objectsToChangeLayerForNonLocalPlayer;
     [SerializeField]
-    private GameObject[] _gunLayerObjects;
+    private GameObject[] _objectsToHideWhenDied;
     [SerializeField]
     private int _defaultLayer = 0;
 
     private void Start()
     {
+        Health.OnLoseHealth.AddListener(OnLoseHealth);
         Health.OnDied += OnPlayerDied;
         PlayerAmmoRefiller.OnAmmoRefill += OnAmmoRefill;
 
         if (!photonView.IsMine)
         {
-            _mainCamera.SetActive(false);
-            _gunCamera.SetActive(false);
-            for (int i = 0; i < _gunLayerObjects.Length; i++)
+            for (int i = 0; i < _objectsToHideForNonLocalPlayer.Length; i++)
             {
-                _gunLayerObjects[i].layer = _defaultLayer;
+                _objectsToHideForNonLocalPlayer[i].SetActive(false);
+            }
+            for (int i = 0; i < _objectsToChangeLayerForNonLocalPlayer.Length; i++)
+            {
+                _objectsToChangeLayerForNonLocalPlayer[i].layer = _defaultLayer;
             }
         }
+        else
+        {
+            photonView.RPC(nameof(RPC_NotifyNewPlayerToMasterClient), RpcTarget.MasterClient, photonView.ViewID);
+        }
+    }
+
+    [PunRPC]
+    void RPC_NotifyNewPlayerToMasterClient(int viewId)
+    {
+        GameController.Instance.OnNewPlayerSpawned(viewId);
+    }
+
+    private void OnDestroy()
+    {
+        Health.OnLoseHealth.RemoveListener(OnLoseHealth);
+        Health.OnDied -= OnPlayerDied;
+        PlayerAmmoRefiller.OnAmmoRefill -= OnAmmoRefill;
     }
 
     private void OnAmmoRefill()
@@ -61,25 +88,46 @@ public class Player : MonoBehaviourPun
         Health = GetComponent<Health>();
         ArmSwitcher = GetComponent<ArmSwitcher>();
         GrenadeThrowing = GetComponent<GrenadeThrowing>();
+        AutomaticZombieAttacking = GetComponent<AutomaticZombieAttacking>();
+        PlayerFlying = GetComponent<PlayerFlying>();
+    }
+
+    public void OnLoseHealth(float amount)
+    {
+        if (_loseHealthEffect.gameObject.activeInHierarchy)
+            _loseHealthEffect.StartFading();
     }
 
     public void OnPlayerDied()
     {
         Health.OnDied -= OnPlayerDied;
 
-        GameController.Instance.GameOver(false, "You died!");
+        photonView.RPC(nameof(RPC_NotifyPlayerDiedToMasterClient), RpcTarget.MasterClient, photonView.ViewID);
 
         PlayerMoving.enabled = false;
         PlayerLooking.enabled = false;
         ArmSwitcher.enabled = false;
         Health.enabled = false;
+        GrenadeThrowing.enabled = false;
+        AutomaticZombieAttacking.enabled = false;
         _handGun.SetActive(false);
         _rifle.SetActive(false);
 
-        _rb.freezeRotation = false;
+        _rb.isKinematic = true;
+        _collider.enabled = false;
 
         transform.eulerAngles = new Vector3(-1, transform.eulerAngles.y, 0);
 
-        GameController.Instance.Allies.Remove(transform);
+        for (int i = 0; i < _objectsToHideWhenDied.Length; i++)
+        {
+            _objectsToHideWhenDied[i].SetActive(false);
+        }
+        PlayerFlying.enabled = true;
+    }
+
+    [PunRPC]
+    private void RPC_NotifyPlayerDiedToMasterClient(int viewId)
+    {
+        GameController.Instance.OnPlayerDied(viewId);
     }
 }

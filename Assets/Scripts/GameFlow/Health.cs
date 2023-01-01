@@ -42,7 +42,7 @@ public class Health : MonoBehaviourPun
 
     public void TakeDamage(float _damage)
     {
-        Debug.Log("TakeDamage " + _damage, this);
+        //Debug.Log("TakeDamage " + _damage + " viewId " + photonView.ViewID, this);
         HandleLocalTakeDamage(_damage);
         PhotonNetwork.RaiseEvent(TakeDamageEventCode, new object[] { PhotonNetwork.LocalPlayer.ActorNumber, photonView.ViewID, _damage }, RaiseEventOptions.Default, SendOptions.SendUnreliable);
 
@@ -55,7 +55,7 @@ public class Health : MonoBehaviourPun
 
     private void HandleLocalTakeDamage(float _damage)
     {
-        Debug.Log("HandleLocalTakeDamage " + _damage, this);
+        //Debug.Log("HandleLocalTakeDamage " + _damage + " viewId " + photonView.ViewID, this);
         _currentHealth -= _damage;
         OnLoseHealth?.Invoke(_currentHealth / _fullHealth);
     }
