@@ -8,11 +8,11 @@ using Random = UnityEngine.Random;
 public class GameController : OneSceneMonoSingleton<GameController>
 {
     [Header("FPS Controller")]
-    [SerializeField] Player PlayerPrefab;
     public Player Player;
 
     public string PlayerPrefabName;
-    public Vector3 PlayerStartSpawnPos;
+    public Vector3 PlayerSpawnAreaCenter;
+    public float PlayerSpawnAreaRadius;
 
     [Header("Game")]
     [SerializeField]
@@ -76,8 +76,11 @@ public class GameController : OneSceneMonoSingleton<GameController>
 
     public void SpawnNewPlayer()
     {
-        GameObject spawned = PhotonHelper.SpawnNewNetworkObject(PlayerPrefabName, PlayerStartSpawnPos, Quaternion.identity);
+        Vector2 randomAreaLocalPos = Random.insideUnitCircle * PlayerSpawnAreaRadius;
+        Vector3 newPlayerPos = new Vector3(PlayerSpawnAreaCenter.x + randomAreaLocalPos.x, PlayerSpawnAreaCenter.y, PlayerSpawnAreaCenter.z + randomAreaLocalPos.y);
+        GameObject spawned = PhotonHelper.SpawnNewNetworkObject(PlayerPrefabName, newPlayerPos, Quaternion.identity);
         Player = spawned.GetComponent<Player>();
+        Allies.Add(Player.transform);
     }
 
     //public void SetMobileControl(bool mobileControl)

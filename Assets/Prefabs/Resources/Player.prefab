@@ -3330,7 +3330,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1950446156}
-  - {fileID: 5337052509420140982}
   - {fileID: 820127250723888005}
   - {fileID: 31772516133585822}
   - {fileID: 2750797353881911706}

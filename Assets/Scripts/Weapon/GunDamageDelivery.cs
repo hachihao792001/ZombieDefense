@@ -24,8 +24,6 @@ public class GunDamageDelivery : MonoBehaviourPun
 
     public void OnShoot()
     {
-        if (!photonView.IsMine)
-            return;
         PerformRaycasting();
     }
 
