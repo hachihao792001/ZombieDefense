@@ -16,14 +16,6 @@ public class ArmSwitcher : MonoBehaviourPun, IPunObservable
     {
         if (!photonView.IsMine)
             return;
-        for (int i = 0; i < arms.Length; i++)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
-            {
-                SwitchToArm(i);
-                break;
-            }
-        }
 
         if (Input.GetKeyDown(KeyCode.Q))
             SwitchGunOnClick();

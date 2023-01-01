@@ -64,7 +64,7 @@ public class GameController : OneSceneMonoSingleton<GameController>
     private void Update()
     {
         if (IsGameOver) return;
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             if (!IsPaused)
             {

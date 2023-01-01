@@ -60,6 +60,8 @@ public class PhotonHelper : MonoBehaviourPunCallbacks
         PhotonNetwork.SendRate = 40; //default 20
         PhotonNetwork.SerializationRate = 20; //default 10
         PhotonNetwork.ConnectUsingSettings();
+
+        LoadingController.Instance.ShowLoading("Connecting to server...");
     }
     public override void OnConnectedToMaster()
     {
@@ -73,6 +75,7 @@ public class PhotonHelper : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("Joined lobby");
+        LoadingController.Instance.HideLoading();
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -90,16 +93,21 @@ public class PhotonHelper : MonoBehaviourPunCallbacks
         options.PublishUserId = true;
         options.MaxPlayers = maxPlayer;
         PhotonNetwork.JoinOrCreateRoom(name, options, TypedLobby.Default);
+
+        LoadingController.Instance.ShowLoading("Creating room...");
     }
 
     public static void JoinRoom(string name)
     {
         PhotonNetwork.JoinRoom(name);
+        LoadingController.Instance.ShowLoading("Joining room...");
     }
     public override void OnJoinedRoom()
     {
         Debug.Log($"You, {GetPlayerString(PhotonNetwork.LocalPlayer)} joined room " + PhotonNetwork.CurrentRoom.Name);
         onJoinedRoom?.Invoke(PhotonNetwork.CurrentRoom);
+
+        LoadingController.Instance.HideLoading();
     }
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
@@ -112,10 +120,12 @@ public class PhotonHelper : MonoBehaviourPunCallbacks
     public static void LeaveCurrentRoom()
     {
         PhotonNetwork.LeaveRoom();
+        LoadingController.Instance.ShowLoading("Leaving room...");
     }
     public override void OnLeftRoom()
     {
         Debug.Log($"You, {GetPlayerString(PhotonNetwork.LocalPlayer)} left room");
+        LoadingController.Instance.HideLoading();
         onLeftCurrentRoom?.Invoke();
     }
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
