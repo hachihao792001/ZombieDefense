@@ -1,9 +1,12 @@
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Turret : MonoBehaviour
+public class Turret : MonoBehaviourPun
 {
     private Zombie _target;
     [SerializeField]
@@ -33,11 +36,15 @@ public class Turret : MonoBehaviour
 
     private void Start()
     {
+        if (!photonView.IsMine)
+            return;
         LookForTarget();
     }
 
     private void Update()
     {
+        if (!photonView.IsMine)
+            return;
         if (_target != null)
         {
             _head.forward = Vector3.Lerp(
@@ -74,9 +81,10 @@ public class Turret : MonoBehaviour
         {
             if (hitInfo.transform == _target.transform)
             {
-                _fireSound.Play();
+                PlayShootEffects();
+                PhotonNetwork.RaiseEvent(GameController.TurretShootEventCode, PhotonNetwork.LocalPlayer.ActorNumber, RaiseEventOptions.Default, SendOptions.SendUnreliable);
+
                 _target.ZombieHealth.TakeDamage(_damage);
-                _lightRay.Emit(1);
                 OnShoot?.Invoke();
 
                 if (CheckLayerInsideLayerMask(hitInfo.collider.gameObject.layer, _zombieLayerMask))
@@ -88,6 +96,30 @@ public class Turret : MonoBehaviour
                     CreateHitEffect(_bulletImpactPrefab, hitInfo);
                 }
             }
+        }
+    }
+
+    private void PlayShootEffects()
+    {
+        _fireSound.Play();
+        _lightRay.Emit(1);
+    }
+
+    private void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_EventReceived;
+    }
+    private void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
+    }
+    private void NetworkingClient_EventReceived(EventData obj)
+    {
+        if (obj.Code == GameController.TurretShootEventCode)
+        {
+            int actorNumber = (int)obj.CustomData;
+            if (photonView.OwnerActorNr == actorNumber && actorNumber != PhotonNetwork.LocalPlayer.ActorNumber)
+                PlayShootEffects();
         }
     }
 

@@ -8,7 +8,6 @@ using UnityEngine;
 public class Meleeing : MonoBehaviourPun
 {
     private readonly int MeleeHash = Animator.StringToHash("Melee");
-    private readonly byte MeleeEventCode = 3;
 
     public float Distance;
     public int Rpm;
@@ -34,7 +33,7 @@ public class Meleeing : MonoBehaviourPun
     public void DoMelee()
     {
         _animator.Play(MeleeHash, 0, 0);
-        PhotonNetwork.RaiseEvent(MeleeEventCode, PhotonNetwork.LocalPlayer.ActorNumber, RaiseEventOptions.Default, SendOptions.SendUnreliable);
+        PhotonNetwork.RaiseEvent(GameController.MeleeEventCode, PhotonNetwork.LocalPlayer.ActorNumber, RaiseEventOptions.Default, SendOptions.SendUnreliable);
     }
     private void OnEnable()
     {
@@ -46,7 +45,7 @@ public class Meleeing : MonoBehaviourPun
     }
     private void NetworkingClient_EventReceived(EventData obj)
     {
-        if (obj.Code == MeleeEventCode)
+        if (obj.Code == GameController.MeleeEventCode)
         {
             int actorNumber = (int)obj.CustomData;
             if (photonView.OwnerActorNr == actorNumber && actorNumber != PhotonNetwork.LocalPlayer.ActorNumber)

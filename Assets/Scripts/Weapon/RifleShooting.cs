@@ -37,7 +37,7 @@ public class RifleShooting : Shooting
             return;
 
         _animator.Play(FireStateHash, layer: 0, normalizedTime: 0);
-        PhotonNetwork.RaiseEvent(FireStateEventCode, PhotonNetwork.LocalPlayer.ActorNumber, RaiseEventOptions.Default, SendOptions.SendUnreliable);
+        PhotonNetwork.RaiseEvent(GameController.FireStateEventCode, PhotonNetwork.LocalPlayer.ActorNumber, RaiseEventOptions.Default, SendOptions.SendUnreliable);
 
         base.Shoot();
     }
@@ -52,7 +52,7 @@ public class RifleShooting : Shooting
     }
     private void NetworkingClient_EventReceived(EventData obj)
     {
-        if (obj.Code == FireStateEventCode)
+        if (obj.Code == GameController.FireStateEventCode)
         {
             int actorNumber = (int)obj.CustomData;
             if (photonView.OwnerActorNr == actorNumber && actorNumber != PhotonNetwork.LocalPlayer.ActorNumber)

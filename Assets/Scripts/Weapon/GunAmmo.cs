@@ -9,7 +9,6 @@ using UnityEngine;
 public class GunAmmo : MonoBehaviourPun
 {
     private readonly int ReloadTriggerHash = Animator.StringToHash("Reload");
-    private readonly byte ReloadEventCode = 2;
 
     [SerializeField]
     public int FullRemainingAmmo;
@@ -93,7 +92,7 @@ public class GunAmmo : MonoBehaviourPun
         if (RemainingAmmo > 0 && LoadedAmmo < _magazineSize)
         {
             _animator.SetTrigger(ReloadTriggerHash);
-            PhotonNetwork.RaiseEvent(ReloadEventCode, PhotonNetwork.LocalPlayer.ActorNumber, RaiseEventOptions.Default, SendOptions.SendUnreliable);
+            PhotonNetwork.RaiseEvent(GameController.ReloadEventCode, PhotonNetwork.LocalPlayer.ActorNumber, RaiseEventOptions.Default, SendOptions.SendUnreliable);
 
             _isReloading = true;
             _reloadSound.Play();
@@ -106,7 +105,7 @@ public class GunAmmo : MonoBehaviourPun
     }
     private void NetworkingClient_EventReceived(EventData obj)
     {
-        if (obj.Code == ReloadEventCode)
+        if (obj.Code == GameController.ReloadEventCode)
         {
             int actorNumber = (int)obj.CustomData;
             if (photonView.OwnerActorNr == actorNumber && actorNumber != PhotonNetwork.LocalPlayer.ActorNumber)

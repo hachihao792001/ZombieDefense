@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerTurretPlacer : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _turretPrefab;
+    private string _turretPrefabName;
     [SerializeField]
     private Transform _turretsParent;
     [SerializeField]
@@ -13,6 +13,7 @@ public class PlayerTurretPlacer : MonoBehaviour
 
     public void PlaceNewTurret()
     {
-        Instantiate(_turretPrefab, transform.position + transform.forward.normalized * _placeDistance, Quaternion.identity, _turretsParent);
+        GameObject spawnedTurret = PhotonHelper.SpawnNewNetworkObject(_turretPrefabName, transform.position + transform.forward.normalized * _placeDistance, Quaternion.identity);
+        spawnedTurret.transform.parent = _turretsParent;
     }
 }

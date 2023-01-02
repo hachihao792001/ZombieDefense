@@ -9,7 +9,16 @@ using Random = UnityEngine.Random;
 
 public class GameController : OneSceneMonoSingleton<GameController>
 {
-    private readonly byte GameOverEventCode = 7;
+    public const byte FireEventCode = 0;
+    public const byte FireStateEventCode = 1;
+    public const byte ReloadEventCode = 2;
+    public const byte MeleeEventCode = 3;
+    public const byte DeadEventCode = 4;
+    public const byte TakeDamageEventCode = 5;
+    public const byte HealEventCode = 6;
+    public const byte GameOverEventCode = 7;
+    public const byte TurretShootEventCode = 8;
+    public const byte GrenadeExplodeEventCode = 9;
 
     public string PlayerPrefabName;
     public Vector3 PlayerSpawnAreaCenter;

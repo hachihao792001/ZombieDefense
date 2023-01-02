@@ -9,8 +9,6 @@ public class Shooting : MonoBehaviourPun
 {
     protected readonly int FireHash = Animator.StringToHash("Fire");
     protected readonly int FireStateHash = Animator.StringToHash("AlternateSingleFire");
-    protected readonly byte FireEventCode = 0;
-    protected readonly byte FireStateEventCode = 1;
 
     public UnityEvent OnShoot;
 

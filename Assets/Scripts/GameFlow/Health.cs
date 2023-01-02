@@ -9,9 +9,6 @@ using UnityEngine.Events;
 public class Health : MonoBehaviourPun
 {
     private readonly int DeadHash = Animator.StringToHash("Dead");
-    private readonly byte DeadEventCode = 4;
-    private readonly byte TakeDamageEventCode = 5;
-    private readonly byte HealEventCode = 6;
 
     [SerializeField]
     private float _fullHealth;
@@ -44,12 +41,12 @@ public class Health : MonoBehaviourPun
     {
         //Debug.Log("TakeDamage " + _damage + " viewId " + photonView.ViewID, this);
         HandleLocalTakeDamage(_damage);
-        PhotonNetwork.RaiseEvent(TakeDamageEventCode, new object[] { PhotonNetwork.LocalPlayer.ActorNumber, photonView.ViewID, _damage }, RaiseEventOptions.Default, SendOptions.SendUnreliable);
+        PhotonNetwork.RaiseEvent(GameController.TakeDamageEventCode, new object[] { PhotonNetwork.LocalPlayer.ActorNumber, photonView.ViewID, _damage }, RaiseEventOptions.Default, SendOptions.SendUnreliable);
 
         if (_currentHealth <= 0)
         {
             HandleLocalDead();
-            PhotonNetwork.RaiseEvent(DeadEventCode, new object[] { PhotonNetwork.LocalPlayer.ActorNumber, photonView.ViewID }, RaiseEventOptions.Default, SendOptions.SendUnreliable);
+            PhotonNetwork.RaiseEvent(GameController.DeadEventCode, new object[] { PhotonNetwork.LocalPlayer.ActorNumber, photonView.ViewID }, RaiseEventOptions.Default, SendOptions.SendUnreliable);
         }
     }
 
@@ -72,7 +69,7 @@ public class Health : MonoBehaviourPun
     public void Heal(float amount)
     {
         HandleLocalHeal(amount);
-        PhotonNetwork.RaiseEvent(HealEventCode, new object[] { PhotonNetwork.LocalPlayer.ActorNumber, photonView.ViewID, amount }, RaiseEventOptions.Default, SendOptions.SendUnreliable);
+        PhotonNetwork.RaiseEvent(GameController.HealEventCode, new object[] { PhotonNetwork.LocalPlayer.ActorNumber, photonView.ViewID, amount }, RaiseEventOptions.Default, SendOptions.SendUnreliable);
     }
 
     private void HandleLocalHeal(float amount)
@@ -94,7 +91,7 @@ public class Health : MonoBehaviourPun
     }
     private void NetworkingClient_EventReceived(EventData obj)
     {
-        if (obj.Code != TakeDamageEventCode && obj.Code != HealEventCode && obj.Code != DeadEventCode)
+        if (obj.Code != GameController.TakeDamageEventCode && obj.Code != GameController.HealEventCode && obj.Code != GameController.DeadEventCode)
             return;
         object[] data = (object[])obj.CustomData;
 
@@ -105,17 +102,17 @@ public class Health : MonoBehaviourPun
         if (photonView.ViewID != viewId)
             return;
 
-        if (obj.Code == TakeDamageEventCode)
+        if (obj.Code == GameController.TakeDamageEventCode)
         {
             float amount = (float)data[2];
             HandleLocalTakeDamage(amount);
         }
-        else if (obj.Code == HealEventCode)
+        else if (obj.Code == GameController.HealEventCode)
         {
             float amount = (float)data[2];
             HandleLocalHeal(amount);
         }
-        else if (obj.Code == DeadEventCode)
+        else if (obj.Code == GameController.DeadEventCode)
         {
             HandleLocalDead();
         }

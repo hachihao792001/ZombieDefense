@@ -1,8 +1,11 @@
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grenade : MonoBehaviour
+public class Grenade : MonoBehaviourPun
 {
     [SerializeField]
     private float _damage;
@@ -29,12 +32,15 @@ public class Grenade : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        explode();
+        if (photonView.IsMine)
+            explode();
     }
 
     void explode()
     {
-        _explosionEffect.SetActive(true);
+        PlayExplosionEffect();
+        PhotonNetwork.RaiseEvent(GameController.GrenadeExplodeEventCode, PhotonNetwork.LocalPlayer.ActorNumber, RaiseEventOptions.Default, SendOptions.SendUnreliable);
+
         _meshRenderer.enabled = false;
         _rb.isKinematic = true;
         Collider[] hitZombieColliders = Physics.OverlapSphere(transform.position, _damageRadius, _zombieLayerMask);
@@ -46,7 +52,34 @@ public class Grenade : MonoBehaviour
             }
         }
 
-        Destroy(gameObject, 3f);
+        StartCoroutine(destroyAfterSeconds(3f));
+    }
+    IEnumerator destroyAfterSeconds(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        PhotonHelper.DestroyNetworkObject(gameObject);
+    }
+    private void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_EventReceived;
+    }
+    private void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
+    }
+    private void NetworkingClient_EventReceived(EventData obj)
+    {
+        if (obj.Code == GameController.GrenadeExplodeEventCode)
+        {
+            int actorNumber = (int)obj.CustomData;
+            if (photonView.OwnerActorNr == actorNumber && actorNumber != PhotonNetwork.LocalPlayer.ActorNumber)
+                PlayExplosionEffect();
+        }
+    }
+
+    private void PlayExplosionEffect()
+    {
+        _explosionEffect.SetActive(true);
     }
 
     public void AddForce(Vector3 force)

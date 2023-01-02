@@ -12,7 +12,7 @@ public class GrenadeThrowing : MonoBehaviourPun
     [SerializeField]
     private float _throwForce;
     [SerializeField]
-    private Grenade _grenadePrefab;
+    private string _grenadePrefabName;
     [SerializeField]
     private Transform _cameraAndWeapon;
 
@@ -37,7 +37,7 @@ public class GrenadeThrowing : MonoBehaviourPun
     {
         if (_grenadeLeft > 0)
         {
-            Grenade newGrenade = Instantiate(_grenadePrefab, transform.position, Quaternion.identity);
+            Grenade newGrenade = PhotonHelper.SpawnNewNetworkObject(_grenadePrefabName, transform.position, Quaternion.identity).GetComponent<Grenade>();
             Physics.IgnoreCollision(newGrenade.GetComponent<Collider>(), GetComponent<Collider>());
             newGrenade.AddForce(_cameraAndWeapon.forward * _throwForce);
             _grenadeLeft--;
