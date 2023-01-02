@@ -56,7 +56,10 @@ public class RifleShooting : Shooting
         {
             int actorNumber = (int)obj.CustomData;
             if (photonView.OwnerActorNr == actorNumber && actorNumber != PhotonNetwork.LocalPlayer.ActorNumber)
+            {
                 _animator.Play(FireStateHash, layer: 0, normalizedTime: 0);
+                PlayShootEffects();
+            }
         }
     }
 

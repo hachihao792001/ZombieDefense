@@ -28,10 +28,16 @@ public class Shooting : MonoBehaviourPun
     {
         if (!photonView.IsMine)
             return;
-        _lightRay.Emit(1);
-        PlayFireSound();
+        PlayShootEffects();
         OnShoot?.Invoke();
     }
+
+    protected void PlayShootEffects()
+    {
+        _lightRay.Emit(1);
+        PlayFireSound();
+    }
+
     public void PlayFireSound() => _fireSound.Play();
 
     public void Lock() => enabled = false;
