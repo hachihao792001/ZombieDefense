@@ -183,6 +183,26 @@ public class PhotonHelper : MonoBehaviourPunCallbacks
     }
     #endregion
 
+    #region Custom properties
+    static ExitGames.Client.Photon.Hashtable _myCustomProperties = new ExitGames.Client.Photon.Hashtable();
+
+    public static void SetMyAvatarIndex(int index)
+    {
+        _myCustomProperties["avatar"] = index;
+        PhotonNetwork.SetPlayerCustomProperties(_myCustomProperties);
+    }
+
+    public static int GetAvatarIndexOf(int actorNumber)
+    {
+        if (PhotonNetwork.CurrentRoom.Players[actorNumber].CustomProperties.ContainsKey("avatar"))
+        {
+            int result = (int)PhotonNetwork.CurrentRoom.Players[actorNumber].CustomProperties["avatar"];
+            return result;
+        }
+        return 0;
+    }
+    #endregion
+
     string GetPlayerString(Photon.Realtime.Player player)
     {
         return $"( {player.ActorNumber} | {player.NickName} )";

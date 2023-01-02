@@ -8,6 +8,8 @@ using Photon.Pun;
 
 public class RoomController : MonoBehaviour
 {
+    public PlayerAvatarInfo[] playerAvatarInfos;
+
     public TMP_Text textRoomName;
     [SerializeField] List<PlayerItemController> _playerItems;
     [SerializeField] GameObject _startButton;

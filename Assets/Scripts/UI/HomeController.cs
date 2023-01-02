@@ -14,6 +14,10 @@ public class HomeController : MonoBehaviour
     public LobbyScreenController lobbyScreenController;
     public TMP_Text username;
 
+    public PlayerAvatarInfo[] playerAvatarInfos;
+    public PopupChangeAvatarController PopupChangeAvatar;
+    public Image ImgAvatar;
+
     private void Start()
     {
         popupChangeName.OnApplyChange += ApplyChangeUserName;
@@ -25,6 +29,15 @@ public class HomeController : MonoBehaviour
         {
             OnJoinedRoom(PhotonNetwork.CurrentRoom);
         }
+
+        int savedAvatarIndex = PlayerPrefs.GetInt("avatar", 0);
+        PhotonHelper.SetMyAvatarIndex(savedAvatarIndex);
+        RefreshAvatar(savedAvatarIndex);
+    }
+
+    private void RefreshAvatar(int index)
+    {
+        ImgAvatar.sprite = playerAvatarInfos[index].img;
     }
 
     private void OnDestroy()
@@ -33,6 +46,11 @@ public class HomeController : MonoBehaviour
         popupRoomName.OnApplyChange -= ApplyRoomName;
 
         PhotonHelper.onJoinedRoom -= OnJoinedRoom;
+    }
+
+    public void AvatarOnClick()
+    {
+        PopupChangeAvatar.Show(RefreshAvatar);
     }
 
     public void ChangeUserNameOnClick()

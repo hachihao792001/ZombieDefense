@@ -6,6 +6,8 @@ using TMPro;
 
 public class PlayerItemController : MonoBehaviour
 {
+    [SerializeField] RoomController _roomController;
+
     [SerializeField] GameObject _playerInfo;
     [SerializeField] Image _imgPlayerAvatar;
     [SerializeField] TMP_Text _txtPlayerName;
@@ -20,6 +22,7 @@ public class PlayerItemController : MonoBehaviour
         }
 
         _playerInfo.SetActive(true);
+        _imgPlayerAvatar.sprite = _roomController.playerAvatarInfos[PhotonHelper.GetAvatarIndexOf(player.ActorNumber)].img;
         _txtPlayerName.text = player.NickName;
 
         _hostIcon.SetActive(player.IsMasterClient);
