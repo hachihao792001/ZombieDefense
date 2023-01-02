@@ -41,6 +41,7 @@ MonoBehaviour:
   - RespawnSpaceship
   - RPC_NotifyNewPlayerToMasterClient
   - RPC_NotifyPlayerDiedToMasterClient
+  - SetPlayerName
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -15,6 +15,7 @@ public class Player : MonoBehaviourPun
     public ArmSwitcher ArmSwitcher;
     public GrenadeThrowing GrenadeThrowing;
     public AutomaticZombieAttacking AutomaticZombieAttacking;
+    public PlayerHealthBar PlayerHealthBar;
     public PlayerFlying PlayerFlying;
 
     [SerializeField]
@@ -59,12 +60,21 @@ public class Player : MonoBehaviourPun
         {
             photonView.RPC(nameof(RPC_NotifyNewPlayerToMasterClient), RpcTarget.MasterClient, photonView.ViewID);
         }
+
+        PlayerHealthBar.SetPlayerName(PhotonNetwork.NickName);
+        photonView.RPC(nameof(SetPlayerName), RpcTarget.OthersBuffered, photonView.ViewID, PhotonNetwork.NickName);
     }
 
     [PunRPC]
     void RPC_NotifyNewPlayerToMasterClient(int viewId)
     {
         GameController.Instance.OnNewPlayerSpawned(viewId);
+    }
+
+    [PunRPC]
+    void SetPlayerName(int viewId, string name)
+    {
+        PlayerHealthBar.SetPlayerName(PhotonNetwork.NickName);
     }
 
     private void OnDestroy()

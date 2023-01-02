@@ -95,9 +95,10 @@ public class GameController : OneSceneMonoSingleton<GameController>
         Player = spawned.GetComponent<Player>();
     }
 
-    public void OnNewPlayerSpawned(int viewId)
+    public void OnNewPlayerSpawned(int viewId)  //only called on master client
     {
-        Player newPlayer = PhotonView.Find(viewId).GetComponent<Player>();
+        PhotonView photonView = PhotonView.Find(viewId);
+        Player newPlayer = photonView.GetComponent<Player>();
         Allies.Add(newPlayer.transform);
         AlivePlayers.Add(newPlayer);
     }
