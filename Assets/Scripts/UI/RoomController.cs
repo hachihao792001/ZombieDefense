@@ -70,6 +70,11 @@ public class RoomController : MonoBehaviour
 
     public void StartGame()
     {
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+
+        LoadingController.Instance.ShowLoading("Starting");
+
         PhotonHelper.LoadScene("Game");
     }
 }

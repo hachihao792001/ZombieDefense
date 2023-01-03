@@ -37,7 +37,7 @@ public class Health : MonoBehaviourPun
         OnGainHealth?.Invoke(_currentHealth / _fullHealth);
     }
 
-    public void TakeDamage(float _damage)
+    public void TakeDamage(float _damage)   //only called by local player
     {
         //Debug.Log("TakeDamage " + _damage + " viewId " + photonView.ViewID, this);
         HandleLocalTakeDamage(_damage);
@@ -47,6 +47,7 @@ public class Health : MonoBehaviourPun
         {
             HandleLocalDead();
             PhotonNetwork.RaiseEvent(GameController.DeadEventCode, new object[] { PhotonNetwork.LocalPlayer.ActorNumber, photonView.ViewID }, RaiseEventOptions.Default, SendOptions.SendUnreliable);
+            HandleKillZombieEarnMoney();
         }
     }
 
@@ -55,6 +56,26 @@ public class Health : MonoBehaviourPun
         //Debug.Log("HandleLocalTakeDamage " + _damage + " viewId " + photonView.ViewID, this);
         _currentHealth -= _damage;
         OnLoseHealth?.Invoke(_currentHealth / _fullHealth);
+    }
+
+    void HandleKillZombieEarnMoney()
+    {
+        Zombie zombie = GetComponent<Zombie>();
+        if (zombie != null)
+        {
+            if (zombie.ZombieType == ZombieType.Normal)
+            {
+                GameController.Instance.MoneyManager.EarnMoney(GameController.Instance.MoneyEarningData.KillingZombie);
+            }
+            else if (zombie.ZombieType == ZombieType.Fast)
+            {
+                GameController.Instance.MoneyManager.EarnMoney(GameController.Instance.MoneyEarningData.KillingFastZombie);
+            }
+            else if (zombie.ZombieType == ZombieType.Big)
+            {
+                GameController.Instance.MoneyManager.EarnMoney(GameController.Instance.MoneyEarningData.KillingBigZombie);
+            }
+        }
     }
 
     void HandleLocalDead()

@@ -43,15 +43,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c857b9c8c14e5743bac8ccf00bc0b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   PlayerPrefabName: Player
-  PlayerStartSpawnPos: {x: 50.75, y: 1.118, z: 21.65}
   PlayerSpawnAreaCenter: {x: 50.75, y: 1.118, z: 21.65}
   PlayerSpawnAreaRadius: 3
+  Player: {fileID: 0}
+  AlivePlayers: []
   ZombieSpawner: {fileID: 0}
   _rv: {fileID: 0}
-  _moneyManager: {fileID: 0}
-  _moneyEarningData: {fileID: 11400000, guid: 82b592988eb6eb6468b7100db4891c93, type: 2}
+  MoneyManager: {fileID: 0}
+  MoneyEarningData: {fileID: 11400000, guid: 82b592988eb6eb6468b7100db4891c93, type: 2}
   _pauseScreen: {fileID: 0}
   _winScreen: {fileID: 0}
   _loseScreen: {fileID: 0}

@@ -106,6 +106,12 @@ public class PhotonHelper : MonoBehaviourPunCallbacks
 
         LoadingController.Instance.HideLoading();
     }
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log($"Join room failed: " + message);
+
+        LoadingController.Instance.HideLoading();
+    }
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         Debug.Log($"Player {GetPlayerString(newPlayer)} joined room");

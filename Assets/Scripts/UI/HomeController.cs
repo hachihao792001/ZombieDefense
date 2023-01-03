@@ -28,6 +28,8 @@ public class HomeController : MonoBehaviour
         if (PhotonNetwork.CurrentRoom != null)  //back from gameplay
         {
             OnJoinedRoom(PhotonNetwork.CurrentRoom);
+            PhotonNetwork.CurrentRoom.IsOpen = true;
+            PhotonNetwork.CurrentRoom.IsVisible = true;
         }
 
         int savedAvatarIndex = PlayerPrefs.GetInt("avatar", 0);

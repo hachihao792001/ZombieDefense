@@ -32,10 +32,8 @@ public class GameController : OneSceneMonoSingleton<GameController>
     public ZombieSpawner ZombieSpawner;
     [SerializeField]
     private RV _rv;
-    [SerializeField]
-    private MoneyManager _moneyManager;
-    [SerializeField]
-    private MoneyEarningData _moneyEarningData;
+    public MoneyManager MoneyManager;
+    public MoneyEarningData MoneyEarningData;
     [SerializeField]
     private PauseScreen _pauseScreen;
     [SerializeField]
@@ -118,26 +116,13 @@ public class GameController : OneSceneMonoSingleton<GameController>
 
     private void OnZombieDied(Zombie whichZombie)
     {
-        if (whichZombie.ZombieType == ZombieType.Normal)
-        {
-            _moneyManager.EarnMoney(_moneyEarningData.KillingZombie);
-        }
-        else if (whichZombie.ZombieType == ZombieType.Fast)
-        {
-            _moneyManager.EarnMoney(_moneyEarningData.KillingFastZombie);
-        }
-        else if (whichZombie.ZombieType == ZombieType.Big)
-        {
-            _moneyManager.EarnMoney(_moneyEarningData.KillingBigZombie);
-        }
-
         OnZombieDiedAction?.Invoke(whichZombie);
     }
 
     public void EndRound()
     {
         CurrentRound++;
-        _moneyManager.EarnMoney(_moneyEarningData.Finish1Round);
+        MoneyManager.EarnMoney(MoneyEarningData.Finish1Round);
 
         if (PhotonNetwork.IsMasterClient && ZombieSpawner.HasSpawningData(CurrentRound))
         {

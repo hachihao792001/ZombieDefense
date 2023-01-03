@@ -27757,6 +27757,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6780043233245089789}
     - target: {fileID: 5111377152402468557, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
+      propertyPath: MoneyManager
+      value: 
+      objectReference: {fileID: 1906945730}
+    - target: {fileID: 5111377152402468557, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
       propertyPath: _pauseScreen
       value: 
       objectReference: {fileID: 343627354}
@@ -27764,10 +27768,6 @@ PrefabInstance:
       propertyPath: ZombieSpawner
       value: 
       objectReference: {fileID: 256040912}
-    - target: {fileID: 5111377152402468557, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
-      propertyPath: _moneyManager
-      value: 
-      objectReference: {fileID: 1906945730}
     - target: {fileID: 5111377152402468557, guid: fbb6fdda453f7454496711c231f3ab38, type: 3}
       propertyPath: Allies.Array.data[0]
       value: 

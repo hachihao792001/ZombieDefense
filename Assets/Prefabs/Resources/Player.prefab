@@ -4066,6 +4066,8 @@ MonoBehaviour:
   - {fileID: 7738954409401875651}
   - {fileID: 7738954409878843285}
   - {fileID: 102751017}
+  - {fileID: 7738954409921460932}
+  - {fileID: 429072008}
   _objectsToChangeLayerForNonLocalPlayer:
   - {fileID: 7738954408732375377}
   - {fileID: 7738954408732375353}
