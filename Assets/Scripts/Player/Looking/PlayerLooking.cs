@@ -19,7 +19,7 @@ public class PlayerLooking : MonoBehaviourPun
     [SerializeField]
     protected float _maxPitch = 60;
 
-    protected void Start()
+    protected virtual void Start()
     {
         GameController.Instance.OnSensitivitySliderChanged =
            (float value) => _sensitivity = value * (_maxSensitivity - _minSensitivity) + _minSensitivity;

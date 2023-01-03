@@ -6,8 +6,9 @@ public class LookByMouse : PlayerLooking
 {
     private float _yaw, _pitch;
 
-    private new void Start()
+    protected override void Start()
     {
+        base.Start();
         GameController.Instance.LockCursor();
     }
 
@@ -28,5 +29,6 @@ public class LookByMouse : PlayerLooking
         _cameraAndWeapon.localEulerAngles = new Vector3(_pitch, 0, 0);
 
         ClampPitchAngle();
+        _pitch = _cameraAndWeapon.localEulerAngles.x;
     }
 }

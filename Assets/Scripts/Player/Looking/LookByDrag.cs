@@ -11,13 +11,13 @@ public class LookByDrag : PlayerLooking
 
     private Vector2 _startDraggingPos;
 
-    private new void Start()
+    protected override void Start()
     {
+        base.Start();
+
         _fPSDragArea.onBeginDrag = OnBeginDrag;
         _fPSDragArea.onDrag = OnDrag;
         _fPSDragArea.onEndDrag = OnEndDrag;
-
-        base.Start();
     }
 
     public void OnBeginDrag(Vector2 pos)

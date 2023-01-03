@@ -34,6 +34,8 @@ public class Player : MonoBehaviourPun
     [SerializeField]
     private GameObject[] _objectsToHideForNonLocalPlayer;
     [SerializeField]
+    private GameObject[] _objectsToHideForLocalPlayer;
+    [SerializeField]
     private GameObject[] _objectsToChangeLayerForNonLocalPlayer;
     [SerializeField]
     private GameObject[] _objectsToHideWhenDied;
@@ -59,6 +61,10 @@ public class Player : MonoBehaviourPun
         }
         else
         {
+            for (int i = 0; i < _objectsToHideForLocalPlayer.Length; i++)
+            {
+                _objectsToHideForLocalPlayer[i].SetActive(false);
+            }
             photonView.RPC(nameof(RPC_NotifyNewPlayerToMasterClient), RpcTarget.MasterClient, photonView.ViewID);
         }
 
