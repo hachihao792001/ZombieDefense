@@ -86,6 +86,11 @@ public class PhotonHelper : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsConnected)
             return;
+        if (cachedRoomInfos.Exists(x => x.Name == name))
+        {
+            WarningController.Instance.ShowWarning("Room with name " + name + " already existed!");
+            return;
+        }
         RoomOptions options = new RoomOptions();
         options.PublishUserId = true;
         options.MaxPlayers = maxPlayer;

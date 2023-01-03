@@ -18,4 +18,12 @@ public class PlayerAvatar : MonoBehaviourPun
             _avatarObjs[i].SetActive(thisPlayerAvatarIndex == i);
         }
     }
+
+    public void HideAvatar()
+    {
+        for (int i = 0; i < playerAvatarInfos.Length; i++)
+        {
+            _avatarObjs[i].SetActive(false);
+        }
+    }
 }

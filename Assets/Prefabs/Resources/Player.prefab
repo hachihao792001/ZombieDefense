@@ -4057,6 +4057,7 @@ MonoBehaviour:
   AutomaticZombieAttacking: {fileID: 5649905187873746896}
   PlayerHealthBar: {fileID: 8071947560547904732}
   PlayerFlying: {fileID: 7236316621670910071}
+  PlayerAvatar: {fileID: 1390369958799524747}
   _loseHealthEffect: {fileID: 1230557006}
   _handGun: {fileID: 7738954409844212426}
   _rifle: {fileID: 3029593477182641166}

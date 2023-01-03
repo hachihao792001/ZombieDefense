@@ -17,6 +17,7 @@ public class Player : MonoBehaviourPun
     public AutomaticZombieAttacking AutomaticZombieAttacking;
     public PlayerHealthBar PlayerHealthBar;
     public PlayerFlying PlayerFlying;
+    public PlayerAvatar PlayerAvatar;
 
     [SerializeField]
     private Fading _loseHealthEffect;
@@ -100,6 +101,7 @@ public class Player : MonoBehaviourPun
         GrenadeThrowing = GetComponent<GrenadeThrowing>();
         AutomaticZombieAttacking = GetComponent<AutomaticZombieAttacking>();
         PlayerFlying = GetComponent<PlayerFlying>();
+        PlayerAvatar = GetComponent<PlayerAvatar>();
     }
 
     public void OnLoseHealth(float amount)
@@ -122,6 +124,7 @@ public class Player : MonoBehaviourPun
         AutomaticZombieAttacking.enabled = false;
         _handGun.SetActive(false);
         _rifle.SetActive(false);
+        PlayerAvatar.HideAvatar();
 
         _rb.isKinematic = true;
         _collider.enabled = false;
