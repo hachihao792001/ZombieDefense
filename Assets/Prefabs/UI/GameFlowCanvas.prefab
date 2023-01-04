@@ -1972,7 +1972,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -209.67822, y: -96.27185}
+  m_AnchoredPosition: {x: -209.67822, y: -61}
   m_SizeDelta: {x: -547.4178, y: -274.9638}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5470555802610394094
@@ -2007,6 +2007,7 @@ MonoBehaviour:
 
     Esc: Unlock cursor
 
+
     WASD: Move
 
     R: Reload
@@ -2022,10 +2023,9 @@ MonoBehaviour:
     turret
 
 
-    Shooting: Auto shoot when point at zombies
+    Shoot: Left mouse
 
-    Melee: Auto melee
-    when point at zombies and get close'
+    Knife: Right mouse'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cfdf8979023536542bc0bad290b66c50, type: 2}
   m_sharedMaterial: {fileID: -7295144032307903166, guid: cfdf8979023536542bc0bad290b66c50, type: 2}

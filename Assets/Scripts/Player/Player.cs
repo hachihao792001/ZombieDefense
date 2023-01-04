@@ -14,7 +14,7 @@ public class Player : MonoBehaviourPun
     public Health Health;
     public ArmSwitcher ArmSwitcher;
     public GrenadeThrowing GrenadeThrowing;
-    public AutomaticZombieAttacking AutomaticZombieAttacking;
+    public PlayerAttacking PlayerAttacking;
     public PlayerHealthBar PlayerHealthBar;
     public PlayerFlying PlayerFlying;
     public PlayerAvatar PlayerAvatar;
@@ -68,8 +68,8 @@ public class Player : MonoBehaviourPun
             photonView.RPC(nameof(RPC_NotifyNewPlayerToMasterClient), RpcTarget.MasterClient, photonView.ViewID);
         }
 
-        PlayerHealthBar.SetPlayerName(PhotonNetwork.NickName);
-        photonView.RPC(nameof(SetPlayerName), RpcTarget.OthersBuffered, photonView.ViewID, PhotonNetwork.NickName);
+        if (photonView.IsMine)
+            photonView.RPC(nameof(SetPlayerName), RpcTarget.OthersBuffered, photonView.ViewID, PhotonNetwork.NickName);
     }
 
     [PunRPC]
@@ -81,7 +81,9 @@ public class Player : MonoBehaviourPun
     [PunRPC]
     void SetPlayerName(int viewId, string name)
     {
-        PlayerHealthBar.SetPlayerName(PhotonNetwork.NickName);
+        PhotonView view = PhotonView.Find(viewId);
+        Player player = view.GetComponent<Player>();
+        player.PlayerHealthBar.SetPlayerName(name);
     }
 
     private void OnDestroy()
@@ -105,7 +107,7 @@ public class Player : MonoBehaviourPun
         Health = GetComponent<Health>();
         ArmSwitcher = GetComponent<ArmSwitcher>();
         GrenadeThrowing = GetComponent<GrenadeThrowing>();
-        AutomaticZombieAttacking = GetComponent<AutomaticZombieAttacking>();
+        PlayerAttacking = GetComponent<PlayerAttacking>();
         PlayerFlying = GetComponent<PlayerFlying>();
         PlayerAvatar = GetComponent<PlayerAvatar>();
     }
@@ -127,7 +129,7 @@ public class Player : MonoBehaviourPun
         ArmSwitcher.enabled = false;
         Health.enabled = false;
         GrenadeThrowing.enabled = false;
-        AutomaticZombieAttacking.enabled = false;
+        PlayerAttacking.enabled = false;
         _handGun.SetActive(false);
         _rifle.SetActive(false);
         PlayerAvatar.HideAvatar();

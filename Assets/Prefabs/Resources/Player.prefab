@@ -5184,9 +5184,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7738954408158036787}
-  - component: {fileID: 5649905187873746896}
   - component: {fileID: 1950446156}
   - component: {fileID: 5337052509420140982}
+  - component: {fileID: 4948603371613183689}
   - component: {fileID: 3786626677163516535}
   - component: {fileID: 2059930253984134012}
   - component: {fileID: 7738954408158036789}
@@ -5225,21 +5225,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5649905187873746896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7738954408158036784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08b2076b6617bbf4f93167175396c6b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aimingCamera: {fileID: 7738954409401875652}
-  _armSwitcher: {fileID: 1950446156}
-  _zombieLayer: 6
 --- !u!114 &1950446156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5276,6 +5261,21 @@ MonoBehaviour:
   OnGainHealth:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4948603371613183689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7738954408158036784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7020d1b4c5bf46244b9a3eb59a63e666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimingCamera: {fileID: 7738954409401875652}
+  _armSwitcher: {fileID: 1950446156}
+  _zombieLayer: 6
 --- !u!114 &3786626677163516535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5296,7 +5296,7 @@ MonoBehaviour:
   Health: {fileID: 5337052509420140982}
   ArmSwitcher: {fileID: 1950446156}
   GrenadeThrowing: {fileID: 1853223572}
-  AutomaticZombieAttacking: {fileID: 5649905187873746896}
+  PlayerAttacking: {fileID: 4948603371613183689}
   PlayerHealthBar: {fileID: 8071947560547904732}
   PlayerFlying: {fileID: 7236316621670910071}
   PlayerAvatar: {fileID: 1390369958799524747}

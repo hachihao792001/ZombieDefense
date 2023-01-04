@@ -54,8 +54,8 @@ public class PhotonHelper : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.GameVersion = "0.0.1";
         PhotonNetwork.NickName = PlayerPrefs.GetString("username", "Player" + Random.Range(1, 100));
-        PhotonNetwork.SendRate = 40; //default 20
-        PhotonNetwork.SerializationRate = 20; //default 10
+        PhotonNetwork.SendRate = 45; //default 20
+        PhotonNetwork.SerializationRate = 25; //default 10
         PhotonNetwork.ConnectUsingSettings();
 
         LoadingController.Instance.ShowLoading("Connecting to server...");
