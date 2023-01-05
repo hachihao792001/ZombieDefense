@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using System;
+using Photon.Pun;
+using ExitGames.Client.Photon;
 
 public class ZombieLeftTextBinding : MonoBehaviour
 {
@@ -36,5 +38,22 @@ public class ZombieLeftTextBinding : MonoBehaviour
         {
             transform.DOScale(Vector3.one, 0.2f);
         });
+        PhotonNetwork.RaiseEvent(GameController.OnZombieLeftTextChanged, _zombieLeftText.text, Photon.Realtime.RaiseEventOptions.Default, SendOptions.SendReliable);
+    }
+
+    private void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_EventReceived;
+    }
+    private void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
+    }
+    private void NetworkingClient_EventReceived(EventData obj)
+    {
+        if (obj.Code == GameController.OnZombieLeftTextChanged)
+        {
+            _zombieLeftText.text = (string)obj.CustomData;
+        }
     }
 }

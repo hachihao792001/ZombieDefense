@@ -369,7 +369,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $80
+  m_text: $60
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -1357,8 +1357,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moneyManager: {fileID: 0}
   _ammoPrice: 30
-  _grenadePrice: 50
-  _turretPrice: 80
+  _grenadePrice: 40
+  _turretPrice: 60
   _ammoItem: {fileID: 492445492}
   _grenadeItem: {fileID: 1919131866}
   _turretItem: {fileID: 1229425842}
@@ -1430,7 +1430,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $50
+  m_text: $40
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}

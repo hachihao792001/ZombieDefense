@@ -12,7 +12,7 @@ public enum ZombieType
     Big = 2
 }
 
-public class Zombie : MonoBehaviour
+public class Zombie : MonoBehaviourPun
 {
     public ZombieType ZombieType;
 

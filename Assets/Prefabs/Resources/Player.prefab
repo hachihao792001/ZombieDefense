@@ -5275,7 +5275,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimingCamera: {fileID: 7738954409401875652}
   _armSwitcher: {fileID: 1950446156}
-  _zombieLayer: 6
 --- !u!114 &3786626677163516535
 MonoBehaviour:
   m_ObjectHideFlags: 0

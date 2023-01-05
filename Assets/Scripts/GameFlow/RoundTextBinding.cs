@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using Photon.Pun;
+using ExitGames.Client.Photon;
 
 public class RoundTextBinding : MonoBehaviour
 {
@@ -32,5 +34,21 @@ public class RoundTextBinding : MonoBehaviour
         {
             transform.DOScale(Vector3.one, 0.2f);
         });
+        PhotonNetwork.RaiseEvent(GameController.OnRoundTextChanged, _roundText.text, Photon.Realtime.RaiseEventOptions.Default, SendOptions.SendReliable);
+    }
+    private void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_EventReceived;
+    }
+    private void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
+    }
+    private void NetworkingClient_EventReceived(EventData obj)
+    {
+        if (obj.Code == GameController.OnRoundTextChanged)
+        {
+            _roundText.text = (string)obj.CustomData;
+        }
     }
 }

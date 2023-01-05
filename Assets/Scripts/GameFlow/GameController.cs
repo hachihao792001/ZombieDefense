@@ -19,6 +19,8 @@ public class GameController : OneSceneMonoSingleton<GameController>
     public const byte GameOverEventCode = 7;
     public const byte TurretShootEventCode = 8;
     public const byte GrenadeExplodeEventCode = 9;
+    public const byte OnZombieLeftTextChanged = 10;
+    public const byte OnRoundTextChanged = 11;
 
     public string PlayerPrefabName;
     public Vector3 PlayerSpawnAreaCenter;
