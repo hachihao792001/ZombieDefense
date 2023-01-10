@@ -11,6 +11,8 @@ public class RV : MonoBehaviour
     [SerializeField]
     private Health _health;
 
+    bool died;
+
     private void OnValidate()
     {
         _health = GetComponent<Health>();
@@ -18,10 +20,15 @@ public class RV : MonoBehaviour
 
     private void Start()
     {
+        died = false;
         _health.OnDied += () =>
         {
-            if (PhotonNetwork.IsMasterClient)
-                GameController.Instance.GameOver(false, "You failed to save the RV!");
+            if (!died)
+            {
+                if (PhotonNetwork.IsMasterClient)
+                    GameController.Instance.GameOver(false, "You failed to save the RV!");
+                died = true;
+            }
         };
     }
 }
